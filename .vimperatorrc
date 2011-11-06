@@ -1,0 +1,81 @@
+" title
+set titlestring=Firefox
+
+" メニューバー、ツールバーなどを表示
+"set guioptions=mT
+
+" 詳細表示レベル？ 内容確認中、左下のステータス状況か？
+" →「:javascript! 」で表示される内容レベル
+"set verbose=9
+
+" スクロールの端などの際に出るbeepをoff
+"set nobeep
+
+" ワイドに？
+set wildmode=list:full
+
+" 検索：大文字小文字を無視
+set ignorecase
+
+" 入力欄にフォーカスを奪われるのを防ぐため。でもたまに奪われる。
+set focuscontent
+
+" 補完機能強化
+"set wildoptions=auto
+
+" searchEngineが邪魔
+set complete=l
+
+" tabremove後のタブ位置を逆に
+noremap d D
+noremap D d
+
+"左右のタブに切り替え
+map s gt
+map a gT
+map <S-j> gt
+map <S-k> gT
+
+" j/k でのスクロール幅を 1行 から n行 に変更(_smooziee.jsを入れてる間は必要なし)
+map j 5<C-e>
+map k 5<C-y>
+
+"Shift + ← → で現在のタブの位置変更
+map <S-Right> :tabmove! +1<CR>
+map <S-Left> :tabmove! -1<CR>
+
+" Backspace に戻るを割り当て
+map <BS> <A-Left>
+
+" h/l に戻るや進むを割り当て
+map h <A-Left>
+map l <A-Right>
+
+" H/L や ← → でタブ移動
+map H gT
+map L gt
+map <Left>  gT
+map <Right> gt
+
+" Shift + ← → で現在のタブの位置変更
+map <S-Right> :tabmove! +1<CR>
+map <S-Left>  :tabmove! -1<CR>
+
+" 読み込んだ事を出力
+echo ".vimperatorrc sourced"
+
+javascript <<EOF
+mappings.addUserMap([modes.NORMAL,modes.VISUAL],['<C-c>'], 'Copy selected text or stop loading',
+  function(){
+    var sel = window.content.window.getSelection().toString();
+    if (sel){
+      util.copyToClipboard(sel,true);
+    } else {
+      BrowserStop();
+      liberator.echo('Stopped loading !');
+    }
+  },{
+    rhs: 'Copy selected text or stop loading'
+  }
+);
+EOF

@@ -1,0 +1,23 @@
+set convert-meta off
+set meta-flag on
+set output-meta on
+
+
+# historical backward search with linehead string binded to up-key
+#
+#"\e[A": history-search-backward
+Control-p: history-search-backward
+
+# historical forward search with linehead string binded to down-key
+#
+#"\e[B": history-search-forward
+Control-n: history-search-forward
+
+
+set bell-style visible
+
+set show-all-if-ambiguous on
+
+set editing-mode vi
+set keymap vi
+
