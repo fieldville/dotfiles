@@ -1,0 +1,18 @@
+set ignorecase
+set smartcase
+set hls
+set list
+
+"スクロール
+noremap <C-j> 5j
+noremap <C-k> 5k
+
+"カーソル位置の単語をyankする
+nnoremap vv vawy
+
+"次のメンバ(フィールド,メソッド)
+eclipseaction GoNextMember org.eclipse.jdt.ui.edit.text.java.goto.next.member
+nnoremap mm :GoNextMember<C-m>
+eclipseaction GoPrevMember org.eclipse.jdt.ui.edit.text.java.goto.previous.member
+nnoremap mp :GoPrevMember<C-m>
+
