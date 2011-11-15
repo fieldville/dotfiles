@@ -1,3 +1,4 @@
+set editing-mode vi
 set convert-meta off
 set meta-flag on
 set output-meta on
@@ -17,7 +18,3 @@ Control-n: history-search-forward
 set bell-style visible
 
 set show-all-if-ambiguous on
-
-set editing-mode vi
-set keymap vi
-
