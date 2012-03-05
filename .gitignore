@@ -1,12 +1,52 @@
-.DS_*
-.bzr
-.svn
-*.pyc
+## generic files to ignore
 *~
-*.a
-*.o
-.#*
-:2e*
-*.mode1v3
-*.pbxuser
+*.lock
+*.DS_Store
 *.sw*
+*.out
+*.o
+tags
+*.rej
+.svn
+*.bk
+*.bak
+*.tmp
+*hoge*
+.cache
+.cache/*
+*~
+.#*
+*.shd
+.metadata
+work
+
+#rails specific
+*.sqlite3
+config/*.yml
+log/*
+tmp/*
+coverage
+db/schema.rb
+.metrics
+*.log
+
+#java specific
+*.class
+
+#netbeans ignore personal stuff
+nbproject/private/
+
+#python specific
+*.pyc
+
+#xcode specific
+build/*
+*.pbxuser
+*.mode2v3
+*.mode1v3
+*.perspective
+*.perspectivev3
+*~.nib
+#ignore private workspace stuff added by Xcode4
+xcuserdata
+project.xcworkspace
