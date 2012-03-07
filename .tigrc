@@ -1,1 +1,2 @@
+bind generic g move-first-line
 bind generic G move-last-line
