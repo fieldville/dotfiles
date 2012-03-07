@@ -16,7 +16,7 @@ tags
 .cache/*
 *~
 .#*
-*.shd
+#*.shd
 .metadata
 work
 

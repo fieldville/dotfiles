@@ -1,0 +1,36 @@
+## cpp -P -
+#define NAME naoki_ichihara
+#define EMAIL naoki_ichihara@sobal.co.jp
+#define HOME /Users/naoki_ichihara
+[core]
+	gitproxy = git-proxy for github.com
+	editor = vim
+	pager = lv -c
+	excludesfile = HOME/.gitignore
+[alias]
+	url = config --get remote.origin.url
+	co = checkout
+	st = status -s
+	stat = status
+	ci = commit -v
+	di = diff
+	br = branch
+	sb = show-branch
+	unstage = reset HEAD --
+[user]
+	name = NAME
+	email = EMAIL
+[diff]
+	color = auto
+	rename = copy
+[pager]
+	color = true
+[color]
+	status = auto
+	branch = auto
+	interactive = auto
+[merge]
+	tool = vimdiff
+[instaweb]
+	httpd = webrick
+	browser = w3m
