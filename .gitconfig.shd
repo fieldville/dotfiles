@@ -16,6 +16,12 @@
 	br = branch
 	sb = show-branch
 	unstage = reset HEAD --
+	d1 = diff HEAD~
+	d2 = diff HEAD~~
+	d3 = diff HEAD~~~
+	d4 = diff HEAD~~~~
+	d5 = diff HEAD~~~~~
+	d10 = diff HEAD~~~~~~~~~~
 [user]
 	name = NAME
 	email = EMAIL
