@@ -1,12 +1,11 @@
 ## cpp -P -
 #define NAME naoki_ichihara
 #define EMAIL naoki_ichihara@sobal.co.jp
-#define HOME /Users/naoki_ichihara
 [core]
 	gitproxy = git-proxy for github.com
 	editor = vim
 	pager = lv -c
-	excludesfile = HOME/.gitignore
+	excludesfile = ~/.gitignore
 [alias]
 	url = config --get remote.origin.url
 	co = checkout
