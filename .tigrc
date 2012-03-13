@@ -1,2 +1,4 @@
 bind generic g move-first-line
 bind generic G move-last-line
+set show-rev-graph = yes
+bind generic L !git reflog
