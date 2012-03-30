@@ -49,3 +49,6 @@ build/*
 #ignore private workspace stuff added by Xcode4
 xcuserdata
 project.xcworkspace
+
+# s2 specific
+src/main/webapp/WEB-INF/classes/*
