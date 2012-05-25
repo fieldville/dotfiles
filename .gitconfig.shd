@@ -60,6 +60,8 @@
 	sm = submodule
 	smupdate = submodule foreach "git checkout master; git pull origin master"
 
+	ignored = "clean -ndX"
+
 [user]
 	name = NAME
 	email = EMAIL
