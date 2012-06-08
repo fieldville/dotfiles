@@ -2,5 +2,5 @@
 nomen: true, eqeqeq: true, plusplus: true, bitwise: true,
 regexp: true, newcap: true, immed: true, strict: true,
 maxerr: 50, indent: 2 */
-/*global jQuery, $, App, gServerSettings, window: false */
+/*global jQuery, $, window, App:true, gServerSettings:true */
 
