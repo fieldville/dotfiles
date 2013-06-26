@@ -50,3 +50,5 @@ build/*
 xcuserdata
 project.xcworkspace
 
+# devtodo
+.todo
