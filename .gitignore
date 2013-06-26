@@ -50,5 +50,3 @@ build/*
 xcuserdata
 project.xcworkspace
 
-# s2 specific
-src/main/webapp/WEB-INF/classes/*
