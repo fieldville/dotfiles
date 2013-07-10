@@ -6,6 +6,7 @@
 	editor = vim
 	pager = lv -c
 	excludesfile = ~/.gitignore
+	precomposeunicode = true
 [alias]
 	url = config --get remote.origin.url
 	co = checkout
@@ -79,3 +80,11 @@
 [instaweb]
 	httpd = webrick
 	browser = w3m
+[push]
+	default = simple
+[svn]
+	rmdir=true
+[credential]
+	helper = osxkeychain
+[http]
+	proxy =
