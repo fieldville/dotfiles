@@ -1,0 +1,9 @@
+work/
+log/
+logs/
+images/
+target/
+tmp/
+vendor/
+*.log
+*.min.*
