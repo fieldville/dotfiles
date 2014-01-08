@@ -162,7 +162,7 @@ install zsh
 install zsh-lovers
 
 # jsl
-tap homebrew/binary/jsl
+tap homebrew/binary
 install jsl
 
 # php54
