@@ -8,6 +8,7 @@ update
 upgrade
 
 tap homebrew/dupes
+tap homebrew/versions
 
 install ack
 install ant
@@ -75,11 +76,10 @@ install imagemagick
 install jasper
 install jbig2dec
 install jenkins
-install jetty
+#install jetty
 install jetty8
 install jpeg
 install jq
-install jsl
 install jsonpp
 install lha
 install libevent
@@ -105,7 +105,6 @@ install memcached
 install mercurial
 install mm-common
 install mobile-shell
-install mosh
 install msmtp
 install neon
 install nkf
@@ -133,7 +132,6 @@ install qt
 install readline
 install reattach-to-user-namespace
 install rhino
-install ricty
 install rlwrap
 install ruby-build
 install s-lang
@@ -163,10 +161,15 @@ install z
 install zsh
 install zsh-lovers
 
+# jsl
+tap homebrew/binary/jsl
+install jsl
+
 # php54
 tap josegonzalez/homebrew-php
 install php54
 
+#install ricty
 #install the_legacy_searcher
 
 # homebrew-cask
@@ -177,19 +180,13 @@ cask install iterm2
 
 # english version
 cask install firefox
-
 cask install google-chrome
 cask install opera
 cask install xmarks-safari
-
 cask install libreoffice
 cask install openoffice
-
-#cask install virtualbox
-
 cask install keyremap4macbook
 cask install appcleaner
-
 cask install kobito
 cask install vagrant
 cask install cyberduck
@@ -204,5 +201,6 @@ cask install bettertouchtool
 cask install evernote
 cask install sublime-text
 cask install cheatsheet
+#cask install virtualbox
 
 #cleanup
