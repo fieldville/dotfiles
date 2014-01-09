@@ -1,0 +1,14 @@
+## Installation:
+
+```
+git clone git://github.com/fieldville/dotfiles.git ~/.dotfiles
+```
+
+## Create symlinks:
+
+```
+cd
+ln -s ~/.dotfiles/.xxx .
+```
+(You must skip .git directory itself.)
+
