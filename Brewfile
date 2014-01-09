@@ -177,9 +177,6 @@ tap phinze/homebrew-cask
 install brew-cask
 
 cask install iterm2
-
-# english version
-cask install firefox
 cask install google-chrome
 cask install opera
 cask install xmarks-safari
@@ -201,6 +198,11 @@ cask install bettertouchtool
 cask install evernote
 cask install sublime-text
 cask install cheatsheet
+
+# english version
+#cask install firefox
+#cask install thunderbird
+
 #cask install virtualbox
 
 #cleanup
