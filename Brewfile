@@ -197,7 +197,7 @@ cask install sourcetree
 cask install bettertouchtool
 cask install evernote
 cask install sublime-text
-cask install cheatsheet
+cask install --appdir=/Applications cheatsheet
 cask install --appdir=/Applications alfred
 
 # english version
@@ -205,5 +205,7 @@ cask install --appdir=/Applications alfred
 #cask install thunderbird
 
 #cask install virtualbox
+
+cask alfred link
 
 #cleanup
