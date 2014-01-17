@@ -176,29 +176,29 @@ install php54
 tap phinze/homebrew-cask
 install brew-cask
 
-cask install iterm2
-cask install google-chrome
-cask install opera
-cask install xmarks-safari
-cask install libreoffice
-cask install openoffice
-cask install keyremap4macbook
-cask install appcleaner
-cask install kobito
-cask install vagrant
-cask install cyberduck
-cask install freemind
-cask install mou
-cask install lightpaper
-cask install grandperspective
-cask install less-app
-cask install pgadmin3
-cask install sourcetree
-cask install bettertouchtool
-cask install evernote
-cask install sublime-text
-cask install --appdir=/Applications cheatsheet
 cask install --appdir=/Applications alfred
+cask install --appdir=/Applications appcleaner
+cask install --appdir=/Applications bettertouchtool
+cask install --appdir=/Applications cheatsheet
+cask install --appdir=/Applications cyberduck
+cask install --appdir=/Applications evernote
+cask install --appdir=/Applications freemind
+cask install --appdir=/Applications google-chrome
+cask install --appdir=/Applications grandperspective
+cask install --appdir=/Applications iterm2
+cask install --appdir=/Applications keyremap4macbook
+cask install --appdir=/Applications kobito
+cask install --appdir=/Applications less-app
+cask install --appdir=/Applications libreoffice
+cask install --appdir=/Applications lightpaper
+cask install --appdir=/Applications mou
+cask install --appdir=/Applications openoffice
+cask install --appdir=/Applications opera
+cask install --appdir=/Applications pgadmin3
+cask install --appdir=/Applications sourcetree
+cask install --appdir=/Applications sublime-text
+cask install --appdir=/Applications vagrant
+cask install --appdir=/Applications xmarks-safari
 
 # english version
 #cask install firefox
