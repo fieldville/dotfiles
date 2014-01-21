@@ -208,4 +208,4 @@ cask install --appdir=/Applications xmarks-safari
 
 cask alfred link
 
-cleanup -s
+#cleanup -s
