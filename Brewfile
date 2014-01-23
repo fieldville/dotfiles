@@ -158,7 +158,7 @@ install wget
 install xz
 install yuicompressor
 install z
-install zsh
+install --enable-etcdir zsh
 install zsh-lovers
 
 # jsl
