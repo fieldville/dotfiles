@@ -195,6 +195,7 @@ cask install --appdir=/Applications mou
 cask install --appdir=/Applications openoffice
 cask install --appdir=/Applications opera
 cask install --appdir=/Applications pgadmin3
+cask install --appdir=/Applications skitch
 cask install --appdir=/Applications sourcetree
 cask install --appdir=/Applications sublime-text
 cask install --appdir=/Applications vagrant
