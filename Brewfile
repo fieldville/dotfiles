@@ -161,6 +161,8 @@ install yuicompressor
 install z
 install --enable-etcdir zsh
 install zsh-lovers
+install docker
+install boot2docker
 
 # jsl
 tap homebrew/binary
