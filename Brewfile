@@ -5,7 +5,7 @@
 ########################################
 
 update
-upgrade
+upgrade || true
 
 tap homebrew/dupes
 tap homebrew/versions
@@ -167,7 +167,7 @@ install jsl
 
 # php54
 tap josegonzalez/homebrew-php
-install php54
+install php54 || true
 
 #install ricty
 #install the_legacy_searcher
