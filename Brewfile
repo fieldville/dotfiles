@@ -166,8 +166,8 @@ tap homebrew/binary
 install jsl
 
 # php54
-tap josegonzalez/homebrew-php
-install php54 || true
+#tap josegonzalez/homebrew-php
+#install php54 || true
 
 #install ricty
 #install the_legacy_searcher
