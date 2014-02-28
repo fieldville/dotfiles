@@ -48,7 +48,7 @@ install gd
 install gdbm
 install gdk-pixbuf
 install gettext
-install ghostscript
+#install ghostscript
 install git
 install git-cola
 install git-extras
