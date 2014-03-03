@@ -62,7 +62,7 @@ install gnu-getopt
 install gnu-sed
 install go
 install gobject-introspection
-install google-app-engine
+#install google-app-engine
 install gradle
 install graphviz
 install groovy
