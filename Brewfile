@@ -107,6 +107,7 @@ install mm-common
 install mobile-shell
 install msmtp
 install neon
+install ngrep
 install nkf
 install nmap
 install node
