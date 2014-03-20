@@ -209,6 +209,10 @@ cask install --appdir=/Applications licecap
 
 #cask install virtualbox
 
+# launchrocket
+tap jimbojsb/launchrocket
+cask install launchrocket
+
 cask alfred link
 
 #cleanup -s
