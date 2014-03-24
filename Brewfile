@@ -205,6 +205,8 @@ cask install --appdir=/Applications sublime-text
 cask install --appdir=/Applications vagrant
 cask install --appdir=/Applications xmarks-safari
 cask install --appdir=/Applications licecap
+cask install --appdir=/Applications appcode
+cask install --appdir=/Applications webstorm
 
 # english version
 #cask install firefox
