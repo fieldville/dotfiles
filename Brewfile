@@ -123,7 +123,8 @@ install pkg-config
 install play
 install pngcheck
 install polipo
-install postgresql8
+install postgresql
+#install postgresql8
 install proctools
 install protobuf
 install pstree
