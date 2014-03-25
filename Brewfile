@@ -128,7 +128,7 @@ install postgresql
 install proctools
 install protobuf
 install pstree
-install pyqt
+#install pyqt
 install python
 install qt
 install readline
