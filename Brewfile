@@ -214,6 +214,7 @@ cask install --appdir=/Applications webstorm
 cask install --appdir=/Applications intellij-idea-ce
 cask install --appdir=/Applications uncrustifyx
 cask install --appdir=/Applications iphoney
+cask install --appdir=/Applications xmind
 
 # english version
 #cask install firefox
