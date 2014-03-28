@@ -173,7 +173,10 @@ install jsl
 #tap josegonzalez/homebrew-php
 #install php54 || true
 
-#install ricty
+# ricty
+tap sanemat/font
+install --powerline --vim-powerline ricty
+
 #install the_legacy_searcher
 
 # homebrew-cask
