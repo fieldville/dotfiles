@@ -210,6 +210,7 @@ cask install --appdir=/Applications licecap
 cask install --appdir=/Applications webstorm
 cask install --appdir=/Applications intellij-idea-ce
 cask install --appdir=/Applications uncrustifyx
+cask install --appdir=/Applications iphoney
 
 # english version
 #cask install firefox
