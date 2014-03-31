@@ -164,6 +164,7 @@ install --enable-etcdir zsh
 install zsh-lovers
 install docker
 install boot2docker
+install -v --HEAD xctool
 
 # jsl
 tap homebrew/binary
@@ -215,6 +216,7 @@ cask install --appdir=/Applications intellij-idea-ce
 cask install --appdir=/Applications uncrustifyx
 cask install --appdir=/Applications iphoney
 cask install --appdir=/Applications xmind
+cask install oclint
 
 # english version
 #cask install firefox
