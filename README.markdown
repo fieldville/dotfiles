@@ -1,14 +1,8 @@
-## Installation:
+Installation:
+------------
 
 ```
-git clone git://github.com/fieldville/dotfiles.git ~/.dotfiles
+$ git clone git://github.com/fieldville/dotfiles.git ~/.dotfiles
+$ cd .dotfiles
+$ ./setup.bash
 ```
-
-## Create symlinks:
-
-```
-cd
-ln -s ~/.dotfiles/.xxx .
-```
-(You must skip .git directory itself.)
-
