@@ -2,7 +2,7 @@ require 'irb/completion'
 require 'irb/ext/save-history'
 
 IRB.conf[:SAVE_HISTORY] = 100
-IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history" 
+IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
 IRB.conf[:PROMPT_MODE]  = :SIMPLE
 
 # Just for Rails...
@@ -13,7 +13,7 @@ if rails_env = ENV['RAILS_ENV']
     :PROMPT_I => "#{rails_root}> ",
     :PROMPT_S => "#{rails_root}* ",
     :PROMPT_C => "#{rails_root}? ",
-    :RETURN   => "=> %s\n" 
+    :RETURN   => "=> %s\n"
   }
   IRB.conf[:PROMPT_MODE] = :RAILS
 
