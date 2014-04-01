@@ -45,7 +45,6 @@ install fontforge
 install freetype
 install gcal
 install gd
-install gdb
 install gdbm
 install gdk-pixbuf
 install gettext
@@ -148,6 +147,7 @@ install ssh-copy-id
 install subversion
 install swig
 install tcpflow
+install tig
 install tmux
 install tokyo-cabinet
 install tomcat
@@ -220,10 +220,6 @@ cask install oclint
 #cask install thunderbird
 
 #cask install virtualbox
-
-# launchrocket
-tap jimbojsb/launchrocket
-cask install launchrocket
 
 cask alfred link
 
