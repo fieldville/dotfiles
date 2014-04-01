@@ -3,3 +3,4 @@ bind generic G move-last-line
 bind generic ^G toggle-rev-graph
 #set show-rev-graph = no
 bind generic L !git reflog
+set blame-options = -w
