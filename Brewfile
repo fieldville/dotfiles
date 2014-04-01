@@ -45,6 +45,7 @@ install fontforge
 install freetype
 install gcal
 install gd
+install gdb
 install gdbm
 install gdk-pixbuf
 install gettext
