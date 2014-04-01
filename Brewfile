@@ -51,7 +51,7 @@ install gdk-pixbuf
 install gettext
 #install ghostscript
 install git
-install git-cola
+#install git-cola
 install git-extras
 install git-flow
 install git-now
@@ -170,10 +170,6 @@ install -v --HEAD xctool
 # jsl
 tap homebrew/binary
 install jsl
-
-# php54
-#tap josegonzalez/homebrew-php
-#install php54 || true
 
 # ricty
 tap sanemat/font
