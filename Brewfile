@@ -167,6 +167,7 @@ cask install --appdir=/Applications cyberduck
 cask install --appdir=/Applications evernote
 cask install --appdir=/Applications freemind
 cask install --appdir=/Applications google-chrome
+cask install --appdir=/Applications google-japanese-ime
 cask install --appdir=/Applications grandperspective
 cask install --appdir=/Applications iterm2
 cask install --appdir=/Applications keyremap4macbook
@@ -192,6 +193,7 @@ cask install --appdir=/Applications uncrustifyx
 cask install --appdir=/Applications iphoney
 cask install --appdir=/Applications xmind
 cask install oclint
+#cask install java  # 1.8
 
 # english version
 #cask install firefox
