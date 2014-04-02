@@ -149,6 +149,8 @@ install --powerline --vim-powerline ricty
 tap phinze/homebrew-cask
 install brew-cask
 
+tap caskroom/versions
+
 cask install --appdir=/Applications alfred
 cask install --appdir=/Applications appcleaner
 cask install --appdir=/Applications bettertouchtool
@@ -184,6 +186,7 @@ cask install --appdir=/Applications iphoney
 cask install --appdir=/Applications xmind
 cask install oclint
 #cask install java  # 1.8
+cask install java6
 
 # english version
 #cask install firefox
