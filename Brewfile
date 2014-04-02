@@ -34,13 +34,9 @@ install dos2unix
 install exiftool
 install fdupes
 install figlet
-install fontconfig
-install fontforge
-install freetype
 install gcal
 install gd
 install gdbm
-install gdk-pixbuf
 install gettext
 install git
 #install git-cola
@@ -51,7 +47,6 @@ install global
 install gnu-getopt
 install gnu-sed
 install go
-install gobject-introspection
 install gradle
 install graphviz
 install groovy
@@ -76,8 +71,6 @@ install libtiff
 install libtool
 install libxml2
 install libyaml
-install little-cms
-install little-cms2
 install lua
 install lv
 install maven-shell
@@ -89,13 +82,11 @@ install memcached
 install mercurial
 install mm-common
 install mobile-shell
-install msmtp
 install neon
 install ngrep
 install nkf
 install nmap
 install node
-install nspr
 install oniguruma
 install openssl
 install ossp-uuid
