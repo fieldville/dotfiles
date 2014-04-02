@@ -18,7 +18,6 @@ install autoconf
 install autojump
 install automake
 install bash-completion
-install brew-cask
 install cmigemo
 install colordiff
 install colorsvn
