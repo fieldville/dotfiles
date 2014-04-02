@@ -21,7 +21,6 @@ install bash-completion
 install cmigemo
 install colordiff
 install colorsvn
-install connect
 install convmv
 install coreutils
 install corkscrew
