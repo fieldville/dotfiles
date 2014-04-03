@@ -183,17 +183,16 @@ cask install --appdir=/Applications intellij-idea-ce
 cask install --appdir=/Applications uncrustifyx
 cask install --appdir=/Applications iphoney
 cask install --appdir=/Applications xmind
-cask install --appdir=/Applications macvim-kaoriya
 cask install --appdir=/Applications eclipse-jee
+cask install --appdir=/Applications virtualbox
 cask install oclint
 #cask install java  # 1.8
+
+# caskroom/versions
+cask install --appdir=/Applications macvim-kaoriya
+cask install --appdir=/Applications firefox-ja
+cask install --appdir=/Applications thunderbird-ja
 cask install java6
-
-# english version
-#cask install firefox
-#cask install thunderbird
-
-#cask install virtualbox
 
 cask alfred link
 
