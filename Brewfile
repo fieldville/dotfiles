@@ -88,8 +88,6 @@ install node
 install oniguruma
 install openssl
 install ossp-uuid
-install pango
-install pangomm
 install pcre
 install pkg-config
 install play
