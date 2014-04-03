@@ -163,7 +163,7 @@ cask install --appdir=/Applications grandperspective
 cask install --appdir=/Applications iterm2
 cask install --appdir=/Applications keyremap4macbook
 cask install --appdir=/Applications kobito
-cask install --appdir=/Applications less-app
+cask install --appdir=/Applications less
 cask install --appdir=/Applications libreoffice
 cask install --appdir=/Applications lightpaper
 cask install --appdir=/Applications mou
@@ -184,7 +184,7 @@ cask install --appdir=/Applications uncrustifyx
 cask install --appdir=/Applications iphoney
 cask install --appdir=/Applications xmind
 cask install --appdir=/Applications eclipse-jee
-cask install --appdir=/Applications virtualbox
+cask install virtualbox
 cask install oclint
 #cask install java  # 1.8
 
