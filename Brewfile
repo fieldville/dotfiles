@@ -184,6 +184,7 @@ cask install --appdir=/Applications uncrustifyx
 cask install --appdir=/Applications iphoney
 cask install --appdir=/Applications xmind
 cask install --appdir=/Applications macvim-kaoriya
+cask install --appdir=/Applications eclipse-jee
 cask install oclint
 #cask install java  # 1.8
 cask install java6
