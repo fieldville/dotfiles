@@ -182,6 +182,7 @@ cask install --appdir=/Applications uncrustifyx
 cask install --appdir=/Applications iphoney
 cask install --appdir=/Applications xmind
 cask install --appdir=/Applications eclipse-jee
+cask install --appdir=/Applications integrity
 cask install virtualbox
 cask install oclint
 #cask install java  # 1.8
