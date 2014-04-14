@@ -1,0 +1,26 @@
+'exception-reporting':
+  'userId': '2c19c0b6-2aa9-56cc-495e-4bc06efe7f3b'
+'release-notes':
+  'viewedVersion': '0.85.0'
+'welcome':
+  'showOnStartup': false
+'metrics':
+  'userId': '5af126d92e278cb7ca83fc212cc211345ac75ac5'
+'editor':
+  'fontSize': 14
+  'showInvisibles': true
+  'fontFamily': 'Ricty Discord'
+  'showIndentGuide': true
+  'tabLength': 4
+  'softTabs': false
+'core':
+  'themes': [
+    'atom-light-ui'
+    'fizzy'
+  ]
+  'ignoredNames': [
+    '.git'
+    '.svn'
+    '.DS_Store'
+  ]
+  'audioBeep': false
