@@ -7,12 +7,12 @@
 'metrics':
   'userId': '5af126d92e278cb7ca83fc212cc211345ac75ac5'
 'editor':
-  'fontSize': 14
   'showInvisibles': true
   'fontFamily': 'Ricty Discord'
   'showIndentGuide': true
   'tabLength': 4
   'softTabs': false
+  'fontSize': 13
 'core':
   'themes': [
     'atom-light-ui'
