@@ -1,0 +1,7 @@
+desc "Install Atom packages"
+task :install do
+  packages = File.new(File.join(pwd, "MANIFEST"), "r").read.split("\n")
+  packages.each do |package|
+    `apm install #{package}`
+  end
+end
