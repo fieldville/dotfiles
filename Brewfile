@@ -184,6 +184,7 @@ cask install --appdir=/Applications xmind
 cask install --appdir=/Applications eclipse-jee
 cask install --appdir=/Applications integrity
 cask install --appdir=/Applications cinch
+cask install --appdir=/Applications diffmerge
 cask install virtualbox
 cask install oclint
 #cask install java  # 1.8
