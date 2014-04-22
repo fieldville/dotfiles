@@ -187,6 +187,7 @@ cask install --appdir=/Applications cinch
 cask install --appdir=/Applications diffmerge
 cask install --appdir=/Applications dash
 cask install --appdir=/Applications imageoptim
+cask install --appdir=/Applications colors
 cask install virtualbox
 cask install oclint
 #cask install java  # 1.8
