@@ -12,7 +12,6 @@ tap homebrew/versions
 
 install ack
 install ant
-install apple-gcc42
 install astyle
 install autoconf
 install autojump
