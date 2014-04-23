@@ -54,8 +54,8 @@ map l <A-Right>
 " H/L や ← → でタブ移動
 map H gT
 map L gt
-map <Left>  gT
-map <Right> gt
+"map <Left>  gT
+"map <Right> gt
 
 " Shift + ← → で現在のタブの位置変更
 map <S-Right> :tabmove! +1<CR>
