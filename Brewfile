@@ -25,7 +25,6 @@ install coreutils
 install corkscrew
 install cpanminus
 install ctags
-install curl-ca-bundle
 install devtodo
 install dos2unix
 install exiftool
