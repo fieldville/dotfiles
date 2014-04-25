@@ -52,3 +52,6 @@ project.xcworkspace
 
 # devtodo
 .todo
+
+# node
+node_modules
