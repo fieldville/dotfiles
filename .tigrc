@@ -1,6 +1,9 @@
 bind generic g move-first-line
 bind generic G move-last-line
-bind generic ^G toggle-rev-graph
+bind generic <Ctrl-G> :toggle commit-title-graph
 #set show-rev-graph = no
 bind generic L !git reflog
 set blame-options = -w
+
+# merge diffを表示
+set diff-options = -m --first-parent
