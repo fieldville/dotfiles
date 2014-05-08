@@ -141,7 +141,7 @@ install --powerline --vim-powerline ricty
 #install the_legacy_searcher
 
 # homebrew-cask
-tap phinze/homebrew-cask
+tap caskroom/cask
 install brew-cask
 
 tap caskroom/versions
