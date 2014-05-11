@@ -129,6 +129,7 @@ install zsh-lovers
 install docker
 install boot2docker
 install -v --HEAD xctool
+install phantomjs
 
 # jsl
 tap homebrew/binary
