@@ -130,6 +130,7 @@ install docker
 install boot2docker
 install -v --HEAD xctool
 install phantomjs
+install htop
 
 # jsl
 tap homebrew/binary
