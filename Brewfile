@@ -150,7 +150,7 @@ tap caskroom/versions
 cask install --appdir=/Applications alfred
 cask install --appdir=/Applications appcleaner
 cask install --appdir=/Applications bettertouchtool
-cask install --appdir=/Applications cheatsheet
+#cask install --appdir=/Applications cheatsheet
 cask install --appdir=/Applications cyberduck
 cask install --appdir=/Applications evernote
 cask install --appdir=/Applications freemind
