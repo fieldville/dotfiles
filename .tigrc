@@ -34,6 +34,9 @@ bind branch d !?git branch -d %(branch)
 bind stash D !?git stash drop %(stash)
 bind stash A !?git stash apply %(stash)
 
+# Unbind
+bind stash ! none
+
 #-------------
 # status view
 #-------------
