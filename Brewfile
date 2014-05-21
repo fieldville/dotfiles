@@ -189,6 +189,7 @@ cask install --appdir=/Applications dash
 cask install --appdir=/Applications imageoptim
 cask install --appdir=/Applications colors
 cask install --appdir=/Applications codekit
+cask install --appdir=/Applications gimp
 cask install virtualbox
 cask install oclint
 #cask install java  # 1.8
