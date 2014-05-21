@@ -38,7 +38,7 @@ install git
 #install git-cola
 install git-extras
 install git-flow
-install git-now
+install --zsh-completion git-now
 install global
 install gnu-getopt
 install gnu-sed
