@@ -151,9 +151,7 @@ tap caskroom/versions
 cask install --appdir=/Applications alfred
 cask install --appdir=/Applications appcleaner
 cask install --appdir=/Applications bettertouchtool
-#cask install --appdir=/Applications cheatsheet
 cask install --appdir=/Applications cyberduck
-cask install --appdir=/Applications evernote
 cask install --appdir=/Applications freemind
 cask install --appdir=/Applications google-chrome
 cask install --appdir=/Applications google-japanese-ime
@@ -166,34 +164,37 @@ cask install --appdir=/Applications libreoffice
 cask install --appdir=/Applications lightpaper
 cask install --appdir=/Applications mou
 cask install --appdir=/Applications openoffice
-cask install --appdir=/Applications opera
 cask install --appdir=/Applications pgadmin3
 cask install --appdir=/Applications skitch
 cask install --appdir=/Applications sourcetree
 cask install --appdir=/Applications sublime-text
 cask install --appdir=/Applications vagrant
 cask install --appdir=/Applications xmarks-safari
-#cask install --appdir=/Applications licecap
-#cask install --appdir=/Applications appcode
-#cask install --appdir=/Applications android-studio
 cask install --appdir=/Applications webstorm
 cask install --appdir=/Applications intellij-idea-ce
 cask install --appdir=/Applications uncrustifyx
-#cask install --appdir=/Applications iphoney
 cask install --appdir=/Applications xmind
 cask install --appdir=/Applications eclipse-jee
-cask install --appdir=/Applications integrity
 cask install --appdir=/Applications cinch
-#cask install --appdir=/Applications diffmerge
 cask install --appdir=/Applications dash
-#cask install --appdir=/Applications imageoptim
 cask install --appdir=/Applications colors
 cask install --appdir=/Applications codekit
-#cask install --appdir=/Applications gimp
 cask install --appdir=/Applications seashore
 cask install virtualbox
 cask install oclint
 #cask install java  # 1.8
+
+#cask install --appdir=/Applications android-studio
+#cask install --appdir=/Applications appcode
+#cask install --appdir=/Applications cheatsheet
+#cask install --appdir=/Applications diffmerge
+#cask install --appdir=/Applications gimp
+#cask install --appdir=/Applications imageoptim
+#cask install --appdir=/Applications integrity
+#cask install --appdir=/Applications iphoney
+#cask install --appdir=/Applications licecap
+#cask install --appdir=/Applications opera
+#cask install --appdir=/Applications evernote
 
 # caskroom/versions
 cask install --appdir=/Applications macvim-kaoriya
