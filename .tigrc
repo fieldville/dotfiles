@@ -3,6 +3,7 @@ bind generic G move-last-line
 bind generic <Ctrl-G> :toggle commit-title-graph
 #set show-rev-graph = no
 bind generic L !git reflog
+bind generic 9 !@sh -c "printf %(commit) | pbcopy"
 set blame-options = -w
 
 # merge diffを表示
