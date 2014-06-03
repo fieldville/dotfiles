@@ -43,6 +43,7 @@ install global
 install gnu-getopt
 install gnu-sed
 install go
+install grep --default-names
 install gradle
 install graphviz
 install groovy
