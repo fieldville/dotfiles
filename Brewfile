@@ -163,7 +163,6 @@ cask install --appdir=/Applications less
 cask install --appdir=/Applications libreoffice
 cask install --appdir=/Applications lightpaper
 cask install --appdir=/Applications mou
-cask install --appdir=/Applications openoffice
 cask install --appdir=/Applications pgadmin3
 cask install --appdir=/Applications skitch
 cask install --appdir=/Applications sourcetree
