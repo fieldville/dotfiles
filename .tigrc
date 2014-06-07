@@ -6,6 +6,8 @@ bind generic L !git reflog
 bind generic 9 !@sh -c "printf %(commit) | pbcopy"
 set blame-options = -w
 
+set vertical-split = false
+
 # merge diffを表示
 set diff-options = -m --first-parent
 
