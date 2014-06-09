@@ -179,7 +179,6 @@ cask install --appdir=/Applications eclipse-jee || true
 cask install --appdir=/Applications cinch || true
 cask install --appdir=/Applications dash || true
 cask install --appdir=/Applications colors || true
-cask install --appdir=/Applications codekit || true
 cask install --appdir=/Applications seashore || true
 cask install virtualbox || true
 cask install oclint || true
