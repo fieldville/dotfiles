@@ -149,6 +149,7 @@ install brew-cask
 
 tap caskroom/versions
 
+cask install xquartz || true
 cask install --appdir=/Applications alfred || true
 cask install --appdir=/Applications appcleaner || true
 cask install --appdir=/Applications bettertouchtool || true
