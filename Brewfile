@@ -149,58 +149,58 @@ install brew-cask
 
 tap caskroom/versions
 
-cask install --appdir=/Applications alfred
-cask install --appdir=/Applications appcleaner
-cask install --appdir=/Applications bettertouchtool
-cask install --appdir=/Applications cyberduck
-cask install --appdir=/Applications freemind
-cask install --appdir=/Applications google-chrome
-cask install --appdir=/Applications google-japanese-ime
-cask install --appdir=/Applications grandperspective
-cask install --appdir=/Applications iterm2
-cask install --appdir=/Applications keyremap4macbook
-cask install --appdir=/Applications kobito
-cask install --appdir=/Applications less
-cask install --appdir=/Applications libreoffice
-cask install --appdir=/Applications lightpaper
-cask install --appdir=/Applications mou
-cask install --appdir=/Applications pgadmin3
-cask install --appdir=/Applications skitch
-cask install --appdir=/Applications sourcetree
-cask install --appdir=/Applications sublime-text
-cask install --appdir=/Applications vagrant
-cask install --appdir=/Applications xmarks-safari
-cask install --appdir=/Applications webstorm
-cask install --appdir=/Applications intellij-idea-ce
-cask install --appdir=/Applications uncrustifyx
-cask install --appdir=/Applications xmind
-cask install --appdir=/Applications eclipse-jee
-cask install --appdir=/Applications cinch
-cask install --appdir=/Applications dash
-cask install --appdir=/Applications colors
-cask install --appdir=/Applications codekit
-cask install --appdir=/Applications seashore
-cask install virtualbox
-cask install oclint
-#cask install java  # 1.8
+cask install --appdir=/Applications alfred || true
+cask install --appdir=/Applications appcleaner || true
+cask install --appdir=/Applications bettertouchtool || true
+cask install --appdir=/Applications cyberduck || true
+cask install --appdir=/Applications freemind || true
+cask install --appdir=/Applications google-chrome || true
+cask install --appdir=/Applications google-japanese-ime || true
+cask install --appdir=/Applications grandperspective || true
+cask install --appdir=/Applications iterm2 || true
+cask install --appdir=/Applications keyremap4macbook || true
+cask install --appdir=/Applications kobito || true
+cask install --appdir=/Applications less || true
+cask install --appdir=/Applications libreoffice || true
+cask install --appdir=/Applications lightpaper || true
+cask install --appdir=/Applications mou || true
+cask install --appdir=/Applications pgadmin3 || true
+cask install --appdir=/Applications skitch || true
+cask install --appdir=/Applications sourcetree || true
+cask install --appdir=/Applications sublime-text || true
+cask install --appdir=/Applications vagrant || true
+cask install --appdir=/Applications xmarks-safari || true
+cask install --appdir=/Applications webstorm || true
+cask install --appdir=/Applications intellij-idea-ce || true
+cask install --appdir=/Applications uncrustifyx || true
+cask install --appdir=/Applications xmind || true
+cask install --appdir=/Applications eclipse-jee || true
+cask install --appdir=/Applications cinch || true
+cask install --appdir=/Applications dash || true
+cask install --appdir=/Applications colors || true
+cask install --appdir=/Applications codekit || true
+cask install --appdir=/Applications seashore || true
+cask install virtualbox || true
+cask install oclint || true
+#cask install java || true # 1.8
 
-#cask install --appdir=/Applications android-studio
-#cask install --appdir=/Applications appcode
-#cask install --appdir=/Applications cheatsheet
-#cask install --appdir=/Applications diffmerge
-#cask install --appdir=/Applications gimp
-#cask install --appdir=/Applications imageoptim
-#cask install --appdir=/Applications integrity
-#cask install --appdir=/Applications iphoney
-#cask install --appdir=/Applications licecap
-#cask install --appdir=/Applications opera
-#cask install --appdir=/Applications evernote
+#cask install --appdir=/Applications android-studio || true
+#cask install --appdir=/Applications appcode || true
+#cask install --appdir=/Applications cheatsheet || true
+#cask install --appdir=/Applications diffmerge || true
+#cask install --appdir=/Applications gimp || true
+#cask install --appdir=/Applications imageoptim || true
+#cask install --appdir=/Applications integrity || true
+#cask install --appdir=/Applications iphoney || true
+#cask install --appdir=/Applications licecap || true
+#cask install --appdir=/Applications opera || true
+#cask install --appdir=/Applications evernote || true
 
 # caskroom/versions
-cask install --appdir=/Applications macvim-kaoriya
-cask install --appdir=/Applications firefox-ja
-cask install --appdir=/Applications thunderbird-ja
-cask install java6
+cask install --appdir=/Applications macvim-kaoriya || true
+cask install --appdir=/Applications firefox-ja || true
+cask install --appdir=/Applications thunderbird-ja || true
+cask install java6 || true
 
 cask alfred link
 
