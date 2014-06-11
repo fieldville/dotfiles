@@ -1,0 +1,31 @@
+\set QUIET 1
+
+-- 拡張テーブル形式モード(expanded)
+\x auto
+
+-- ヌル文字置き換え
+\pset null ¤
+
+\pset linestyle unicode
+\pset border 2
+\set VERBOSITY verbose
+
+-- 実行時間を表示
+\timing
+
+-- プロンプト
+\set PROMPT1 '%[%033[33;1m%]%x%[%033[0m%]%[%033[1m%]%/%[%033[0m%]%R%# '
+--\set PROMPT1 '%[%033[1m%]%M %n@%/%R%[%033[0m%]%# '
+--\set PROMPT1 '%[%033[1m%]%M/%/%R%[%033[0m%]%# '
+
+\set PROMPT2 '[more] %R > '
+
+-- Use a separate history file per-database.
+-- \set HISTFILE ~/.psql_history- :DBNAME
+
+-- 空白を無視
+\set HISTCONTROL ignoredups
+
+-- 小文字で統一
+\set COMP_KEYWORD_CASE lower
+
