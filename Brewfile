@@ -188,7 +188,7 @@ cask install oclint || true
 #cask install --appdir=/Applications appcode || true
 #cask install --appdir=/Applications cheatsheet || true
 #cask install --appdir=/Applications diffmerge || true
-#cask install --appdir=/Applications gimp || true
+cask install --appdir=/Applications gimp || true
 #cask install --appdir=/Applications imageoptim || true
 #cask install --appdir=/Applications integrity || true
 #cask install --appdir=/Applications iphoney || true
