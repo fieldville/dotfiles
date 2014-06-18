@@ -192,7 +192,7 @@ cask install oclint || true
 #cask install --appdir=/Applications imageoptim || true
 #cask install --appdir=/Applications integrity || true
 #cask install --appdir=/Applications iphoney || true
-#cask install --appdir=/Applications licecap || true
+cask install --appdir=/Applications licecap || true
 #cask install --appdir=/Applications opera || true
 #cask install --appdir=/Applications evernote || true
 
