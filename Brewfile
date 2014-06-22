@@ -89,7 +89,7 @@ install openssl
 install ossp-uuid
 install pcre
 install pkg-config
-install play
+install typesafe-activator # play
 install pngcheck
 install polipo
 install postgresql
