@@ -17,3 +17,5 @@ noremap <C-u> 5k
 "カーソル位置の単語をyankする
 nnoremap tt vawy
 
+set sw=4
+
