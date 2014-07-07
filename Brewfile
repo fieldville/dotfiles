@@ -143,6 +143,11 @@ install --powerline --vim-powerline ricty
 
 #install the_legacy_searcher
 
+
+# peco
+tap peco/peco
+install peco
+
 # homebrew-cask
 tap caskroom/cask
 install brew-cask
