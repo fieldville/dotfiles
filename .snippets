@@ -71,3 +71,5 @@ ls -l | grep drw | awk '{print $9}'  | sed 's@/@@'
 # date
 date +%Y%m%d
 
+# git submodule
+git submodule foreach git pull origin master
