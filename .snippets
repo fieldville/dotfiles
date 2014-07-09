@@ -1,0 +1,73 @@
+gss | grep '??' | awk '{print $2}'
+gss | grep '^ M' | awk '{print $2}'
+
+# sql join order fix
+perl -pi -e 's/([^\.\s=]+) on ([^\.\s=]+)(\.[^\.\s=]+) = ([^\.\s=]+)(\.[^\.\s=]+)/$1 on $4$5 = $2$3/ if /([^\.\s=]+) on ([^\.\s=]+)(\.[^\.\s=]+) = ([^\.\s=]+)(\.[^\.\s=]+)/ and $1 ne $2' **/*.sql
+
+# jsp last line fix
+find . -name '*.jsp' -exec sh -c "tail -1 {} | xxd -p | tail -1 | grep -q -v 0a$" ';' -exec sh -c "echo >> {}" ';'
+
+# find camel case jsp
+find . -name '*.jsp' | grep -E '[a-z]{1,}[A-Z]'
+
+# remove .DS_Store
+find . -name '.DS_Store' | xargs rm
+
+# dos2unix
+find . -name '*.java' | xargs file | grep CRLF | awk -F: '{print $1}' | xargs dos2unix
+
+# perltidy
+find . -name '*.cgi' -o -name '*.pm' -o -name '*.pl' | sed 's/.*/perltidy & > &.tdy \&\& mv &.tdy &/' | sh
+
+# cut hoge
+grep -l hoge **/*.java | xargs perl -ni -e '/hoge/ or print'
+
+# xml reformat
+find . -name '*.xml' | sed 's@.*@xmllint --format & > &.new \&\& mv &.new &@' | sh
+
+# mvn
+mvn dependency:resolve
+mvn dependency:sources
+
+# create sastruts sample
+mvn archetype:generate -DarchetypeRepository=http://maven.seasar.org/maven2/ -DarchetypeGroupId=org.seasar.sastruts -DarchetypeArtifactId=sa-struts-archetype -DarchetypeVersion=1.0.4-sp9.1 -DgroupId=hoge -DartifactId=Hoge -Dversion=1
+
+# brew cask
+brew cask install --force --appdir=/Applications hoge
+
+# list up differ files
+diff -qr * | grep differ | awk '{printf "vimdiff %s %s\n", $2, $4}'                                                                 ❮❮❮
+
+# git last month log
+git log --author=author_name --since="1 month ago" --until="0 month ago" --pretty=oneline --reverse | cat -n | lv
+
+# git rebase
+git branch | peco | cut -b 3- | while read line; do echo -e "\e[0;31m--- $line ---\e[0m"; git rebase origin/master $line; done
+
+# recess
+recess --noOverqualifying false --strictPropertyOrder true --noIDs true --noUnderscores true global.less | lv
+
+# fdupes
+fdupes -r . | vim -
+
+# git remote
+ls -1d  * | grep '/$' | sed 's@/$@@' | sed 's/.*/(cd &; git remote -v)/'
+
+# unset proxy
+unset http_proxy; unset ALL_PROXY
+
+# eclipse formatter from command line
+/Applications/eclipse/eclipse -nosplash -application org.eclipse.jdt.core.JavaCodeFormatter -verbose -config ~/.dotfiles_private/.settings/org.eclipse.jdt.core.prefs `find $(pwd) -name '*.java' | grep -v SqlFiles.java`
+
+# change assertEquals order
+find . -name '*.java' | xargs grep 'assertEquals([^,]*, [0-9]*)' | awk -F: '{print $1}' | sort | uniq | xargs perl -pi -e 's/assertEquals\(([^,]*), (\d+)\)/assertEquals($2, $1)/'
+
+# normalize html
+pandoc -f html -t markdown before.html| pandoc -f markdown -t html                                                                                    ❮❮❮
+
+# list dirs
+ls -l | grep drw | awk '{print $9}'  | sed 's@/@@'
+
+# date
+date +%Y%m%d
+
