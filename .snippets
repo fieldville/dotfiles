@@ -70,6 +70,7 @@ ls -l | grep drw | awk '{print $9}'  | sed 's@/@@'
 
 # date
 date +%Y%m%d
+sudo gdate -s "`curl -s --head http://www.google.co.jp | grep '^Date' | cut -b 7-`"
 
 # git submodule
 git submodule foreach git pull origin master
