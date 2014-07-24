@@ -77,3 +77,6 @@ git submodule foreach git pull origin master
 
 # postgresql reset database
 DMP=data.dmp; DB=db; HOST=host; USER=user; PORT=5433; ARGS="-U $USER -h $HOST $DB -p $PORT"; eval "dropdb $ARGS && createdb $ARGS && psql $ARGS < $DMP"
+
+# perl DBI dump
+perl -MDBIx::QueryLog script.pl
