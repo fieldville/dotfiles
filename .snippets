@@ -10,6 +10,10 @@ find . -name '*.jsp' -exec sh -c "tail -1 {} | xxd -p | tail -1 | grep -q -v 0a$
 # find camel case jsp
 find . -name '*.jsp' | grep -E '[a-z]{1,}[A-Z]'
 
+# jsp
+find . -name '*.jsp' | xargs grep -l '<br>' | xargs perl -pi -e 's@<br>@<br />@g'
+find . -name '*.jsp' | xargs grep -l '<br/>' | xargs perl -pi -e 's@<br/>@<br />@g'
+
 # remove .DS_Store
 find . -name '.DS_Store' | xargs rm
 
@@ -61,6 +65,9 @@ unset http_proxy; unset ALL_PROXY
 
 # change assertEquals order
 find . -name '*.java' | xargs grep 'assertEquals([^,]*, [0-9]*)' | awk -F: '{print $1}' | sort | uniq | xargs perl -pi -e 's/assertEquals\(([^,]*), (\d+)\)/assertEquals($2, $1)/'
+
+# find java empty class
+find . -name '*.java' | xargs pcregrep -M '{\n}'
 
 # normalize html
 pandoc -f html -t markdown before.html| pandoc -f markdown -t html                                                                                    ❮❮❮
