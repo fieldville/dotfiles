@@ -13,6 +13,7 @@ find . -name '*.jsp' | grep -E '[a-z]{1,}[A-Z]'
 # jsp
 find . -name '*.jsp' | xargs grep -l '<br>' | xargs perl -pi -e 's@<br>@<br />@g'
 find . -name '*.jsp' | xargs grep -l '<br/>' | xargs perl -pi -e 's@<br/>@<br />@g'
+find . -name '*.jsp' | xargs pcregrep -l '\S/>' | xargs perl -pi -e 's!(\S)/>!$1 />!g'
 
 # remove .DS_Store
 find . -name '.DS_Store' | xargs rm
