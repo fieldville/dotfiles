@@ -44,7 +44,9 @@ brew cask install --force --appdir=/Applications hoge
 diff -qr * | grep differ | awk '{printf "vimdiff %s %s\n", $2, $4}'                                                                 ❮❮❮
 
 # git last month log
-git log --author=author_name --since="1 month ago" --until="0 month ago" --pretty=oneline --reverse | cat -n | lv
+git log --since=$(date -v-1m "+%Y-%m-01") --until=$(date "+%Y-%m-01") --reverse --pretty=format:"%cd  %h  %s" --date=short --author="$(git config user.name)" | cat -n | lv
+git log --since="1 month ago" --until="0 month ago" --reverse --pretty=oneline --author="$(git config user.name)" | cat -n | lv
+tig --all --since=$(date -v-1m "+%Y-%m-01") --until=$(date "+%Y-%m-01") --reverse --author="$(git config user.name)"
 
 # git rebase
 git branch | peco | cut -b 3- | while read line; do echo -e "\e[0;31m--- $line ---\e[0m"; git rebase origin/master $line; done
