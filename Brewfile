@@ -185,6 +185,7 @@ cask install --appdir=/Applications cinch || true
 cask install --appdir=/Applications dash || true
 cask install --appdir=/Applications colors || true
 cask install --appdir=/Applications seashore || true
+cask install --appdir=/Applications vimr || true
 cask install virtualbox || true
 cask install oclint || true
 #cask install java || true # 1.8
