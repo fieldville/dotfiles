@@ -1,4 +1,4 @@
-set ignorecase
+set noignorecase
 set smartcase
 set hls
 set list
