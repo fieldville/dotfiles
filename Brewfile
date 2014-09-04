@@ -96,6 +96,7 @@ install postgresql
 #install postgresql8
 install proctools
 install protobuf
+install proxytunnel
 install pstree
 install python
 install qt
