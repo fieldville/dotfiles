@@ -54,3 +54,5 @@ project.xcworkspace
 
 # node
 node_modules
+
+.atom/compile-cache
