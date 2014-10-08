@@ -90,3 +90,15 @@ DMP=data.dmp; DB=db; HOST=host; USER=user; PORT=5433; ARGS="-U $USER -h $HOST $D
 
 # perl DBI dump
 perl -MDBIx::QueryLog script.pl
+
+# tcpflow
+tcpflow -JCX /dev/null -i en0 dst host proxy.co.jp
+
+# tcpdump
+sudo tcpdump -A -s0 -i en0 dst host proxy.co.jp
+
+# tshark
+# cf) http://www.packetlevel.ch/workshop/drahthai/wireshark-display-filters.pdf
+tshark -V -i en0 -Y 'http.proxy_authorization'
+tshark -D
+
