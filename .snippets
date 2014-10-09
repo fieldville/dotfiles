@@ -96,6 +96,7 @@ tcpflow -JCX /dev/null -i en0 dst host proxy.co.jp
 
 # tcpdump
 tcpdump -A -s0 -i en0 dst host proxy.co.jp
+tcpdump    -s0 -i en0 port 53
 
 # tshark
 # cf) http://www.packetlevel.ch/workshop/drahthai/wireshark-display-filters.pdf
