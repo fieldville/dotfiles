@@ -99,8 +99,9 @@ tcpdump -A -s0 -i en0 dst host proxy.co.jp
 
 # tshark
 # cf) http://www.packetlevel.ch/workshop/drahthai/wireshark-display-filters.pdf
-tshark -V -i en0 -Y 'http.proxy_authorization'
 tshark -D
+tshark -V -i en0 -Y 'http.proxy_authorization'
+tshark -i en0 -Y 'dns.qry.name'
 
 # ngrep
 ngrep -d en0 host proxy.co.jp
