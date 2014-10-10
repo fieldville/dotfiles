@@ -129,6 +129,7 @@ brew install boot2docker
 brew install -v --HEAD xctool
 brew install phantomjs
 brew install htop
+brew install wireshark
 
 # jsl
 brew tap homebrew/binary
