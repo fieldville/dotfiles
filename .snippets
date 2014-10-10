@@ -116,3 +116,12 @@ sudo du -sx * | sort -nr | head -10
 sudo netstat -atnp
 # udp
 sudo netstat -aunp
+
+# apt
+apt-cache pkgnames
+apt-cache dumpavail | vi -
+apt-cache search -n PACKAGE
+apt-cache show PACKAGE
+
+# dpkg
+dpkg -l
