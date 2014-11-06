@@ -130,7 +130,7 @@ brew install -v --HEAD xctool
 brew install phantomjs
 brew install htop
 brew install wireshark
-brew install clamav
+#brew install clamav
 
 # jsl
 brew tap homebrew/binary
