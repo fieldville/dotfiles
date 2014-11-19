@@ -39,7 +39,8 @@ brew install global
 brew install gnu-getopt
 brew install gnu-sed
 brew install go
-brew install grep --default-names
+#brew install grep --default-names
+brew install homebrew/dupes/grep --default-names
 brew install gradle
 brew install graphviz
 brew install groovy
@@ -145,11 +146,11 @@ brew install --powerline --vim-powerline ricty
 
 # peco
 brew tap peco/peco
-brew install peco
+brew install peco/peco/peco
 
 # homebrew-cask
 brew tap caskroom/cask
-brew install brew-cask
+brew install caskroom/cask/brew-cask
 
 brew tap caskroom/versions
 
