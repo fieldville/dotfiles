@@ -202,6 +202,7 @@ brew cask install --appdir=/Applications licecap || true
 #brew cask install --appdir=/Applications opera || true
 #brew cask install --appdir=/Applications evernote || true
 brew cask install --appdir=/Applications unetbootin || true
+brew cask install --appdir=/Applications keepassx || true
 
 # caskroom/versions
 brew cask install --appdir=/Applications macvim-kaoriya || true
