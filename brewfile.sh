@@ -132,6 +132,7 @@ brew install phantomjs
 brew install htop
 brew install wireshark
 #brew install clamav
+brew install qemu
 
 # jsl
 brew tap homebrew/binary
