@@ -134,6 +134,7 @@ brew install wireshark
 #brew install clamav
 brew install qemu
 brew install jigdo
+brew install libvirt
 
 # jsl
 brew tap homebrew/binary
