@@ -205,6 +205,7 @@ brew cask install --appdir=/Applications licecap || true
 brew cask install --appdir=/Applications unetbootin || true
 brew cask install --appdir=/Applications keepassx || true
 brew cask install --appdir=/Applications chicken || true
+brew cask install --appdir=/Applications jxplorer || true
 
 # caskroom/versions
 brew cask install --appdir=/Applications macvim-kaoriya || true
