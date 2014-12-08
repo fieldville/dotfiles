@@ -133,6 +133,7 @@ brew install htop
 brew install wireshark
 #brew install clamav
 brew install qemu
+brew install jigdo
 
 # jsl
 brew tap homebrew/binary
