@@ -39,8 +39,7 @@ brew install global
 brew install gnu-getopt
 brew install gnu-sed
 brew install go
-#brew install grep --default-names
-brew install homebrew/dupes/grep --default-names
+brew install homebrew/dupes/grep --with-default-names
 brew install gradle
 brew install graphviz
 brew install groovy
