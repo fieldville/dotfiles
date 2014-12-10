@@ -207,6 +207,7 @@ brew cask install --appdir=/Applications unetbootin || true
 brew cask install --appdir=/Applications keepassx || true
 brew cask install --appdir=/Applications chicken || true
 brew cask install --appdir=/Applications jxplorer || true
+brew cask install --force --appdir=/Applications sdformatter || true
 
 # caskroom/versions
 brew cask install --appdir=/Applications macvim-kaoriya || true
