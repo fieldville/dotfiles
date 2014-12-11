@@ -134,6 +134,8 @@ brew install wireshark
 brew install qemu
 brew install jigdo
 brew install libvirt
+brew install fping
+brew install ddrescue
 
 # jsl
 brew tap homebrew/binary
