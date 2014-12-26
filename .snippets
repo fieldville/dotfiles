@@ -130,3 +130,6 @@ dpkg -l
 
 # ionice
 ionice -c 2 -n 7 nice -n 19
+
+# rpm --freshen for apt-get
+for i in pkg1 pkg2 pkg3; do dpkg -L $i > /dev/null && sudo apt-get install $i; done
