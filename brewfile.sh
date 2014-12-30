@@ -136,6 +136,7 @@ brew install jigdo
 brew install libvirt
 brew install fping
 brew install ddrescue
+brew install sshuttle
 
 # jsl
 brew tap homebrew/binary
