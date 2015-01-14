@@ -137,6 +137,7 @@ brew install libvirt
 brew install fping
 brew install ddrescue
 #brew install sshuttle
+brew install ipcalc
 
 # jsl
 brew tap homebrew/binary
@@ -190,7 +191,6 @@ brew cask install --appdir=/Applications cinch || true
 brew cask install --appdir=/Applications dash || true
 brew cask install --appdir=/Applications colors || true
 brew cask install --appdir=/Applications seashore || true
-brew cask install --appdir=/Applications vimr || true
 #brew cask install virtualbox || true
 brew cask install oclint || true
 #brew cask install java || true # 1.8
