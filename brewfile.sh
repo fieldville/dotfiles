@@ -138,6 +138,8 @@ brew install fping
 brew install ddrescue
 #brew install sshuttle
 brew install ipcalc
+brew install sipcalc
+brew install mtr
 
 # jsl
 brew tap homebrew/binary
