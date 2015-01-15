@@ -133,3 +133,6 @@ ionice -c 2 -n 7 nice -n 19
 
 # rpm --freshen for apt-get
 for i in pkg1 pkg2 pkg3; do dpkg -L $i > /dev/null && sudo apt-get install $i; done
+
+# explor tput color
+for (( i = 0; i < 17; i++ )); do echo "$(tput setaf $i)This is ($i) $(tput sgr0)"; done
