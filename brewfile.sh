@@ -220,6 +220,6 @@ brew cask install --appdir=/Applications firefox-ja || true
 brew cask install --appdir=/Applications thunderbird-ja || true
 brew cask install java6 || true
 
-brew cask alfred link
+#brew cask alfred link
 
 #brew cleanup -s
