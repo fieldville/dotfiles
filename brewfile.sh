@@ -140,6 +140,7 @@ brew install ddrescue
 brew install ipcalc
 brew install sipcalc
 brew install mtr
+brew install ranger
 
 # jsl
 brew tap homebrew/binary
