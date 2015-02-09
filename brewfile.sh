@@ -141,6 +141,7 @@ brew install ipcalc
 brew install sipcalc
 brew install mtr
 brew install ranger
+brew install dfc
 
 # jsl
 brew tap homebrew/binary
