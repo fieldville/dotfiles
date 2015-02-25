@@ -136,3 +136,7 @@ for i in pkg1 pkg2 pkg3; do dpkg -L $i > /dev/null && sudo apt-get install $i; d
 
 # explor tput color
 for (( i = 0; i < 17; i++ )); do echo "$(tput setaf $i)This is ($i) $(tput sgr0)"; done
+
+# delete old generation directory of homebrew cask (NOT PERFECT!)
+# cd /opt/homebrew-cask/Caskroom
+\ls -1d * | sed 's@.*@(cd &; r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr ../&/[0-9]\* | tail -n +2 | sed "s!\.\./!!")@'
