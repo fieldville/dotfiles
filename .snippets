@@ -140,3 +140,6 @@ for (( i = 0; i < 17; i++ )); do echo "$(tput setaf $i)This is ($i) $(tput sgr0)
 # delete old generation directory of homebrew cask (NOT PERFECT!)
 # cd /opt/homebrew-cask/Caskroom
 \ls -1d * | sed 's@.*@(cd &; r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr ../&/[0-9]\* | tail -n +2 | sed "s!\.\./!!")@'
+
+# fdupes
+find . -type f | xargs md5sum > /tmp/a; grep -f <(awk '{print $1}' /tmp/a | sort | uniq -c | awk '{if($1 > 1) print $2}') /tmp/a | perl -lane 'push @{$a{$F[0]}}, $F[1]; END {print join "\n", sort(@{$a{$_}}), "" for keys %a}'
