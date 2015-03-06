@@ -138,8 +138,10 @@ for i in pkg1 pkg2 pkg3; do dpkg -L $i > /dev/null && sudo apt-get install $i; d
 for (( i = 0; i < 17; i++ )); do echo "$(tput setaf $i)This is ($i) $(tput sgr0)"; done
 
 # delete old generation directory of homebrew cask
-(cd /opt/homebrew-cask/Caskroom; \ls -1d * | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -r | tail -n +2 | sed "s!^!$p/!")@' | sh)
-(cd /usr/local/Cellar; \ls -1d * | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -r | tail -n +2 | sed "s!^!$p/!")@' | sh)
+#find /opt/homebrew-cask/Caskroom -type d -maxdepth 1 | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -r | tail -n +2 | sed "s!^!$p/!")@' | sh
+find /opt/homebrew-cask/Caskroom -type d -maxdepth 1 | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | gsort -rV | tail -n +2 | sed "s!^!$p/!")@' | sh
+#find /usr/local/Cellar -type d -maxdepth 1 | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -r | tail -n +2 | sed "s!^!$p/!")@' | sh
+find /usr/local/Cellar -type d -maxdepth 1 | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | gsort -rV | tail -n +2 | sed "s!^!$p/!")@' | sh
 
 # fdupes
 find . -type f | xargs md5sum > /tmp/a; grep -f <(awk '{print $1}' /tmp/a | sort | uniq -c | awk '{if($1 > 1) print $2}') /tmp/a | perl -lane 'push @{$a{$F[0]}}, $F[1]; END {print join "\n", sort(@{$a{$_}}), "" for keys %a}'
