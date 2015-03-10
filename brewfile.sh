@@ -142,6 +142,7 @@ brew install sipcalc
 brew install mtr
 brew install ranger
 brew install dfc
+brew install gnuplot
 
 # jsl
 brew tap homebrew/binary
