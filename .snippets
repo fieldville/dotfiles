@@ -148,3 +148,6 @@ find . -type f | xargs md5sum > /tmp/a; grep -f <(awk '{print $1}' /tmp/a | sort
 
 # ps with header
 ps auxww | sed -n '1p; /sed -n /d; /PATTERN/p'
+
+## generate random mac address
+openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
