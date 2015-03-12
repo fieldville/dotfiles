@@ -143,6 +143,7 @@ brew install mtr
 brew install ranger
 brew install dfc
 brew install gnuplot
+brew install freeradius-server
 
 # jsl
 brew tap homebrew/binary
