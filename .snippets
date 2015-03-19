@@ -151,3 +151,6 @@ ps auxww | sed -n '1p; /sed -n /d; /PATTERN/p'
 
 ## generate random mac address
 openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
+
+## modify string
+pbpaste | perl -ne 'next unless(/\[\d+\]: /); if(/IP (\S+) .*/){$i=$1}elsif(/from.*<(.*)>.*/){$f=$1}elsif(/to.*<(.*)>.*/){$t=$1} END{print "<pre>\nIP　　　$i\n送信元　$f\n送信先　$t\n</pre>\n"}' | pbcopy
