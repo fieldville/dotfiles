@@ -157,3 +157,6 @@ pbpaste | perl -ne 'next unless(/\[\d+\]: /); if(/IP (\S+) .*/){$i=$1}elsif(/fro
 
 ## openssl show cert expire date
 openssl s_client -connect ${HOST}:${PORT} </dev/null 2>/dev/null | openssl x509 -text | sed -n '/Not After/s@^.*: @@p' | date '+%F %H:%M:%S' -f -
+
+## openssl show client cert validate date from p12 file
+openssl pkcs12 -in 207044.p12 -clcerts -nokeys -passin file:207044.pass.txt 2>/dev/null | openssl x509 -noout -date
