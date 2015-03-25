@@ -12,12 +12,12 @@ set completion-ignore-case on
 
 # historical backward search with linehead string binded to up-key
 #
-#"\e[A": history-search-backward
+"\e[A": history-search-backward
 Control-p: history-search-backward
 
 # historical forward search with linehead string binded to down-key
 #
-#"\e[B": history-search-forward
+"\e[B": history-search-forward
 Control-n: history-search-forward
 
 
