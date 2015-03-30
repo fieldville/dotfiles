@@ -152,8 +152,8 @@ ps auxww | sed -n '1p; /sed -n /d; /PATTERN/p'
 ## generate random mac address
 openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
 
-## modify string
-pbpaste | perl -ne 'next unless(/\[\d+\]: /); if(/IP (\S+) .*/){$i=$1}elsif(/from.*<(.*)>.*/){$f=$1}elsif(/to.*<(.*)>.*/){$t=$1} END{print "<pre>\nIP　　　$i\n送信元　$f\n送信先　$t\n</pre>\n"}' | pbcopy
+## spam check
+pbpaste | perl -lane 'if(/IP (\S+) .*/){$i=$1}elsif(/from.*<(.*@(.*))>.*/){$f=$1;print $2}elsif(/to.*<(.*)>.*/){$t=$1}END{print STDERR "<pre>\nIP　　　$i\n送信元　$f\n送信先　$t\n</pre>\n"}' | xargs -I% dig +noall +answer % any | perl -lane 'print $F[5] if /MX/;print STDERR if /TXT|\tA/;END{print STDERR}' | xargs -n1 dig +noall +answer | awk '{print $5}' | gsort -V | uniq
 
 ## openssl show cert expire date
 openssl s_client -connect ${HOST}:${PORT} </dev/null 2>/dev/null | openssl x509 -text | sed -n '/Not After/s@^.*: @@p' | date '+%F %H:%M:%S' -f -
