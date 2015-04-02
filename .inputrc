@@ -24,3 +24,5 @@ Control-n: history-search-forward
 set bell-style visible
 
 set show-all-if-ambiguous on
+
+Control-e: clear-screen
