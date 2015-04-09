@@ -145,6 +145,7 @@ brew install dfc
 brew install gnuplot
 brew install freeradius-server
 brew install pandoc
+brew install html-xml-utils
 
 # jsl
 brew tap homebrew/binary
