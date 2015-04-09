@@ -144,6 +144,7 @@ brew install ranger
 brew install dfc
 brew install gnuplot
 brew install freeradius-server
+brew install pandoc
 
 # jsl
 brew tap homebrew/binary
