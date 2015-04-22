@@ -146,6 +146,8 @@ brew install gnuplot
 brew install freeradius-server
 brew install pandoc
 brew install html-xml-utils
+brew install terraform
+brew install ansible
 
 # jsl
 brew tap homebrew/binary
