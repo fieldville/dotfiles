@@ -150,6 +150,7 @@ brew install terraform
 brew install ansible
 brew install ansifilter
 brew install daemontools
+brew install source-highlight
 
 # jsl
 brew tap homebrew/binary
