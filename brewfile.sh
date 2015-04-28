@@ -1,7 +1,7 @@
 #!/bin/sh
 
 brew update
-brew upgrade || true
+brew upgrade --all || true
 
 brew tap homebrew/dupes
 brew tap homebrew/versions
