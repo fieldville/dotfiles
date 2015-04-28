@@ -149,6 +149,7 @@ brew install html-xml-utils
 brew install terraform
 brew install ansible
 brew install ansifilter
+brew install daemontools
 
 # jsl
 brew tap homebrew/binary
