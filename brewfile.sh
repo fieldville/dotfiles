@@ -148,6 +148,7 @@ brew install pandoc
 brew install html-xml-utils
 brew install terraform
 brew install ansible
+brew install ansifilter
 
 # jsl
 brew tap homebrew/binary
