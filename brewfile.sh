@@ -151,6 +151,7 @@ brew install ansible
 brew install ansifilter
 brew install daemontools
 brew install source-highlight
+brew install grepcidr
 
 # jsl
 brew tap homebrew/binary
