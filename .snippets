@@ -138,10 +138,10 @@ for i in pkg1 pkg2 pkg3; do dpkg -L $i > /dev/null && sudo apt-get install $i; d
 for (( i = 0; i < 17; i++ )); do echo "$(tput setaf $i)This is ($i) $(tput sgr0)"; done
 
 # delete old generation directory of homebrew cask
-#find /opt/homebrew-cask/Caskroom -type d -maxdepth 1 | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -r | tail -n +2 | sed "s!^!$p/!")@' | sh
-find /opt/homebrew-cask/Caskroom -type d -maxdepth 1 | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | gsort -rV | tail -n +2 | sed "s!^!$p/!")@' | sh
-#find /usr/local/Cellar -type d -maxdepth 1 | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -r | tail -n +2 | sed "s!^!$p/!")@' | sh
-find /usr/local/Cellar -type d -maxdepth 1 | sed 's@.*@(cd &; p=$(pwd); r=$(ls -1d [0-9]\* 2>/dev/null | wc -l); [[ $r -ge 2 ]] \&\& ls -1dr [0-9]\* | gsort -rV | tail -n +2 | sed "s!^!$p/!")@' | sh
+#find /opt/homebrew-cask/Caskroom -type d -maxdepth 1 | sed 's@.*@(cd &; [[ $(ls -1d [0-9]\* 2>/dev/null | wc -l) -ge 2 ]] \&\& ls -1dr [0-9]\* | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -r | sed -n "2,$ s!^!$PWD/!p")@' | sh
+find /opt/homebrew-cask/Caskroom -type d -maxdepth 1 | sed 's@.*@(cd &; [[ $(ls -1d [0-9]\* 2>/dev/null | wc -l) -ge 2 ]] \&\& ls -1dr [0-9]\* | gsort -rV | sed -n "2,$ s!^!$PWD/!p")@' | sh
+#find /usr/local/Cellar -type d -maxdepth 1 | sed 's@.*@(cd &; [[ $(ls -1d [0-9]\* 2>/dev/null | wc -l) -ge 2 ]] \&\& ls -1dr [0-9]\* | sort -t. -k 1,1n -k 2,2n -k 3,3n -k 4,4n | tail -r | sed -n "2,$ s!^!$PWD/!p")@' | sh
+find /usr/local/Cellar -type d -maxdepth 1 | sed 's@.*@(cd &; [[ $(ls -1d [0-9]\* 2>/dev/null | wc -l) -ge 2 ]] \&\& ls -1dr [0-9]\* | gsort -rV | sed -n "2,$ s!^!$PWD/!p")@' | sh
 
 # fdupes
 find . -type f | xargs md5sum > /tmp/a; grep -f <(awk '{print $1}' /tmp/a | sort | uniq -c | awk '{if($1 > 1) print $2}') /tmp/a | perl -lane 'push @{$a{$F[0]}}, $F[1]; END {print join "\n", sort(@{$a{$_}}), "" for keys %a}'
@@ -151,9 +151,6 @@ ps auxww | sed -n '1p; /sed -n /d; /PATTERN/p'
 
 ## generate random mac address
 openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/.$//'
-
-## spam check
-pbpaste | perl -lane 'if(/IP (\S+) .*/){$i=$1}elsif(/from.*<(.*@(.*))>.*/){$f=$1;print $2}elsif(/to.*<(.*)>.*/){$t=$1}END{print STDERR "<pre>\nIP　　　$i\n送信元　$f\n送信先　$t\n</pre>\n"}' | xargs -I% dig +noall +answer % any | perl -lane 'print $F[5] if /MX/;print STDERR if /TXT|\tA/;END{print STDERR}' | xargs -n1 dig +noall +answer | awk '{print $5}' | gsort -V | uniq
 
 ## openssl show cert expire date
 openssl s_client -connect ${HOST}:${PORT} </dev/null 2>/dev/null | openssl x509 -text | sed -n '/Not After/s@^.*: @@p' | date '+%F %H:%M:%S' -f -
