@@ -205,6 +205,7 @@ brew cask install --appdir=/Applications cinch || true
 brew cask install --appdir=/Applications dash || true
 brew cask install --appdir=/Applications colors || true
 brew cask install --appdir=/Applications seashore || true
+brew cask install --appdir=/Applications visual-studio-code || true
 #brew cask install virtualbox || true
 brew cask install oclint || true
 #brew cask install java || true # 1.8
