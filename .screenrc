@@ -1,4 +1,4 @@
-escape ^Aa
+escape ^t^t
 startup_message off
 defmonitor on
 autodetach on
