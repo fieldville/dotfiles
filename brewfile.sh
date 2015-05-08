@@ -152,6 +152,7 @@ brew install ansifilter
 brew install daemontools
 brew install source-highlight
 brew install grepcidr
+brew install minicom
 
 # jsl
 brew tap homebrew/binary
