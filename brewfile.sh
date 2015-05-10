@@ -153,6 +153,7 @@ brew install daemontools
 brew install source-highlight
 brew install grepcidr
 brew install minicom
+brew install samba
 
 # jsl
 brew tap homebrew/binary
