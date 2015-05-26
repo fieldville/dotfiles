@@ -155,6 +155,9 @@ brew install grepcidr
 brew install minicom
 brew install samba
 brew install unrar
+brew install unrar
+brew install pwgen
+brew install sf-pwgen
 
 # jsl
 brew tap homebrew/binary
