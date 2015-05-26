@@ -154,6 +154,7 @@ brew install source-highlight
 brew install grepcidr
 brew install minicom
 brew install samba
+brew install unrar
 
 # jsl
 brew tap homebrew/binary
