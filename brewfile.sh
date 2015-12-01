@@ -158,6 +158,7 @@ brew install unrar
 brew install unrar
 brew install pwgen
 brew install sf-pwgen
+brew install iproute2mac
 
 # jsl
 brew tap homebrew/binary
@@ -214,7 +215,7 @@ brew cask install --appdir=/Applications seashore || true
 brew cask install --appdir=/Applications visual-studio-code || true
 #brew cask install virtualbox || true
 brew cask install oclint || true
-#brew cask install java || true # 1.8
+brew cask install java || true # 1.8
 
 #brew cask install --appdir=/Applications android-studio || true
 #brew cask install --appdir=/Applications appcode || true
@@ -239,7 +240,7 @@ brew cask install --appdir=/Applications 0xdbe-eap || true
 brew cask install --appdir=/Applications macvim-kaoriya || true
 brew cask install --appdir=/Applications firefox-ja || true
 brew cask install --appdir=/Applications thunderbird-ja || true
-brew cask install java6 || true
+#brew cask install java6 || true
 
 #brew cask alfred link
 
