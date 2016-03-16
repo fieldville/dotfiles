@@ -175,6 +175,9 @@ brew install --powerline --vim-powerline ricty
 brew tap peco/peco
 brew install peco/peco/peco
 
+# neovim
+brew install neovim/neovim/neovim
+
 # homebrew-cask
 brew tap caskroom/cask
 brew install caskroom/cask/brew-cask
