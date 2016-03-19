@@ -38,7 +38,7 @@ brew install git-flow
 brew install --zsh-completion git-now
 brew install global
 brew install gnu-getopt
-brew install gnu-sed
+brew install gnu-sed --with-default-names
 brew install go
 brew install homebrew/dupes/grep --with-default-names
 brew install gradle
