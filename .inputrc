@@ -7,7 +7,7 @@ set convert-meta off
 set output-meta on
 set expand-tilde on
 
-set horizontal-scroll-mode on
+set horizontal-scroll-mode off
 set completion-ignore-case on
 
 # historical backward search with linehead string binded to up-key
