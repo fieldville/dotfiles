@@ -12,6 +12,7 @@ brew install astyle
 brew install autoconf
 brew install autojump
 brew install automake
+brew install bash
 brew install bash-completion
 brew install cmigemo
 brew install colordiff
