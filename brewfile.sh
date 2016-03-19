@@ -80,6 +80,7 @@ brew install ngrep
 brew install nkf
 brew install nmap
 brew install node
+brew install nvm
 brew install oniguruma
 brew install openssl
 brew install ossp-uuid
