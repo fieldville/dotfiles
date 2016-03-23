@@ -108,6 +108,7 @@ brew install sonar-runner
 brew install spidermonkey
 brew install sqlite
 brew install ssh-copy-id
+brew install sshrc
 brew install subversion
 brew install swig
 brew install tcpflow
