@@ -22,6 +22,7 @@ brew install coreutils
 brew install corkscrew
 brew install cpanminus
 brew install ctags
+brew install direnv
 brew install devtodo
 brew install dos2unix
 brew install exiftool
