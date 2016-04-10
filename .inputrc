@@ -21,6 +21,12 @@ Control-p: history-search-backward
 Control-n: history-search-forward
 
 
+# cycle forward
+Control-k: menu-complete
+# cycle backward
+Control-j: menu-complete-backward
+
+
 set bell-style visible
 
 set show-all-if-ambiguous on

@@ -1,6 +1,8 @@
 # http://robots.thoughtbot.com/post/19398560514/how-to-copy-and-paste-with-tmux-on-mac-os-x
 # brew install reattach-to-user-namespace
-set -g default-command "reattach-to-user-namespace -l zsh"
+#set -g default-command "reattach-to-user-namespace -l zsh"
+#set -g default-command "reattach-to-user-namespace -l bash"
+set -g default-command "tmux rename-window bash; reattach-to-user-namespace -l bash"
 
 # Setup 'v' to begin selection as in Vim
 bind -t vi-copy v begin-selection
