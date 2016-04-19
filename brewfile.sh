@@ -243,6 +243,7 @@ brew cask install --appdir=/Applications sdformatter || true
 brew cask install --appdir=/Applications clipmenu || true
 brew cask install --appdir=/Applications 0xdbe-eap || true
 brew cask install android-file-transfer || true
+brew cask install chefdk || true
 
 # caskroom/versions
 brew cask install --appdir=/Applications macvim-kaoriya || true
