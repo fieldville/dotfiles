@@ -33,7 +33,6 @@ brew install gd
 brew install gdbm
 brew install gettext
 brew install git
-#brew install git-cola
 brew install git-extras
 brew install git-flow
 brew install --zsh-completion git-now
@@ -50,7 +49,6 @@ brew install hub
 brew install imagemagick
 brew install jasper
 brew install jenkins
-#brew install jetty
 brew install jetty8
 brew install jpeg
 brew install jq
@@ -92,7 +90,6 @@ brew install typesafe-activator # play
 brew install pngcheck
 brew install polipo
 brew install postgresql
-#brew install postgresql8
 brew install proctools
 brew install protobuf
 brew install proxytunnel
@@ -134,13 +131,11 @@ brew install -v --HEAD xctool
 brew install phantomjs
 brew install htop
 brew install wireshark
-#brew install clamav
 brew install qemu
 brew install jigdo
 brew install libvirt
 brew install fping
 brew install ddrescue
-#brew install sshuttle
 brew install ipcalc
 brew install sipcalc
 brew install mtr
@@ -164,15 +159,11 @@ brew install pwgen
 brew install sf-pwgen
 brew install iproute2mac
 
-# jsl
 brew tap homebrew/binary
-brew install jsl
 
 # ricty
 brew tap sanemat/font
 brew install --powerline --vim-powerline ricty
-
-#brew install the_legacy_searcher
 
 
 # peco
@@ -189,68 +180,44 @@ brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
 
 brew cask install xquartz || true
-brew cask install --appdir=/Applications alfred || true
-brew cask install --appdir=/Applications appcleaner || true
-brew cask install --appdir=/Applications bettertouchtool || true
-brew cask install --appdir=/Applications cyberduck || true
-brew cask install --appdir=/Applications freemind || true
-brew cask install --appdir=/Applications google-chrome || true
-brew cask install --appdir=/Applications google-japanese-ime || true
-brew cask install --appdir=/Applications grandperspective || true
-brew cask install --appdir=/Applications iterm2 || true
-brew cask install --appdir=/Applications keyremap4macbook || true
-brew cask install --appdir=/Applications kobito || true
-brew cask install --appdir=/Applications codekit || true
-brew cask install --appdir=/Applications libreoffice || true
-brew cask install --appdir=/Applications lightpaper || true
-brew cask install --appdir=/Applications mou || true
-brew cask install --appdir=/Applications pgadmin3 || true
-brew cask install --appdir=/Applications skitch || true
-brew cask install --appdir=/Applications sourcetree || true
-brew cask install --appdir=/Applications sublime-text || true
-brew cask install --appdir=/Applications vagrant || true
-brew cask install --appdir=/Applications xmarks-safari || true
-brew cask install --appdir=/Applications webstorm || true
-brew cask install --appdir=/Applications intellij-idea-ce || true
-brew cask install --appdir=/Applications uncrustifyx || true
-brew cask install --appdir=/Applications xmind || true
-#brew cask install --appdir=/Applications eclipse-jee || true
-brew cask install --appdir=/Applications cinch || true
-brew cask install --appdir=/Applications dash || true
-brew cask install --appdir=/Applications colors || true
-brew cask install --appdir=/Applications seashore || true
-brew cask install --appdir=/Applications visual-studio-code || true
+brew cask install alfred || true
+brew cask install appcleaner || true
+brew cask install freemind || true
+brew cask install google-chrome || true
+brew cask install google-japanese-ime || true
+brew cask install grandperspective || true
+brew cask install iterm2 || true
+brew cask install keyremap4macbook || true
+brew cask install kobito || true
+brew cask install codekit || true
+brew cask install libreoffice || true
+brew cask install pgadmin3 || true
+brew cask install skitch || true
+brew cask install sourcetree || true
+brew cask install sublime-text || true
+brew cask install vagrant || true
+brew cask install xmarks-safari || true
+brew cask install webstorm || true
+brew cask install intellij-idea-ce || true
+brew cask install cinch || true
+brew cask install dash || true
+brew cask install visual-studio-code || true
 #brew cask install virtualbox || true
 brew cask install oclint || true
 brew cask install java || true # 1.8
+brew cask install jsl || true
 
-#brew cask install --appdir=/Applications android-studio || true
-#brew cask install --appdir=/Applications appcode || true
-#brew cask install --appdir=/Applications cheatsheet || true
-#brew cask install --appdir=/Applications diffmerge || true
-brew cask install --appdir=/Applications gimp || true
-#brew cask install --appdir=/Applications imageoptim || true
-#brew cask install --appdir=/Applications integrity || true
-#brew cask install --appdir=/Applications iphoney || true
-brew cask install --appdir=/Applications licecap || true
-#brew cask install --appdir=/Applications opera || true
-brew cask install --appdir=/Applications evernote || true
-brew cask install --appdir=/Applications unetbootin || true
-brew cask install --appdir=/Applications keepassx || true
-brew cask install --appdir=/Applications chicken || true
-brew cask install --appdir=/Applications jxplorer || true
-brew cask install --appdir=/Applications sdformatter || true
-brew cask install --appdir=/Applications clipmenu || true
-brew cask install --appdir=/Applications 0xdbe-eap || true
+#brew cask install android-studio || true
+#brew cask install appcode || true
+brew cask install cheatsheet || true
+brew cask install gimp || true
+brew cask install evernote || true
+brew cask install keepassx || true
+brew cask install jxplorer || true
 brew cask install android-file-transfer || true
 brew cask install chefdk || true
 
 # caskroom/versions
-brew cask install --appdir=/Applications macvim-kaoriya || true
-brew cask install --appdir=/Applications firefox-ja || true
-brew cask install --appdir=/Applications thunderbird-ja || true
-#brew cask install java6 || true
-
-#brew cask alfred link
+brew cask install macvim-kaoriya || true
 
 #brew cleanup -s
