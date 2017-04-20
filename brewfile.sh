@@ -161,6 +161,7 @@ brew install unrar
 brew install pwgen
 brew install sf-pwgen
 brew install iproute2mac
+brew install shellcheck
 
 brew tap homebrew/binary
 
