@@ -125,8 +125,11 @@ brew install yuicompressor
 brew install z
 brew install --enable-etcdir zsh
 brew install zsh-lovers
+brew install docker-machine
 brew install docker
-brew install boot2docker
+brew install docker-compose
+brew install docker-swarm
+brew install docker-clean
 brew install -v --HEAD xctool
 brew install phantomjs
 brew install htop
