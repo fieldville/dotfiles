@@ -220,6 +220,7 @@ brew cask install keepassx || true
 brew cask install jxplorer || true
 brew cask install android-file-transfer || true
 brew cask install chefdk || true
+brew cask install kitematic || true
 
 # caskroom/versions
 brew cask install macvim-kaoriya || true
