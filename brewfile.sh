@@ -162,6 +162,7 @@ brew install pwgen
 brew install sf-pwgen
 brew install iproute2mac
 brew install shellcheck
+brew install swagger-codegen
 
 brew tap homebrew/binary
 
