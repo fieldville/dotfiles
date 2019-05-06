@@ -1,0 +1,171 @@
+{
+    // proxy
+    "http.proxy": "http://user:pass@proxy.jp:3128",
+    "http.proxyStrictSSL": false,
+
+    // file
+    "files.autoGuessEncoding": true,
+    "files.useExperimentalFileWatcher": true,   // auto refresh(not valid?)
+    "files.insertFinalNewline": true,      // 保存時にファイルの最後に空行を挿入する
+    "files.trimFinalNewlines": true,       // 保存時にファイルの最後に存在する空行を削除する
+    "files.trimTrailingWhitespace": true,
+    "markdown-pdf.convertOnSave": false,
+    "markdown-pdf.executablePath": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+    "markdown-pdf.type": [
+        "html",
+    ],
+
+    // git with wsl
+    "terminal.integrated.shell.windows": "C:\\Users\\user_name\\AppData\\Local\\Microsoft\\WindowsApps\\ubuntu.exe",
+    "git.path": "C:\\wslgit.exe",
+
+    // explorer
+    "explorer.confirmDelete": false,
+    "window.zoomLevel": -1,
+
+
+    // ミニマップをfalse
+    //"editor.minimap.enabled": false,
+    "editor.minimap.showSlider": "always",
+    "editor.minimap.renderCharacters": false,
+    // editor その他
+    "editor.renderLineHighlight": "all",    // カーソル行を強調する
+    "editor.cursorBlinking": "phase",       // カーソルを点滅させる
+    "editor.cursorStyle": "block",
+    "editor.renderControlCharacters": true, // 制御文字を表示する
+    "editor.renderWhitespace": "boundary",  // 空白文字を表示する
+
+    // terminal
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "block",
+    "terminal.integrated.fontFamily": "Cica",
+    "terminal.integrated.fontSize": 16,
+    "terminal.external.linuxExec": "xterm-256color",
+    "terminal.integrated.scrollback": 10000,
+    "terminal.integrated.windowsEnableConpty": true,
+    "terminal.integrated.copyOnSelection": true,
+    //terminalでも使用可能になるaction
+    /*
+    "terminal.integrated.commandsToSkipShell": [
+        "editor.action.toggleTabFocusMode",
+        "workbench.action.debug.continue",
+        "workbench.action.debug.pause",
+        "workbench.action.debug.restart",
+        "workbench.action.debug.run",
+        "workbench.action.debug.start",
+        "workbench.action.debug.stepInto",
+        "workbench.action.debug.stepOut",
+        "workbench.action.debug.stepOver",
+        "workbench.action.debug.stop",
+        "workbench.action.firstEditorInGroup",
+        "workbench.action.focusActiveEditorGroup",
+        "workbench.action.focusEighthEditorGroup",
+        "workbench.action.focusFifthEditorGroup",
+        "workbench.action.focusFirstEditorGroup",
+        "workbench.action.focusFourthEditorGroup",
+        "workbench.action.focusLastEditorGroup",
+        "workbench.action.focusSecondEditorGroup",
+        "workbench.action.focusSeventhEditorGroup",
+        "workbench.action.focusSixthEditorGroup",
+        "workbench.action.focusThirdEditorGroup",
+        "workbench.action.lastEditorInGroup",
+        "workbench.action.navigateDown",
+        "workbench.action.navigateLeft",
+        "workbench.action.navigateRight",
+        "workbench.action.navigateUp",
+        "workbench.action.openNextRecentlyUsedEditorInGroup",
+        "workbench.action.openPreviousRecentlyUsedEditorInGroup",
+        "workbench.action.quickOpen",
+        "workbench.action.quickOpenPreviousEditor",
+        "workbench.action.quickOpenView",
+        "workbench.action.showCommands",
+        "workbench.action.tasks.build",
+        "workbench.action.tasks.restartTask",
+        "workbench.action.tasks.runTask",
+        "workbench.action.tasks.showLog",
+        "workbench.action.tasks.showTasks",
+        "workbench.action.tasks.terminate",
+        "workbench.action.tasks.test",
+        "workbench.action.terminal.clear",
+        "workbench.action.terminal.clearSelection",
+        "workbench.action.terminal.copySelection",
+        "workbench.action.terminal.deleteWordLeft",
+        "workbench.action.terminal.deleteWordRight",
+        "workbench.action.terminal.focus",
+        "workbench.action.terminal.focusAtIndex1",
+        "workbench.action.terminal.focusAtIndex2",
+        "workbench.action.terminal.focusAtIndex3",
+        "workbench.action.terminal.focusAtIndex4",
+        "workbench.action.terminal.focusAtIndex5",
+        "workbench.action.terminal.focusAtIndex6",
+        "workbench.action.terminal.focusAtIndex7",
+        "workbench.action.terminal.focusAtIndex8",
+        "workbench.action.terminal.focusAtIndex9",
+        "workbench.action.terminal.focusFindWidget",
+        "workbench.action.terminal.focusNext",
+        "workbench.action.terminal.focusNextPane",
+        "workbench.action.terminal.focusPrevious",
+        "workbench.action.terminal.focusPreviousPane",
+        "workbench.action.terminal.hideFindWidget",
+        "workbench.action.terminal.kill",
+        "workbench.action.terminal.moveToLineEnd",
+        "workbench.action.terminal.moveToLineStart",
+        "workbench.action.terminal.new",
+        "workbench.action.terminal.newInActiveWorkspace",
+        "workbench.action.terminal.paste",
+        "workbench.action.terminal.resizePaneDown",
+        "workbench.action.terminal.resizePaneLeft",
+        "workbench.action.terminal.resizePaneRight",
+        "workbench.action.terminal.resizePaneUp",
+        "workbench.action.terminal.runActiveFile",
+        "workbench.action.terminal.runSelectedText",
+        "workbench.action.terminal.scrollDown",
+        "workbench.action.terminal.scrollDownPage",
+        "workbench.action.terminal.scrollToBottom",
+        "workbench.action.terminal.scrollToNextCommand",
+        "workbench.action.terminal.scrollToPreviousCommand",
+        "workbench.action.terminal.scrollToTop",
+        "workbench.action.terminal.scrollUp",
+        "workbench.action.terminal.scrollUpPage",
+        "workbench.action.terminal.selectAll",
+        "workbench.action.terminal.selectToNextCommand",
+        "workbench.action.terminal.selectToNextLine",
+        "workbench.action.terminal.selectToPreviousCommand",
+        "workbench.action.terminal.selectToPreviousLine",
+        "workbench.action.terminal.split",
+        "workbench.action.terminal.splitInActiveWorkspace",
+        "workbench.action.terminal.toggleTerminal",
+        "workbench.action.togglePanel"
+    ],
+    */
+    // これを適用するとおそらくバグの影響で最大幅が10%程度狭まってしまう模様
+    //"terminal.integrated.rendererType": "dom",
+
+    // vscode vimの設定
+    "vim.useCtrlKeys": true,
+    // systemのclipboardを使用します
+    //"vim.useSystemClipboard": true,
+    // hlsearchは必要だと思う
+    "vim.hlsearch": true,
+    // 検索をするときに見やすいモッサりすることなければこのまま
+    "vim.easymotion": true,
+    // wordを* or + で検索するでしょ?
+    "vim.visualstar": true,
+    // ignore case in search patterns.
+    "vim.ignorecase": true,
+    // show where a / search matches as you type it.
+    "vim.incsearch": true,
+    // enable the sneak plugin for vim.
+    "vim.sneak": true,
+
+    // glassit
+    "glassit.alpha": 245,
+    "workbench.colorTheme": "One Monokai",
+    "diffEditor.renderSideBySide": true,
+
+    /// python
+    "python.pythonPath": "C:\\Apps\\w2w\\python.bat",
+    "files.autoSave": "afterDelay",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+}
