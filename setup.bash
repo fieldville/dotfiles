@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cmds=$(
-for f in $(find . -mindepth 1 -maxdepth 1 -name '.*' ! -name '.git' -a ! -name '.*swp' | sed 's|./||'); do
+for f in $(find . -mindepth 1 -maxdepth 1 -name '.*' ! -name '.git' -a ! -name '.*swp' | sed 's|./||' | grep -v .vscode); do
   echo "(cd; ln -fs .dotfiles/$f .)"
 done)
 
