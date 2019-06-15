@@ -9,7 +9,7 @@
     "files.trimFinalNewlines": true,       // 保存時にファイルの最後に存在する空行を削除する
     "files.trimTrailingWhitespace": true,
     "markdown-pdf.convertOnSave": false,
-    "markdown-pdf.executablePath": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+    //"markdown-pdf.executablePath": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
     "markdown-pdf.type": [
         "html",
     ],
