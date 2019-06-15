@@ -1,11 +1,10 @@
 {
     // proxy
-    "http.proxy": "http://user:pass@proxy.jp:3128",
+    //"http.proxy": "http://user:pass@proxy.jp:3128",
     "http.proxyStrictSSL": false,
 
     // file
     "files.autoGuessEncoding": true,
-    "files.useExperimentalFileWatcher": true,   // auto refresh(not valid?)
     "files.insertFinalNewline": true,      // 保存時にファイルの最後に空行を挿入する
     "files.trimFinalNewlines": true,       // 保存時にファイルの最後に存在する空行を削除する
     "files.trimTrailingWhitespace": true,
@@ -16,16 +15,14 @@
     ],
 
     // git with wsl
-    "terminal.integrated.shell.windows": "C:\\Users\\user_name\\AppData\\Local\\Microsoft\\WindowsApps\\ubuntu.exe",
-    "git.path": "C:\\wslgit.exe",
+    //"terminal.integrated.shell.windows": "C:\\Users\\user_name\\AppData\\Local\\Microsoft\\WindowsApps\\ubuntu.exe",
+    //"git.path": "C:\\wslgit.exe",
 
     // explorer
     "explorer.confirmDelete": false,
     "window.zoomLevel": -1,
 
 
-    // ミニマップをfalse
-    //"editor.minimap.enabled": false,
     "editor.minimap.showSlider": "always",
     "editor.minimap.renderCharacters": false,
     // editor その他
@@ -34,6 +31,7 @@
     "editor.cursorStyle": "block",
     "editor.renderControlCharacters": true, // 制御文字を表示する
     "editor.renderWhitespace": "boundary",  // 空白文字を表示する
+    "editor.suggestSelection": "first",
 
     // terminal
     "terminal.integrated.cursorBlinking": true,
@@ -164,8 +162,7 @@
     "diffEditor.renderSideBySide": true,
 
     /// python
-    "python.pythonPath": "C:\\Apps\\w2w\\python.bat",
+    //"python.pythonPath": "C:\\Apps\\w2w\\python.bat",
     "files.autoSave": "afterDelay",
-    "editor.suggestSelection": "first",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
 }
