@@ -1,0 +1,84 @@
+hotkeys:
+  shell: {}
+  profile: {}
+  split-bottom:
+    - - Ctrl-Shift-D
+    - - Ctrl-Q
+      - '-'
+  split-right:
+    - - Ctrl-Shift-E
+    - - Ctrl-Q
+      - IntlYen
+  zoom-out:
+    - - Ctrl--
+    - - Ctrl-NumpadSubtract
+  zoom-in:
+    - - Ctrl-NumpadAdd
+    - - Ctrl-Shift--
+  clear:
+    - - Ctrl-L
+  pane-nav-up:
+    - - Ctrl-Alt-Up
+    - - Ctrl-Q
+      - K
+  pane-nav-down:
+    - - Ctrl-Alt-Down
+    - - Ctrl-Q
+      - J
+  pane-nav-left:
+    - - Ctrl-Alt-Left
+    - - Ctrl-Q
+      - H
+  next-tab:
+    - - Ctrl-Tab
+  previous-tab:
+    - - Ctrl-Shift-Tab
+  pane-nav-right:
+    - - Ctrl-Alt-Right
+    - - Ctrl-Q
+      - L
+terminal:
+  colorScheme:
+    name: Molokai
+    foreground: '#bbbbbb'
+    background: '#121212'
+    cursor: '#bbbbbb'
+    colors:
+      - '#121212'
+      - '#fa2573'
+      - '#98e123'
+      - '#dfd460'
+      - '#1080d0'
+      - '#8700ff'
+      - '#43a8d0'
+      - '#bbbbbb'
+      - '#555555'
+      - '#f6669d'
+      - '#b1e05f'
+      - '#fff26d'
+      - '#00afff'
+      - '#af87ff'
+      - '#51ceff'
+      - '#ffffff'
+  environment: {}
+  profile: powershell
+  bell: visual
+  rightClick: paste
+  frontend: xterm-webgl
+  font: Cica
+  background: colorScheme
+  ligatures: false
+  copyOnSelect: true
+  autoOpen: true
+  recoverTabs: false
+ssh: {}
+appearance:
+  frame: thin
+  theme: Compact
+  tabsLocation: top
+  vibrancy: true
+  vibrancyType: fluent
+  opacity: 0.96
+  dock: 'off'
+enableAnalytics: false
+enableWelcomeTab: false
