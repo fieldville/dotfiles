@@ -26,8 +26,8 @@ window:
   # Specified in number of pixels.
   # If the position is not set, the window manager will handle the placement.
   position:
-    x: 0
-    y: 0
+    x: 100
+    y: 100
 
   # Window padding (changes require restart)
   #
@@ -242,8 +242,8 @@ schemes:
       cyan:    '0x93a1a1' # base1
       white:   '0xfdf6e3' # base3
 
-#colors: *dark
-colors: *argonaut
+colors: *dark
+#colors: *argonaut
 
 # Colors (Tomorrow Night Bright)
 #colors:
@@ -391,6 +391,8 @@ selection:
 #   - (Linux) user login shell
 #   - (Windows) powershell
 shell:
+  #program: /Windows/System32/wsl.exe
+  #program: powershell
   program: ubuntu
 #  args:
 #    - --login
@@ -400,6 +402,18 @@ shell:
 # Directory the shell is started in. If this is unset, or `None`, the working
 # directory of the parent process will be used.
 #working_directory: None
+
+# Windows 10 ConPTY backend (Windows only)
+#
+# This will enable better color support and may resolve other issues,
+# however this API and its implementation is still young and so is
+# disabled by default, as stability may not be as good as the winpty
+# backend.
+#
+# Alacritty will fall back to the WinPTY automatically if the ConPTY
+# backend cannot be initialized.
+#enable_experimental_conpty_backend: false
+enable_experimental_conpty_backend: true
 
 # WinPTY backend (Windows only)
 #
@@ -627,5 +641,3 @@ shell:
   #- { key: PageDown,  mods: Shift,   action: ScrollPageDown, mode: ~Alt       }
   #- { key: Home,      mods: Shift,   action: ScrollToTop,    mode: ~Alt       }
   #- { key: End,       mods: Shift,   action: ScrollToBottom, mode: ~Alt       }
-
-enable_experimental_conpty_backend: true
