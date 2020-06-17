@@ -185,17 +185,45 @@ font:
 #draw_bold_text_with_bright_colors: true
 
 schemes:
+  wombat: &wombat
+    # Default colors
+    primary:
+      background: '#1f1f1f'
+      foreground: '#e5e1d8'
+
+    # Normal colors
+    normal:
+      black:   '#000000'
+      red:     '#f7786d'
+      green:   '#bde97c'
+      yellow:  '#efdfac'
+      blue:    '#6ebaf8'
+      magenta: '#ef88ff'
+      cyan:    '#90fdf8'
+      white:   '#e5e1d8'
+
+    # Bright colors
+    bright:
+      black:   '#b4b4b4'
+      red:     '#f99f92'
+      green:   '#e3f7a1'
+      yellow:  '#f2e9bf'
+      blue:    '#b3d2ff'
+      magenta: '#e5bdff'
+      cyan:    '#c2fefa'
+      white:   '#ffffff'
+
   argonaut: &argonaut
     # Default colors
     primary:
       background: '0x292C3E'
       foreground: '0xEBEBEB'
-  
+
     # Cursor colors
     cursor:
      text: '0xFF261E'
      cursor: '0xFF261E'
-  
+
     # Normal colors
     normal:
       black:   '0x0d0d0d'
@@ -206,7 +234,7 @@ schemes:
       magenta: '0x8763B8'
       cyan:    '0x21DEEF'
       white:   '0xEBEBEB'
-  
+
     # Bright colors
     bright:
       black:   '0x6D7070'
@@ -242,8 +270,9 @@ schemes:
       cyan:    '0x93a1a1' # base1
       white:   '0xfdf6e3' # base3
 
-colors: *dark
+#colors: *dark
 #colors: *argonaut
+colors: *wombat
 
 # Colors (Tomorrow Night Bright)
 #colors:
