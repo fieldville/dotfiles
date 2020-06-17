@@ -56,3 +56,8 @@ project.xcworkspace
 node_modules
 
 .atom/compile-cache
+
+# GNU global
+GTAGS
+GPATH
+GRTAGS
