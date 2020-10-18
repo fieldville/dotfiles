@@ -1,4 +1,4 @@
-// Place your key bindings in this file to override the defaultsauto[]
+// Place your key bindings in this file to override the defaults
 [
     { "key": "alt+t", "command": "workbench.action.terminal.new", "when": "terminalFocus" },
     { "key": "ctrl+shift+`", "command": "-workbench.action.terminal.new" },
