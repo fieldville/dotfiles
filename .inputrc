@@ -1,5 +1,4 @@
-set editing-mode vi
-set keymap vi-insert
+#set editing-mode vi
 set convert-meta off
 set meta-flag on
 
@@ -21,17 +20,27 @@ Control-p: history-search-backward
 Control-n: history-search-forward
 
 
-set bell-style visible
+$if mode=vi
+  set keymap vi-insert
+  set bell-style visible
 
-set show-all-if-ambiguous on
+  set show-all-if-ambiguous on
 
-Control-l: clear-screen
+  Control-l: clear-screen
 
-# cycle forward
-Control-k: menu-complete
-# cycle backward
-Control-j: menu-complete-backward
+  # cycle forward
+  Control-k: menu-complete
+  # cycle backward
+  Control-j: menu-complete-backward
 
-set bind-tty-special-chars off
-Control-u: kill-whole-line
-Control-w: backward-kill-word
+  set bind-tty-special-chars off
+  Control-u: kill-whole-line
+  Control-w: backward-kill-word
+$endif
+$if mode=emacs
+  # cycle forward
+  "\ek": menu-complete
+  # cycle backward
+  "\ej": menu-complete-backward
+$endif
+
