@@ -61,3 +61,5 @@ node_modules
 GTAGS
 GPATH
 GRTAGS
+
+.envrc
