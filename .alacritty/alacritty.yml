@@ -641,6 +641,7 @@ enable_experimental_conpty_backend: true
 # a no-op if you do not wish to receive input characters for that binding.
 key_bindings:
   - { key: Space, mods: Control, chars: "\x00" }
+  - { key: Slash, mods: Control, chars: "\x1f" }
   # (Windows/Linux only)
   #- { key: V,        mods: Control|Shift, action: Paste            }
   #- { key: C,        mods: Control|Shift, action: Copy             }
