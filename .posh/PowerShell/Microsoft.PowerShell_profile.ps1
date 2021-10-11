@@ -61,8 +61,8 @@ if (Test-Path alias:gp) { del alias:gp -Force }
 
 function gl { git pull $args }
 function glr { git pull --rebase }
-function gp { git push }
-function gd { git diff }
+function gp { git push $args }
+function gd { git diff $args }
 function gss { git status -s $args }
 function gc { git commit $args }
 function gco { git checkout $args }
