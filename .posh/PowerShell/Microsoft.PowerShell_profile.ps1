@@ -29,8 +29,8 @@ Set-PSReadlineKeyHandler -Key 'Ctrl+n' -Function HistorySearchForward
 #Set-PSReadlineKeyHandler -Key 'Ctrl+u' -Function BackwardKillLine
 
 Import-Module ZLocation
-Import-Module DockerCompletion
-Import-Module posh-docker
+#Import-Module DockerCompletion
+#Import-Module posh-docker
 Import-Module posh-git
 Import-Module oh-my-posh
 #Set-PoshPrompt -Theme paradox
@@ -50,22 +50,29 @@ function l { dir $args }
 function ll { ls -ltrh $args }
 function la { ls -ltrha $args }
 
+function which ($command) {
+  Get-command -Name $command -ShowCommandInfo | Format-List -Property Definition
+}
 function find { busybox find $args }
 
 if (Test-Path alias:gl) { del alias:gl -Force }
 if (Test-Path alias:gc) { del alias:gc -Force }
 if (Test-Path alias:gp) { del alias:gp -Force }
 
-function gl { git pull --rebase }
+function gl { git pull $args }
+function glr { git pull --rebase }
 function gp { git push }
 function gd { git diff }
 function gss { git status -s $args }
 function gc { git commit $args }
-function grhh { git reset --hard HEAD }
+function gco { git checkout $args }
 function grv { git remote -v }
 function gg { git grep $args }
+function gori { git config --list --show-origin $args }
+function grhh { git reset --hard HEAD }
 function gsta { git stash save }
-function gco { git checkout $args }
+function gstp { git stash pop }
+function gca { git commit -v -a $args }
 
 function egrep { egrep --color=auto $args }
 function fgrep { fgrep --color=auto $args }
@@ -73,6 +80,7 @@ function grep { grep --color --exclude-dir='{.git,.svn}' --exclude=\*.html\* $ar
 
 # for docker
 function dco { docker-compose $args }
+function dps { docker ps $args }
 function ds { docker images; docker ps -a }
 function da { docker ps -a }
 
