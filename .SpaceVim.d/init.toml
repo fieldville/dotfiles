@@ -27,6 +27,8 @@
 
     # customize
     relativenumber = false
+    filetree_direction = "left"
+
 # Enable autocomplete layer
 [[layers]]
 name = 'autocomplete'
@@ -38,3 +40,7 @@ name = 'shell'
 #default_position = 'top'
 default_position = 'bottom'
 default_height = 30
+
+[[custom_plugins]]
+  repo = "lilydjwg/colorizer"
+  merged = false
