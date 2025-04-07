@@ -28,6 +28,9 @@
     # customize
     relativenumber = false
     filetree_direction = "left"
+    enable_leader = false
+    disable_default_key_mappings = true
+    windows_leader = ''
 
 # Enable autocomplete layer
 [[layers]]
