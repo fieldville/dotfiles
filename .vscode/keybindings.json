@@ -18,8 +18,8 @@
     { "key": "ctrl+q", "command": "workbench.action.quickOpenView", "when": "!terminalFocus" },
     { "key": "ctrl+q", "command": "-workbench.action.quickOpenView" },
     { "key": "ctrl+j", "command": "-workbench.action.togglePanel" },
-    // for hbase shell(emacs keybind)
-    { "key": "ctrl+f", "command": "-workbench.action.terminal.focusFindWidget", "when": "terminalFocus" },
+    // for shell(emacs keybind)
+    { "key": "ctrl+f", "command": "-workbench.action.terminal.focusFind", "when": "terminalFindFocused && terminalHasBeenCreated || terminalFindFocused && terminalProcessSupported || terminalFocusInAny && terminalHasBeenCreated || terminalFocusInAny && terminalProcessSupported" },
     //{ "key": "ctrl+e", "command": "-workbench.action.quickOpen", "when": "terminalFocus" },
     { "key": "ctrl+e", "command": "-workbench.action.quickOpen" },
 ]
