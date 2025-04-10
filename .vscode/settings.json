@@ -42,6 +42,7 @@
     "terminal.integrated.scrollback": 10000,
     "terminal.integrated.windowsEnableConpty": true,
     "terminal.integrated.copyOnSelection": true,
+    "terminal.integrated.allowChords": false, // Ctrl+K有効
     //terminalでも使用可能になるaction
     /*
     "terminal.integrated.commandsToSkipShell": [
