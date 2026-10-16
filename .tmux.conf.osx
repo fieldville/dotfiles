@@ -6,7 +6,8 @@ set -g default-command "tmux rename-window bash; reattach-to-user-namespace -l b
 
 # Setup 'v' to begin selection as in Vim
 bind -T copy-mode-vi v send -X begin-selection
-bind -T copy-mode-vi y send -X copy-pipe-and-cancel "reattach-to-user-namespace pbcopy"
+# y: クリップボードへコピーするがコピーモードは抜けない（スクロール位置を維持したまま選択をやり直せる）
+bind -T copy-mode-vi y send -X copy-pipe "reattach-to-user-namespace pbcopy"
 
 # Update default binding of `Enter` to also use copy-pipe
 unbind -T copy-mode-vi Enter
