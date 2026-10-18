@@ -60,8 +60,6 @@ brew "atkmm"
 brew "m4"
 # Automatic configure script builder
 brew "autoconf"
-# Shell extension to jump to frequently used directories
-brew "autojump"
 # Tool for generating GNU Standards-compliant Makefiles
 brew "automake"
 # Official Amazon AWS command-line interface
@@ -494,6 +492,8 @@ brew "yasm"
 brew "yuicompressor"
 # General-purpose lossless data-compression library
 brew "zlib"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 # Tips, tricks, and examples for zsh
 brew "zsh-lovers"
 # Enable Windows-like alt-tab
