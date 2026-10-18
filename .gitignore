@@ -49,13 +49,8 @@ build/*
 xcuserdata
 project.xcworkspace
 
-# devtodo
-.todo
-
 # node
 node_modules
-
-.atom/compile-cache
 
 # GNU global
 GTAGS
@@ -63,3 +58,24 @@ GPATH
 GRTAGS
 
 .envrc*
+
+# byobu runtime files (~/.byobu is a symlink into this repo)
+.byobu/.python_cache
+.byobu/.ssh-agent-*
+.byobu/.welcome-displayed
+.byobu/backend
+# byobu-generated defaults (byobu rewrites these)
+.byobu/.screenrc
+.byobu/color
+.byobu/color.tmux
+.byobu/datetime.tmux
+.byobu/keybindings
+.byobu/profile
+.byobu/prompt
+.byobu/shellinit.tmux
+.byobu/status
+.byobu/statusrc
+.byobu/windows
+.byobu/windows.tmux
+.byobu/profile.tmux
+.byobu/keybindings.tmux
