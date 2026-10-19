@@ -32,9 +32,14 @@ Set-PSReadlineKeyHandler -Key 'Ctrl+n' -Function HistorySearchForward
 # Useful for pasting / editing multi-line scriptlets; the buffer is replaced on save & quit.
 # NOTE: ViEditVisually resolves $env:EDITOR via Get-Command as a single application and passes
 # only the temp file as argument, so 'code --wait' does not work; use the wrapper bin/code-wait.cmd.
+# nvim blocks until exit on its own, so it needs no wrapper and is preferred when available.
 if (-not $env:EDITOR) {
   $codeWait = Join-Path $HOME '.dotfiles\.posh\PowerShell\bin\code-wait.cmd'
-  if ((Test-Path $codeWait) -and (Get-Command code -ErrorAction SilentlyContinue)) { $env:EDITOR = $codeWait }
+  if (Get-Command nvim -ErrorAction SilentlyContinue) {
+    $env:EDITOR = 'nvim'
+  } elseif ((Test-Path $codeWait) -and (Get-Command code -ErrorAction SilentlyContinue)) {
+    $env:EDITOR = $codeWait
+  }
 }
 Set-PSReadLineKeyHandler -Chord 'Ctrl+x,Ctrl+e' -Function ViEditVisually
 
