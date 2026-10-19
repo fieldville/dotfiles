@@ -30,7 +30,12 @@ Set-PSReadlineKeyHandler -Key 'Ctrl+n' -Function HistorySearchForward
 
 # Ctrl+x, Ctrl+e: edit the current command line in $env:EDITOR (like bash's edit-and-execute-command).
 # Useful for pasting / editing multi-line scriptlets; the buffer is replaced on save & quit.
-if (-not $env:EDITOR) { $env:EDITOR = 'code --wait' }
+# NOTE: ViEditVisually resolves $env:EDITOR via Get-Command as a single application and passes
+# only the temp file as argument, so 'code --wait' does not work; use the wrapper bin/code-wait.cmd.
+if (-not $env:EDITOR) {
+  $codeWait = Join-Path $HOME '.dotfiles\.posh\PowerShell\bin\code-wait.cmd'
+  if ((Test-Path $codeWait) -and (Get-Command code -ErrorAction SilentlyContinue)) { $env:EDITOR = $codeWait }
+}
 Set-PSReadLineKeyHandler -Chord 'Ctrl+x,Ctrl+e' -Function ViEditVisually
 
 Import-Module ZLocation
