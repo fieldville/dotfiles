@@ -28,6 +28,11 @@ Set-PSReadlineKeyHandler -Key 'Ctrl+n' -Function HistorySearchForward
 #Set-PSReadlineKeyHandler -Key 'Ctrl+k' -Function KillLine
 #Set-PSReadlineKeyHandler -Key 'Ctrl+u' -Function BackwardKillLine
 
+# Ctrl+x, Ctrl+e: edit the current command line in $env:EDITOR (like bash's edit-and-execute-command).
+# Useful for pasting / editing multi-line scriptlets; the buffer is replaced on save & quit.
+if (-not $env:EDITOR) { $env:EDITOR = 'code --wait' }
+Set-PSReadLineKeyHandler -Chord 'Ctrl+x,Ctrl+e' -Function ViEditVisually
+
 Import-Module ZLocation
 #Import-Module DockerCompletion
 #Import-Module posh-docker
