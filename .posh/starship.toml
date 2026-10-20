@@ -1,0 +1,27 @@
+# Starship prompt config, shared by PowerShell (pwsh / Windows PowerShell) via
+# $env:STARSHIP_CONFIG set in .posh/PowerShell/Microsoft.PowerShell_profile.ps1.
+# Schema / all options: https://starship.rs/config/
+# Try a preset:  starship preset <name> -o .posh/starship.toml   (starship preset --list)
+
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+[character]
+success_symbol = '[❯](bold green)'
+error_symbol = '[❯](bold red)'
+
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+symbol = ' '
+
+[git_status]
+ahead = '⇡${count}'
+behind = '⇣${count}'
+diverged = '⇕⇡${ahead_count}⇣${behind_count}'
+
+[cmd_duration]
+min_time = 2000

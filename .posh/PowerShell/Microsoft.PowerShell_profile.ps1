@@ -38,14 +38,17 @@ Set-PSReadLineKeyHandler -Chord 'Ctrl+x,Ctrl+e' -Function ViEditVisually
 Import-Module ZLocation
 #Import-Module DockerCompletion
 #Import-Module posh-docker
-Import-Module posh-git
-Import-Module oh-my-posh
-#Set-PoshPrompt -Theme paradox
-#Set-PoshPrompt -Theme robbyrussell
-#Set-PoshPrompt -Theme avit
-#Set-PoshPrompt -Theme rudolfs-light
-#Set-PoshPrompt -Theme rudolfs-dark
-Set-PoshPrompt -Theme honukai
+Import-Module posh-git   # kept for git tab completion; the prompt itself is Starship
+
+# Prompt: Starship (https://starship.rs). Install: `winget install Starship.Starship`
+# (Windows) / `brew install starship` (macOS, see Brewfile). Config lives in this repo
+# so `git pull` picks up prompt changes too.
+$env:STARSHIP_CONFIG = Join-Path (Split-Path $PSScriptRoot -Parent) 'starship.toml'
+if (Get-Command starship -ErrorAction SilentlyContinue) {
+  Invoke-Expression (&starship init powershell)
+} else {
+  Write-Warning "starship not found; prompt not customised. Install with: winget install Starship.Starship"
+}
 
 Set-Alias vi vim
 

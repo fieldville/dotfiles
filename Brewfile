@@ -373,7 +373,6 @@ brew "nspr"
 # Manage multiple Node.js versions
 brew "nvm"
 # Prompt theme engine for any shell
-brew "oh-my-posh"
 # Audio codecs extracted from Android open source project
 brew "opencore-amr"
 # Open source distributed and RESTful search engine
