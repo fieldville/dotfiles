@@ -1,5 +1,6 @@
 # Windows counterpart of `brew bundle`: install everything listed in Wingetfile via winget,
-# then the VS Code extensions (vscode "...") listed in Brewfile.
+# then the PowerShell modules (psmodule "...") listed there, then the VS Code extensions
+# (vscode "...") listed in Brewfile.
 #   powershell -ExecutionPolicy Bypass -File .\winget.ps1          # install what is missing
 #   powershell -ExecutionPolicy Bypass -File .\winget.ps1 -DryRun  # only show what would be installed
 #   powershell -ExecutionPolicy Bypass -File .\winget.ps1 -SkipVscode
@@ -49,6 +50,23 @@ foreach ($id in $missing) {
   "  installing $id"
   winget install --id $id -e --silent --accept-source-agreements --accept-package-agreements
   if ($LASTEXITCODE -ne 0) { Write-Warning "  failed: $id (exit $LASTEXITCODE)" }
+}
+
+# ---- PowerShell modules ----------------------------------------------------
+# Installed into the user module dir of the shell running this script. Windows PowerShell 5.1
+# cannot see pwsh's dir (pwsh can see 5.1's), so run from Windows PowerShell to cover both,
+# or run setup.ps1 in each shell. setup.ps1 reads the same entries.
+$modules = Read-Entries "Wingetfile" "psmodule" | ForEach-Object Name
+$missingModules = $modules | Where-Object { -not (Get-Module -ListAvailable -Name $_) }
+"psmodule: $($modules.Count) listed, $($missingModules.Count) to install"
+if ($missingModules -and $PSVersionTable.PSVersion.Major -lt 6) {
+  # 5.1 defaults to TLS 1.0/1.1, which the PowerShell Gallery no longer accepts.
+  [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
+}
+foreach ($m in $missingModules) {
+  if ($DryRun) { "  would install $m"; continue }
+  "  installing $m"
+  Install-Module -Name $m -Scope CurrentUser -Force
 }
 
 # ---- VS Code extensions ----------------------------------------------------

@@ -3,6 +3,8 @@
 # libraries from Brewfile are omitted. IDs are exact winget package identifiers
 # (`winget search --id <id> -e`). An optional `cmd: "name"` marks the package as already
 # installed when that command is on PATH, so tools installed outside winget are not duplicated.
+# `psmodule "Name"` entries are PowerShell Gallery modules (Install-Module), see the section at
+# the end; winget.ps1 and setup.ps1 both read them.
 
 ## Shell / terminal
 # Windows Terminal
@@ -87,3 +89,12 @@ winget "KeePassXCTeam.KeePassXC"
 winget "Dropbox.Dropbox"
 # Free cross-platform office suite
 winget "TheDocumentFoundation.LibreOffice"
+
+## PowerShell modules (PowerShell Gallery, installed with Install-Module -Scope CurrentUser)
+# Windows PowerShell 5.1 and pwsh keep separate user module dirs. pwsh also searches the
+# Windows PowerShell one, the reverse is not true, so install from Windows PowerShell (or
+# from both shells via setup.ps1) to cover both.
+# fzf key bindings for PSReadLine: Ctrl+r history search, Ctrl+t file picker (needs junegunn.fzf)
+psmodule "PSFzf"
+# git tab completion (the prompt itself is Starship)
+psmodule "posh-git"

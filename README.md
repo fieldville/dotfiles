@@ -20,8 +20,9 @@ PS> powershell -ExecutionPolicy Bypass -File .\setup.ps1
 ```
 
 This makes `$PROFILE` dot-source `.posh/PowerShell/Microsoft.PowerShell_profile.ps1`,
-so later changes only need `git pull`. Run it once in each shell you use
-(Windows PowerShell and pwsh have separate `$PROFILE`s).
+so later changes only need `git pull`, and installs the PowerShell modules the profile
+needs (`psmodule` entries in `Wingetfile`: PSFzf, posh-git). Run it once in each shell
+you use (Windows PowerShell and pwsh have separate `$PROFILE`s and module directories).
 
 Packages (the winget counterpart of `brew bundle`):
 
@@ -30,8 +31,8 @@ PS> powershell -ExecutionPolicy Bypass -File .\winget.ps1          # install wha
 PS> powershell -ExecutionPolicy Bypass -File .\winget.ps1 -DryRun  # just list it
 ```
 
-`Wingetfile` lists the Windows-relevant subset of `Brewfile` as winget IDs; VS Code
-extensions are read from `Brewfile` itself.
+`Wingetfile` lists the Windows-relevant subset of `Brewfile` as winget IDs plus the
+PowerShell Gallery modules (`psmodule`); VS Code extensions are read from `Brewfile` itself.
 
 tig: there is no winget package, but Git for Windows bundles `tig.exe` in `usr\bin`
 (not on PATH). The profile defines a `tig` function that runs it and points
