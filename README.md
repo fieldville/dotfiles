@@ -7,6 +7,9 @@ $ cd .dotfiles
 $ ./setup.bash
 ```
 
+`setup.bash` asks per file whether to link it into `~` (`y` / `n` / `a` = all / `q` = quit).
+Use `./setup.bash -y` to link everything without asking.
+
 Windows (PowerShell):
 ---------------------
 
