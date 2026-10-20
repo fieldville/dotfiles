@@ -32,3 +32,9 @@ PS> powershell -ExecutionPolicy Bypass -File .\winget.ps1 -DryRun  # just list i
 
 `Wingetfile` lists the Windows-relevant subset of `Brewfile` as winget IDs; VS Code
 extensions are read from `Brewfile` itself.
+
+tig: there is no winget package, but Git for Windows bundles `tig.exe` in `usr\bin`
+(not on PATH). The profile defines a `tig` function that runs it and points
+`$TIGRC_USER` at `~\.tigrc` or `~\.dotfiles2\home\.tigrc` (whichever exists), so
+clone [dotfiles2](https://github.com/fieldville/dotfiles2) to `~\.dotfiles2` to get
+the shared `.tigrc` without a symlink.

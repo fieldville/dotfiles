@@ -15,7 +15,9 @@ winget "Starship.Starship", cmd: "starship"
 winget "DEVCOM.JetBrainsMonoNerdFont"
 
 ## Git / dev tools
-# Distributed revision control system (also provides bash, grep, sed, ...)
+# Distributed revision control system (also provides bash, grep, sed, ... and tig:
+# there is no winget package for tig, the PowerShell profile's `tig` function runs the
+# copy bundled in <git root>\usr\bin)
 winget "Git.Git", cmd: "git"
 # GitHub command-line tool
 winget "GitHub.cli", cmd: "gh"

@@ -171,6 +171,39 @@ function grt {
   if ($top) { Set-Location $top }
 }
 
+# ---------------------------------------------------------------------------
+# tig: there is no winget/scoop package, but Git for Windows ships tig.exe (MSYS2 build)
+# in <git root>\usr\bin, which is deliberately NOT on PATH (it also holds find/sort/...).
+# Locate it through `git --exec-path` (<root>\{mingw64,ucrt64}\libexec\git-core) so this
+# works for both the scoop and the winget (C:\Program Files\Git) installs, and expose
+# usr\bin only for the duration of the tig process so `!sh -c ...` binds in .tigrc work.
+# Config: .tigrc lives in the dotfiles2 repo (home/.tigrc); tig reads $TIGRC_USER instead
+# of ~/.tigrc, so no symlink (admin-only on Windows) is needed. Forward slashes keep the
+# MSYS2 build happy. A value already set elsewhere wins.
+# ---------------------------------------------------------------------------
+function tig {
+  $execPath = git --exec-path 2>$null
+  if (-not $execPath) { Write-Error "tig: git not found"; return }
+  $gitRoot = Split-Path (Split-Path (Split-Path $execPath -Parent) -Parent) -Parent
+  $usrBin  = Join-Path $gitRoot 'usr\bin'
+  $exe     = Join-Path $usrBin 'tig.exe'
+  if (-not (Test-Path $exe)) { Write-Error "tig: not found at $exe (is Git for Windows installed?)"; return }
+
+  $oldPath = $env:PATH
+  $oldRc   = $env:TIGRC_USER
+  try {
+    $env:PATH = "$usrBin;$env:PATH"
+    if (-not $env:TIGRC_USER) {
+      $rc = @("$HOME\.tigrc", "$HOME\.dotfiles2\home\.tigrc") | Where-Object { Test-Path $_ } | Select-Object -First 1
+      if ($rc) { $env:TIGRC_USER = $rc -replace '\\', '/' }
+    }
+    & $exe @args
+  } finally {
+    $env:PATH = $oldPath
+    if ($null -eq $oldRc) { Remove-Item Env:TIGRC_USER -ErrorAction SilentlyContinue } else { $env:TIGRC_USER = $oldRc }
+  }
+}
+
 function egrep { egrep --color=auto $args }
 function fgrep { fgrep --color=auto $args }
 function grep { grep --color --exclude-dir='{.git,.svn}' --exclude=\*.html\* $args }
