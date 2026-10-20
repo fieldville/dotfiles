@@ -35,6 +35,19 @@ Set-PSReadlineKeyHandler -Key 'Ctrl+n' -Function HistorySearchForward
 if (-not $env:EDITOR) { $env:EDITOR = 'nvim' }
 Set-PSReadLineKeyHandler -Chord 'Ctrl+x,Ctrl+e' -Function ViEditVisually
 
+# fzf via PSFzf: Ctrl+r = fuzzy history search (replaces ReverseSearchHistory),
+# Ctrl+t = fuzzy file-path picker (replaces Emacs SwapCharacters).
+# Install: `winget install junegunn.fzf` and `Install-Module PSFzf -Scope CurrentUser`.
+# NOTE: Windows PowerShell 5.1 and pwsh use separate module dirs
+# (Documents\WindowsPowerShell\Modules vs Documents\PowerShell\Modules), so run
+# Install-Module from BOTH shells, otherwise one of them hits the warning below.
+if ((Get-Command fzf -ErrorAction SilentlyContinue) -and (Get-Module -ListAvailable PSFzf)) {
+  Import-Module PSFzf
+  Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
+} else {
+  Write-Warning "fzf or PSFzf not found; Ctrl+r/Ctrl+t keep PSReadLine's defaults."
+}
+
 Import-Module ZLocation
 #Import-Module DockerCompletion
 #Import-Module posh-docker
