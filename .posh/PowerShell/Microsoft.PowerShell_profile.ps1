@@ -230,4 +230,12 @@ function da { docker ps -a }
 #Set-Alias docker 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe'
 #Set-Alias kubectl 'C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe'
 
+# zoxide as `j` / `ji` (interactive via fzf), same as `zoxide init bash --cmd j` in
+# .dotfiles2/home/.bashrc. Install: `winget install ajeetdsouza.zoxide` (see Wingetfile).
+# Kept at the end of the profile: on Windows PowerShell 5.1 zoxide hooks the prompt
+# function, so it has to run after Starship has defined it. ZLocation's `z` stays as-is.
+if (Get-Command zoxide -ErrorAction SilentlyContinue) {
+  Invoke-Expression (& { (zoxide init powershell --cmd j | Out-String) })
+}
+
 #Set-Location C:\
