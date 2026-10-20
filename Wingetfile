@@ -1,0 +1,81 @@
+# Windows counterpart of Brewfile: install with `powershell -ExecutionPolicy Bypass -File .\winget.ps1`.
+# Only entries actually wanted on Windows are listed; macOS-only casks and build-time
+# libraries from Brewfile are omitted. IDs are exact winget package identifiers
+# (`winget search --id <id> -e`). An optional `cmd: "name"` marks the package as already
+# installed when that command is on PATH, so tools installed outside winget are not duplicated.
+
+## Shell / terminal
+# Windows Terminal
+winget "Microsoft.WindowsTerminal", cmd: "wt"
+# PowerShell 7 (pwsh)
+winget "Microsoft.PowerShell", cmd: "pwsh"
+# Cross-shell prompt for astronauts
+winget "Starship.Starship", cmd: "starship"
+# Nerd Font for starship icons (FiraCode Nerd Font is not on winget)
+winget "DEVCOM.JetBrainsMonoNerdFont"
+
+## Git / dev tools
+# Distributed revision control system (also provides bash, grep, sed, ...)
+winget "Git.Git", cmd: "git"
+# GitHub command-line tool
+winget "GitHub.cli", cmd: "gh"
+# Simple terminal UI for git commands
+winget "JesseDuffield.lazygit", cmd: "lazygit"
+# Lazier way to manage everything docker
+winget "JesseDuffield.Lazydocker", cmd: "lazydocker"
+# Terminal-based AI coding assistant
+winget "Anthropic.ClaudeCode", cmd: "claude"
+# Open-source code editor
+winget "Microsoft.VisualStudioCode", cmd: "code"
+
+## CLI utilities
+# Simple, fast and user-friendly alternative to find
+winget "sharkdp.fd", cmd: "fd"
+# Search tool like grep and The Silver Searcher
+winget "BurntSushi.ripgrep.MSVC", cmd: "rg"
+# Command-line fuzzy finder written in Go
+winget "junegunn.fzf", cmd: "fzf"
+# Simplistic interactive filtering tool
+winget "peco.peco", cmd: "peco"
+# Lightweight and flexible command-line JSON processor
+winget "jqlang.jq", cmd: "jq"
+# Shell extension to navigate your filesystem faster
+winget "ajeetdsouza.zoxide", cmd: "zoxide"
+# Load/unload environment variables based on $PWD
+winget "direnv.direnv", cmd: "direnv"
+# Internet file retriever
+winget "JernejSimoncic.Wget", cmd: "wget"
+# Maintained ctags implementation
+winget "UniversalCtags.Ctags", cmd: "ctags"
+
+## Editors
+# Ambitious Vim-fork focused on extensibility and agility
+winget "Neovim.Neovim", cmd: "nvim"
+# Vi 'workalike' with many additional features
+winget "vim.vim", cmd: "vim"
+
+## Languages / runtimes
+# Interpreted, interactive, object-oriented programming language
+winget "Python.Python.3.12", cmd: "python"
+
+## Cloud / containers
+# Official Amazon AWS command-line interface
+winget "Amazon.AWSCLI", cmd: "aws"
+# App to build and share containerised applications and microservices
+winget "Docker.DockerDesktop", cmd: "docker"
+
+## Media / graphics
+# PDF rendering library (based on the xpdf-3.0 code base)
+winget "oschwartz10612.Poppler", cmd: "pdftotext"
+
+## Desktop apps
+# Web browser
+winget "Google.Chrome"
+# Japanese input software
+winget "Google.JapaneseIME"
+# Password manager app
+winget "KeePassXCTeam.KeePassXC"
+# Client for the Dropbox cloud storage service
+winget "Dropbox.Dropbox"
+# Free cross-platform office suite
+winget "TheDocumentFoundation.LibreOffice"
