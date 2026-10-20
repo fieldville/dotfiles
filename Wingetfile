@@ -56,6 +56,12 @@ winget "Neovim.Neovim", cmd: "nvim"
 # Vi 'workalike' with many additional features
 winget "vim.vim", cmd: "vim"
 
+## Build tools (nvim-treesitter compiles parsers, so it needs a C compiler and the tree-sitter CLI)
+# GNU compiler collection (WinLibs standalone MinGW-w64 build, POSIX threads, UCRT runtime)
+winget "BrechtSanders.WinLibs.POSIX.UCRT", cmd: "gcc"
+# Incremental parsing system for programming tools (CLI)
+winget "tree-sitter.tree-sitter-cli", cmd: "tree-sitter"
+
 ## Languages / runtimes
 # Interpreted, interactive, object-oriented programming language
 winget "Python.Python.3.12", cmd: "python"
