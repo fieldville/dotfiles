@@ -48,7 +48,6 @@ if ((Get-Command fzf -ErrorAction SilentlyContinue) -and (Get-Module -ListAvaila
   Write-Warning "fzf or PSFzf not found; Ctrl+r/Ctrl+t keep PSReadLine's defaults."
 }
 
-Import-Module ZLocation
 #Import-Module DockerCompletion
 #Import-Module posh-docker
 Import-Module posh-git   # kept for git tab completion; the prompt itself is Starship
@@ -233,7 +232,7 @@ function da { docker ps -a }
 # zoxide as `j` / `ji` (interactive via fzf), same as `zoxide init bash --cmd j` in
 # .dotfiles2/home/.bashrc. Install: `winget install ajeetdsouza.zoxide` (see Wingetfile).
 # Kept at the end of the profile: on Windows PowerShell 5.1 zoxide hooks the prompt
-# function, so it has to run after Starship has defined it. ZLocation's `z` stays as-is.
+# function, so it has to run after Starship has defined it. Replaces ZLocation (`z`).
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
   Invoke-Expression (& { (zoxide init powershell --cmd j | Out-String) })
 }
