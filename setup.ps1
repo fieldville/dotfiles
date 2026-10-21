@@ -7,8 +7,15 @@
 #   pwsh -ExecutionPolicy Bypass -File .\setup.ps1
 # CLI tools (fzf, zoxide, starship, ...) are installed separately by winget.ps1.
 
+# $PROFILE lives under OneDrive\Documents and is synced between machines whose user names
+# differ, so the line must resolve $HOME at load time instead of baking in an absolute path.
+# This assumes the repo is cloned to ~/.dotfiles on every machine (as setup.bash does).
 $src  = Join-Path $PSScriptRoot ".posh\PowerShell\Microsoft.PowerShell_profile.ps1"
-$line = ". '$src'"
+$rel  = ".dotfiles\.posh\PowerShell\Microsoft.PowerShell_profile.ps1"
+if ($src -ne (Join-Path $HOME $rel)) {
+  Write-Warning "This repo is at $PSScriptRoot, but `$PROFILE will look for it at ~\.dotfiles. Move/clone it there."
+}
+$line = ". (Join-Path `$HOME '$rel')"
 
 if ((Test-Path $PROFILE) -and (Select-String -Path $PROFILE -SimpleMatch $line -Quiet)) {
   "Already set up: $PROFILE"
