@@ -1,11 +1,27 @@
 # Starship prompt config, shared by PowerShell (pwsh / Windows PowerShell) via
-# $env:STARSHIP_CONFIG set in .posh/PowerShell/Microsoft.PowerShell_profile.ps1.
+# $env:STARSHIP_CONFIG set in .posh/PowerShell/Microsoft.PowerShell_profile.ps1,
+# and by zsh via STARSHIP_CONFIG set in .zshrc.
 # Schema / all options: https://starship.rs/config/
 # Try a preset:  starship preset <name> -o .posh/starship.toml   (starship preset --list)
 
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = true
+
+# Give git (and other module commands) more headroom than the 500ms default.
+# On Windows, git_status right after `git pull` can exceed 500ms while git re-hashes
+# files through the git-lfs filter; Starship then kills git and git-lfs spams
+# "filter-process initialization failed ... The pipe is being closed" at every prompt.
+command_timeout = 2000
+
+# Show the shell name: this config is shared by zsh (WSL / macOS), bash and
+# PowerShell, so "zsh" vs "bash" vs "pwsh" is the quick visual cue to tell them apart.
+# Each indicator is itself a format string, so the colour can differ per shell.
+[shell]
+disabled = false
+powershell_indicator = "[pwsh](bold blue)"
+bash_indicator = "[bash](bold yellow)"
+zsh_indicator = "[zsh](bold green)"
 
 [character]
 success_symbol = '[❯](bold green)'

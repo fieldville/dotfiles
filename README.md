@@ -10,6 +10,26 @@ $ ./setup.bash
 `setup.bash` asks per file whether to link it into `~` (`y` / `n` / `a` = all / `q` = quit).
 Use `./setup.bash -y` to link everything without asking.
 
+zsh:
+----
+
+`.zshrc` / `.zprofile` are the zsh counterpart of `.dotfiles2/home/.bashrc` / `.profile`
+(plain zsh + Starship, no oh-my-zsh). They still source the shared alias files
+(`.alias`, `.falias`, `.kalias`, `.dalias`) from `~/.dotfiles2`, so clone both repos.
+Starship reads `.posh/starship.toml` from this repo, the same file the PowerShell
+profile uses. zsh-autosuggestions / zsh-syntax-highlighting are optional and picked up
+from Homebrew or the Ubuntu packages when installed.
+
+```
+$ brew bundle                                                          # macOS: zsh plugins are in Brewfile
+$ sudo apt install zsh zsh-autosuggestions zsh-syntax-highlighting     # Ubuntu / WSL
+$ ./setup.bash                                                         # links .zshrc and .zprofile among the rest
+$ chsh -s "$(command -v zsh)"
+```
+
+byobu / tmux start `$SHELL` (see `.byobu/shell-expand.tmux` and `.tmux.conf.osx`),
+so new windows open zsh once `chsh` has run and you have logged in again.
+
 Windows (PowerShell):
 ---------------------
 
