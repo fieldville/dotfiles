@@ -493,8 +493,12 @@ brew "yuicompressor"
 brew "zlib"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Fish-like fast/unobtrusive autosuggestions for zsh (loaded by .zshrc when present)
+brew "zsh-autosuggestions"
 # Tips, tricks, and examples for zsh
 brew "zsh-lovers"
+# Fish shell like syntax highlighting for zsh (loaded by .zshrc when present)
+brew "zsh-syntax-highlighting"
 # Enable Windows-like alt-tab
 cask "alt-tab"
 # Application uninstaller
