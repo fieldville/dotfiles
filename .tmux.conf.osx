@@ -2,7 +2,9 @@
 # brew install reattach-to-user-namespace
 #set -g default-command "reattach-to-user-namespace -l zsh"
 #set -g default-command "reattach-to-user-namespace -l bash"
-set -g default-command "tmux rename-window bash; reattach-to-user-namespace -l bash"
+# Use the login shell ($SHELL) instead of hard-coding bash, so byobu/tmux follow chsh.
+# reattach-to-user-namespace is no longer needed on modern macOS/tmux.
+set -g default-command "exec $SHELL"
 
 # Setup 'v' to begin selection as in Vim
 bind -T copy-mode-vi v send -X begin-selection
