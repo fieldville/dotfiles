@@ -1,0 +1,117 @@
+## docker
+alias dco='docker compose'
+alias dc='docker compose'
+alias d='docker'
+# 'docker ps' displays the currently running containers
+#alias dps='docker ps'
+alias dps='docker container ls'
+# This command is a neat shell pipeline to stop all running containers no matter
+# where you are and without knowing any container names
+#alias dsa="docker ps -q | awk '{print \$1}' | xargs -r -o docker stop"
+alias dsa="docker container ls -q | awk '{print \$1}' | xargs -r -o docker stop"
+alias ds="docker images; docker ps -a"
+alias da="docker ps -a"
+
+# Start the docker compose stack in the current directory
+alias dcu="docker compose up -d"
+# Start the docker compose stack in the current directory and rebuild the images
+alias dcub="docker compose up -d --build"
+# Stop, delete (down) or restart the docker compose stack in the current directory
+alias dcs="docker compose stop"
+alias dcd="docker compose down"
+alias dcr="docker compose restart"
+# Show the logs for the docker compose stack in the current directory
+# May be extended with the service name to get service-specific logs, like
+# 'dcl php' to get the logs of the php container
+alias dcl="docker compose logs"
+# Quickly run the docker exec command like this: 'dex container-name bash'
+#alias dex="docker container exec -it"
+
+# Get the latest container ID
+#alias dl="docker ps --latest --quiet"
+alias dl="docker container ls --latest --quiet"
+# List containers including stopped containers
+#alias dpa="docker ps --all"
+alias dpa="docker container ls --all"
+# List images
+#alias di="docker images"
+alias di="docker image ls"
+# List images including intermediates
+#alias dia="docker images --all"
+alias dia="docker image ls --all"
+# Get an IPaddress of a container
+alias dip="docker container inspect --format '{{ .NetworkSettings.IPAddress }}'"
+# Run a daemonized container
+#alias drd="docker run --detach --publish-all"
+alias drd="docker container run --detach --publish-all"
+# Run an interactive container 
+#alias dri="docker run --interactive --tty --publish-all"
+alias dri="docker container run --interactive --tty --publish-all"
+# Remove all containers
+#alias drm='docker rm $(docker ps --all --quiet)'
+alias drm='docker container rm $(docker container ls --all --quiet)'
+# Remove all images
+#alias drmi='docker rmi $(docker images --quiet)'
+alias drmi='docker image rm $(docker image ls -q)'
+# Remove all containers and images by force
+#alias dclean='docker kill $(docker ps --all --quiet); drm; drmi;'
+alias dclean='docker container kill $(docker container ls --all --quiet); drm; drmi;'
+alias dprn='docker system prune'
+# List all aliases relating to docker
+dalias() { alias | grep 'docker' | sed "s/^\([^=]*\)='\(.*\)'/\1    => \2/"| sed "s/'\\\'//g"; }
+dcalias() { alias | grep 'docker compose' | sed "s/^\([^=]*\)='\(.*\)'/\1    => \2/"| sed "s/'\\\'//g"; }
+
+alias dcnt='docker container'
+alias dimg='docker image'
+alias dcur='docker container ls -f status=running -l -q'
+alias dexec='docker container exec -it $(dcur)'
+alias drun='docker container run --rm -d'
+alias drunit='docker container run --rm -it'
+alias dstop='docker container stop $(dcur)'
+
+########################################
+#[bash \- How to auto\-complete a multi\-level command aliased to a single command? \- Stack Overflow](https://stackoverflow.com/questions/47781631/how-to-auto-complete-a-multi-level-command-aliased-to-a-single-command)
+# Usage:
+#   docker_alias_completion_wrapper <completion function> <alias/function name>
+#
+# Example:
+#   dock-ip() { docker inspect --format '{{ .NetworkSettings.IPAddress }}' $@ ;}
+#   docker_alias_completion_wrapper __docker_complete_containers_running dock-ip
+function docker_alias_completion_wrapper {
+  local completion_function="$1";
+  local alias_name="$2";
+
+  local func=$(cat <<EOT
+    # Generate a new completion function name
+    function _$alias_name() {
+        # Start off like _docker()
+        local previous_extglob_setting=\$(shopt -p extglob);
+        shopt -s extglob;
+
+        # Populate \$cur, \$prev, \$words, \$cword
+        _get_comp_words_by_ref -n : cur prev words cword;
+
+        # Declare and execute
+        declare -F $completion_function >/dev/null && $completion_function;
+
+        eval "\$previous_extglob_setting";
+        return 0;
+    };
+EOT
+  );
+  eval "$func";
+
+  # Register the alias completion function
+  complete -F _$alias_name $alias_name
+}
+# bash only: in zsh `export -f` would print the function body instead.
+[ -n "$BASH_VERSION" ] && export -f docker_alias_completion_wrapper
+
+# Get container IP
+function dock-ip() { docker inspect --format '{{ .NetworkSettings.IPAddress }}' $@ ;}
+docker_alias_completion_wrapper __docker_complete_containers_running dock-ip
+
+# Execute interactive container
+function dex() { docker exec -i -t --privileged $@ ;}
+docker_alias_completion_wrapper __docker_complete_containers_all dex
+########################################

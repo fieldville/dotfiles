@@ -77,7 +77,7 @@ function which ($command) {
 function find { busybox find $args }
 
 # ---------------------------------------------------------------------------
-# Git aliases: mirrors the "aliases for git" section of .dotfiles2/home/.alias (bash).
+# Git aliases: mirrors the "aliases for git" section of .alias (bash/zsh) in this repo.
 # Keep the two in sync when adding one. PowerShell resolves aliases before
 # functions, so built-in aliases that collide with ours (gc=Get-Content,
 # gl=Get-Location, gp=Get-ItemProperty, gm=Get-Member, gcm=Get-Command,
@@ -189,7 +189,7 @@ function grt {
 # Locate it through `git --exec-path` (<root>\{mingw64,ucrt64}\libexec\git-core) so this
 # works for both the scoop and the winget (C:\Program Files\Git) installs, and expose
 # usr\bin only for the duration of the tig process so `!sh -c ...` binds in .tigrc work.
-# Config: .tigrc lives in the dotfiles2 repo (home/.tigrc); tig reads $TIGRC_USER instead
+# Config: .tigrc in this repo (two levels up from here); tig reads $TIGRC_USER instead
 # of ~/.tigrc, so no symlink (admin-only on Windows) is needed. Forward slashes keep the
 # MSYS2 build happy. A value already set elsewhere wins.
 # ---------------------------------------------------------------------------
@@ -206,7 +206,7 @@ function tig {
   try {
     $env:PATH = "$usrBin;$env:PATH"
     if (-not $env:TIGRC_USER) {
-      $rc = @("$HOME\.tigrc", "$HOME\.dotfiles2\home\.tigrc") | Where-Object { Test-Path $_ } | Select-Object -First 1
+      $rc = @("$HOME\.tigrc", (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) '.tigrc')) | Where-Object { Test-Path $_ } | Select-Object -First 1
       if ($rc) { $env:TIGRC_USER = $rc -replace '\\', '/' }
     }
     & $exe @args
@@ -230,7 +230,7 @@ function da { docker ps -a }
 #Set-Alias kubectl 'C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe'
 
 # zoxide as `j` / `ji` (interactive via fzf), same as `zoxide init bash --cmd j` in
-# .dotfiles2/home/.bashrc. Install: `winget install ajeetdsouza.zoxide` (see Wingetfile).
+# .bashrc in this repo. Install: `winget install ajeetdsouza.zoxide` (see Wingetfile).
 # Kept at the end of the profile: on Windows PowerShell 5.1 zoxide hooks the prompt
 # function, so it has to run after Starship has defined it. Replaces ZLocation (`z`).
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {

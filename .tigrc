@@ -1,0 +1,53 @@
+# tig の既定では main view の g/G が commit-title-graph のトグルなので、vim 風の gg / G に差し替える
+bind generic g move-first-line
+bind generic G move-last-line
+# main view には既定で bind main G :toggle commit-title-graph があり generic より優先されるので明示的に上書き
+bind main G move-last-line
+bind generic <Ctrl-G> :toggle commit-title-graph
+#set show-rev-graph = no
+bind generic L !git reflog
+# コミットハッシュをクリップボードへ (macOS: pbcopy / Windows Git Bash: clip)
+bind generic 9 !@sh -c "printf %(commit) | { command -v pbcopy >/dev/null && pbcopy || clip; }"
+set blame-options = -w
+
+set vertical-split = false
+
+# merge diffを表示
+set diff-options = -m --first-parent
+
+#-------------
+# main view
+#-------------
+# チーム開発しているとよくremoteで更新が入るため手元に同期
+bind main <Ctrl-r> !git pull --rebase
+# revert作業は手早く行う必要があるためバインドして効率化
+bind main V !?git revert %(commit)
+# 任意のリビジョンを再現するためにcheckoutすることが多いためバインド
+bind main C !?git checkout %(commit)
+
+#-------------
+# branch view
+#-------------
+# カーソル行のブランチを親にして入力した名前のブランチを作成
+bind branch n !git checkout -b %(prompt) %(branch)
+# 不要になったブランチを削除(squash mergeや別リポジトリへのmergeをするワークフロー用)
+bind branch D !?git branch -D %(branch)
+# 不要になったブランチを削除
+bind branch d !?git branch -d %(branch)
+
+#-------------
+# stash view
+#-------------
+bind stash D !?git stash drop %(stash)
+bind stash A !?git stash apply %(stash)
+
+# Unbind
+bind stash ! none
+
+#-------------
+# status view
+#-------------
+bind status D !@?rm %(file)
+bind status C !git commit -v
+bind status + !git commit -v --amend
+

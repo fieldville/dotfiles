@@ -1,0 +1,126 @@
+export PGDATA=/usr/local/var/postgres
+
+alias iostat_d='iostat -d'
+alias iostat_c='iostat -c'
+alias Psql='psql format56 -U postgres'
+alias cdwork_ios='cd ~/Documents/00_Work/iOS'
+alias cdwork='cd ~/Documents/00_Work'
+alias cdworkspace='cd ~/Documents/00_Work/workspace'
+
+export PATH=~/tools:$PATH
+export PATH=$HOME/.cargo/bin:$PATH
+
+complete -C aws_completer aws
+#eval "$(direnv hook bash)"
+
+if [ -f ~/.function.bash ]; then
+    . ~/.function.bash
+fi
+
+# some more ls aliases
+alias ls='ls --color'
+alias ll='ls -ltrh'
+alias la='ll -A'
+alias l='ls'   # plain ls, same as `l` in home/.posh/PowerShell (no -CF markers)
+#alias df='df -Th'
+alias df='df -h'
+alias h='history'
+alias dmesg='dmesg -T'
+alias grep='grep -I --color --exclude-dir={.git,.svn,HTML} --exclude={\*.pyc\*}'
+
+# aliases for git
+alias gcl='git clone'
+alias ga='git add'
+alias gall='git add .'
+alias grh='git reset HEAD'
+alias grhh='git reset HEAD --hard'
+alias gclean='git reset --hard && git clean -dfx'
+alias gm="git merge"
+alias g='git'
+alias get='git'
+alias gst='git status'
+alias gs='git status'
+alias gss='git status -s'
+alias gl='git pull'
+alias gpr='git pull --rebase'
+alias gpp='git pull && git push'
+alias gup='git fetch && git rebase'
+alias gp='git push'
+alias gpo='git push origin'
+alias gdv='git diff -w "$@" | vim -R -'
+alias gc='git commit -v'
+alias gca='git commit -v -a'
+alias gcma='git checkout master'
+alias gcm='git checkout main'
+alias gci='git commit --interactive'
+alias gb='git branch'
+alias gba='git branch -a'
+alias gcount='git shortlog -sn'
+alias gcp='git cherry-pick'
+alias gco='git checkout'
+alias gexport='git archive --format zip --output'
+alias gdel='git branch -D'
+alias gmua='git fetch origin -v; git fetch upstream -v; git merge upstream/master'
+alias gmu='git fetch origin -v; git fetch upstream -v; git merge upstream/main'
+alias gll='git log --graph --pretty=oneline --abbrev-commit'
+#alias gg="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
+alias gg="git log --graph --pretty=format:'%h -%d %s (%cr)' --abbrev-commit --date=relative"
+alias ggs="gg --stat"
+alias gsl="git shortlog -sn"
+alias gw="git whatchanged"
+alias gt="git tag"
+alias gta="git ls-remote --tags"
+alias gtd="git tag -d"
+alias gtl="git tag -l"
+alias gd='git diff'
+alias grv='git remote -v'
+alias grmv='git remote rename'
+alias grrm='git remote remove'
+alias grset='git remote set-url'
+alias grup='git remote update'
+alias grbi='git rebase -i'
+alias grbc='git rebase --continue'
+alias grba='git rebase --abort'
+alias gbr='git branch --remote'
+alias gcfg='git config --list'
+alias glg='git log --stat --max-count=10'
+alias glgg='git log --graph --max-count=10'
+alias glgga='git log --graph --decorate --all'
+alias glo='git log --oneline --decorate --color'
+alias glog='git log --oneline --decorate --color --graph'
+alias gsts='git stash show --text'
+alias gsta='git stash'
+alias gstp='git stash pop'
+alias gstd='git stash drop'
+alias grt='cd $(git rev-parse --show-cdup)'
+#alias pip='pip3'
+#alias pip='pip3.6'
+#alias python='python3'
+
+# also load inputrc (bash only: $SHELL is still bash when zsh runs this file)
+if [[ $- =~ i ]]; then
+  if [[ -n $BASH_VERSION ]]; then
+    DIR=$(cd $(dirname ${BASH_SOURCE[0]}) && pwd)
+    bind -f $DIR/.inputrc
+  fi
+fi
+
+alias fdh="fd --no-ignore-vcs -H -E '.git/'"
+alias rgh="rg -."
+
+# alias emacs="emacs -nw"  # disabled: emacs not installed on 26.04
+# alias e="emacs"  # disabled: emacs not installed on 26.04
+
+alias vi=nvim
+alias view='nvim -R'
+alias vimdiff='nvim -d'
+
+# alias cie='conda info -e'  # disabled: conda not installed on 26.04
+# alias cee='conda env export'  # disabled: conda not installed on 26.04
+
+alias lg='lazygit'
+
+alias tt='terraform'
+alias ttp='terraform plan'
+alias tta='terraform apply'
+alias ttm='terraform fmt -recursive'

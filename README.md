@@ -13,12 +13,12 @@ Use `./setup.bash -y` to link everything without asking.
 zsh:
 ----
 
-`.zshrc` / `.zprofile` are the zsh counterpart of `.dotfiles2/home/.bashrc` / `.profile`
-(plain zsh + Starship, no oh-my-zsh). They still source the shared alias files
-(`.alias`, `.falias`, `.kalias`, `.dalias`) from `~/.dotfiles2`, so clone both repos.
-Starship reads `.posh/starship.toml` from this repo, the same file the PowerShell
-profile uses. zsh-autosuggestions / zsh-syntax-highlighting are optional and picked up
-from Homebrew or the Ubuntu packages when installed.
+`.zshrc` / `.zprofile` are the zsh counterpart of `.bashrc` / `.profile` (plain zsh +
+Starship, no oh-my-zsh). Both shells source the same alias files (`.alias`, `.falias`,
+`.kalias`, `.dalias`) and Starship reads `.posh/starship.toml`, all from this repo, so
+this repo alone is enough on a home machine. zsh-autosuggestions /
+zsh-syntax-highlighting are optional and picked up from Homebrew or the Ubuntu
+packages when installed.
 
 ```
 $ brew bundle                                                          # macOS: zsh plugins are in Brewfile
@@ -56,6 +56,5 @@ PowerShell Gallery modules (`psmodule`); VS Code extensions are read from `Brewf
 
 tig: there is no winget package, but Git for Windows bundles `tig.exe` in `usr\bin`
 (not on PATH). The profile defines a `tig` function that runs it and points
-`$TIGRC_USER` at `~\.tigrc` or `~\.dotfiles2\home\.tigrc` (whichever exists), so
-clone [dotfiles2](https://github.com/fieldville/dotfiles2) to `~\.dotfiles2` to get
-the shared `.tigrc` without a symlink.
+`$TIGRC_USER` at `~\.tigrc` or `.tigrc` in this repo (whichever exists), so no symlink
+is needed on Windows.

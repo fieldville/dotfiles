@@ -1,13 +1,12 @@
 # zsh interactive shell: plain zsh + Starship (no oh-my-zsh / zplug).
-# Ported from .dotfiles2/home/.zshrc (the conservative setup) for the home machines
-# (WSL, Linux, macOS). The shared alias files (.alias, .falias, .kalias, .dalias) still
-# come from ~/.dotfiles2, so clone both repos.
+# Kept in step with .bashrc so bash and zsh behave the same; the alias files
+# (.alias, .falias, .kalias, .dalias) are in this repo too.
 
 # Directory this file really lives in (follows the ~/.zshrc symlink), so repo-local
 # files like .posh/starship.toml are found wherever the repo is cloned.
 _dotfiles_dir=${${(%):-%N}:A:h}
 
-# --- history (same sizes and dedup behaviour as .dotfiles2/home/.bashrc)
+# --- history (same sizes and dedup behaviour as .bashrc)
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
@@ -23,7 +22,7 @@ bashcompinit
 zstyle ':completion:*' list-separator '-->'
 zstyle ':completion:*:manuals' separate-sections true
 
-# --- key bindings. Same as bash (.dotfiles2/home/.inputrc): emacs keymap, history
+# --- key bindings. Same as bash (.inputrc): emacs keymap, history
 # search by the typed prefix on Ctrl-p/Ctrl-n, Alt-p/Alt-n and Up/Down.
 # "bindkey -e" is explicit because zsh would otherwise pick the vi keymap whenever
 # EDITOR/VISUAL=nvim is inherited from the environment (e.g. inside byobu).
@@ -96,7 +95,7 @@ if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
 fi
 
-# --- added on Ubuntu 26.04 migration (same as .dotfiles2/home/.bashrc)
+# --- added on Ubuntu 26.04 migration (same as .bashrc)
 [ -f ~/.cargo/env ] && . ~/.cargo/env
 export PATH="$HOME/.local/share/fnm:$PATH"
 command -v fnm >/dev/null && eval "$(fnm env --use-on-cd --shell zsh)"
