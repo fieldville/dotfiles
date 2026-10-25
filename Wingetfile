@@ -3,6 +3,9 @@
 # libraries from Brewfile are omitted. IDs are exact winget package identifiers
 # (`winget search --id <id> -e`). An optional `cmd: "name"` marks the package as already
 # installed when that command is on PATH, so tools installed outside winget are not duplicated.
+# An optional `override: "args"` is passed to `winget install --override`, i.e. handed to the
+# package's own installer in place of the arguments from the winget manifest (used to pick
+# Visual Studio workloads; the string must then also request a quiet install itself).
 # `psmodule "Name"` entries are PowerShell Gallery modules (Install-Module), see the section at
 # the end; winget.ps1 and setup.ps1 both read them.
 
@@ -63,6 +66,15 @@ winget "vim.vim", cmd: "vim"
 winget "BrechtSanders.WinLibs.POSIX.UCRT", cmd: "gcc"
 # Incremental parsing system for programming tools (CLI)
 winget "tree-sitter.tree-sitter-cli", cmd: "tree-sitter"
+
+## IDE
+# Visual Studio Community 2026 (free edition). The winget manifest alone installs the bare
+# shell with no workloads, so the override picks "Desktop development with C++" (MSVC, Windows
+# SDK, CMake) plus its recommended components. To add workloads: edit the --add list here, or
+# open Visual Studio Installer > Modify; component IDs are listed at
+# https://learn.microsoft.com/visualstudio/install/workload-component-id-vs-community
+# --wait is needed so winget (and this script) blocks until the install actually finishes.
+winget "Microsoft.VisualStudio.Community", override: "--quiet --wait --norestart --add Microsoft.VisualStudio.Workload.NativeDesktop --includeRecommended"
 
 ## Languages / runtimes
 # Interpreted, interactive, object-oriented programming language

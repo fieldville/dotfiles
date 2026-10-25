@@ -13,11 +13,18 @@ $ErrorActionPreference = "Continue"
 $root = $PSScriptRoot
 Push-Location $root   # code.cmd refuses to start from a UNC cwd (e.g. when launched from WSL)
 
-# Lines look like:  kind "name"            or   kind "name", cmd: "exe"
+# Lines look like:  kind "name"   optionally followed by   , cmd: "exe"   and/or   , override: "args"
 function Read-Entries([string]$file, [string]$kind) {
   Get-Content (Join-Path $root $file) | ForEach-Object {
-    if ($_ -match "^$kind\s+`"([^`"]+)`"(?:\s*,\s*cmd:\s*`"([^`"]+)`")?") {
-      [pscustomobject]@{ Name = $Matches[1]; Cmd = $Matches[2] }
+    if ($_ -match "^$kind\s+`"([^`"]+)`"(.*)") {
+      $entry = [pscustomobject]@{ Name = $Matches[1]; Cmd = $null; Override = $null }
+      foreach ($opt in [regex]::Matches($Matches[2], "(\w+):\s*`"([^`"]+)`"")) {
+        switch ($opt.Groups[1].Value) {
+          'cmd'      { $entry.Cmd      = $opt.Groups[2].Value }
+          'override' { $entry.Override = $opt.Groups[2].Value }
+        }
+      }
+      $entry
     }
   }
 }
@@ -41,15 +48,19 @@ if (Test-Path $tmp) {
   Remove-Item $tmp
 }
 
-$missing = $wanted | Where-Object {
+$missing = @($wanted | Where-Object {
   -not $installed[$_.Name] -and -not ($_.Cmd -and (Get-Command $_.Cmd -ErrorAction SilentlyContinue))
-} | ForEach-Object Name
+})
 "winget: $($wanted.Count) listed, $($missing.Count) to install"
-foreach ($id in $missing) {
-  if ($DryRun) { "  would install $id"; continue }
-  "  installing $id"
-  winget install --id $id -e --silent --accept-source-agreements --accept-package-agreements
-  if ($LASTEXITCODE -ne 0) { Write-Warning "  failed: $id (exit $LASTEXITCODE)" }
+foreach ($p in $missing) {
+  if ($DryRun) { "  would install $($p.Name)$(if ($p.Override) { " (override: $($p.Override))" })"; continue }
+  "  installing $($p.Name)"
+  $wingetArgs = @('install', '--id', $p.Name, '-e', '--silent', '--accept-source-agreements', '--accept-package-agreements')
+  # --override replaces the installer arguments from the manifest entirely, so the entry
+  # itself must ask for a quiet install (e.g. Visual Studio's --quiet --wait --norestart).
+  if ($p.Override) { $wingetArgs += @('--override', $p.Override) }
+  winget @wingetArgs
+  if ($LASTEXITCODE -ne 0) { Write-Warning "  failed: $($p.Name) (exit $LASTEXITCODE)" }
 }
 
 # ---- PowerShell modules ----------------------------------------------------

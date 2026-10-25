@@ -96,6 +96,9 @@ PS> powershell -ExecutionPolicy Bypass -File .\winget.ps1 -DryRun  # just list i
 
 `Wingetfile` lists the Windows-relevant subset of `Brewfile` as winget IDs plus the
 PowerShell Gallery modules (`psmodule`); VS Code extensions are read from `Brewfile` itself.
+An entry's `override: "..."` is passed through to the package's own installer (used for
+Visual Studio Community, which otherwise installs with no workloads). Visual Studio needs
+elevation, so expect a UAC prompt during that step.
 
 The profile mirrors `.alias` (`l`/`ll`/`la`, `vi`/`view`/`vimdiff` on nvim) and dot-sources
 `.posh/PowerShell/galias.ps1`, the PowerShell port of the git aliases in `.galias` (`g`,
