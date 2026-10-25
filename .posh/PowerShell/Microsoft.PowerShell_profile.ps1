@@ -214,9 +214,18 @@ function which ($command) {
 # .bashrc, see galias.ps1.
 . (Join-Path $PSScriptRoot 'galias.ps1')
 
-function egrep { egrep --color=auto $args }
-function fgrep { fgrep --color=auto $args }
-function grep { grep --color --exclude-dir='{.git,.svn}' --exclude=\*.html\* $args }
+# grep / egrep / fgrep: colour, skip binaries and VCS dirs, as `alias grep=...` in .alias.
+# Inside a function named grep a bare `grep` resolves to the function itself (functions shadow
+# executables) and recurses until the call depth overflows, so call `grep.exe` explicitly: with
+# the extension PowerShell looks the application up instead. No brace expansion here, so each
+# --exclude-dir is spelled out. Only defined when a grep.exe is on PATH (Git for Windows keeps
+# its copy in usr\bin, off PATH; busybox grep has neither --color nor --exclude-dir).
+# egrep / fgrep go through `grep -E` / `grep -F`, as GNU grep 3.8+ deprecates the wrappers.
+if (Get-Command grep.exe -ErrorAction Ignore) {
+  function grep { grep.exe -I --color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=HTML --exclude='*.pyc*' @args }
+  function egrep { grep -E @args }
+  function fgrep { grep -F @args }
+}
 
 # Docker aliases (d, dco, dps, dex, dcu, dcl, ...): counterpart of `source ~/.dalias` in
 # .bashrc, see dalias.ps1.
