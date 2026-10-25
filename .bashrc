@@ -1,3 +1,14 @@
+# ble.sh (Bash Line Editor): zsh-autosuggestions-like inline suggestions from history,
+# syntax highlighting and menu completion for bash. Neither apt nor Homebrew package it:
+#   git clone --recursive --depth 1 https://github.com/akinomyoga/ble.sh.git /tmp/ble.sh
+#   make -C /tmp/ble.sh install PREFIX=~/.local
+# Sourced with --attach=none here and attached at the very end of this file, as its README
+# recommends, so everything in between (fzf, zoxide, starship) is set up before it takes
+# over the line editor. Settings are in .blerc in this repo. Skipped silently when absent.
+if [[ $- == *i* && -f ~/.local/share/blesh/ble.sh ]]; then
+  source -- ~/.local/share/blesh/ble.sh --attach=none
+fi
+
 # Don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options.
 export HISTCONTROL=ignoredups:erasedups
@@ -5,7 +16,9 @@ export HISTCONTROL=ignoredups:erasedups
 # Append to the history file, don't overwrite it.
 shopt -s histappend
 
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# Share history between sessions. Under ble.sh this is `bleopt history_share=1` (.blerc);
+# the readline hack below would make ble.sh reload the whole history file at every prompt.
+[[ ${BLE_VERSION-} ]] || export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 # History size up
 export HISTSIZE=100000
@@ -36,7 +49,17 @@ export PATH=~/.local/bin:$PATH
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/.alias ] && . ~/.alias
 [ -f ~/.alias.private ] && . ~/.alias.private
-command -v fzf >/dev/null 2>&1 && eval "$(fzf --bash)"
+# fzf: Ctrl+r history, Ctrl+t files, Alt+c dirs, `**<Tab>` completion. Under ble.sh the
+# `bind` calls that `fzf --bash` emits must not be used; its fzf integration modules load
+# the same key-bindings.bash / completion.bash from fzf's install dir instead.
+if command -v fzf >/dev/null 2>&1; then
+  if [[ ${BLE_VERSION-} ]]; then
+    ble-import -d integration/fzf-completion
+    ble-import -d integration/fzf-key-bindings
+  else
+    eval "$(fzf --bash)"
+  fi
+fi
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init bash --cmd j)"
 [ -f ~/.falias ] && source ~/.falias
 [ -f ~/.kalias ] && source ~/.kalias
@@ -65,3 +88,6 @@ fi
 [ -f ~/.cargo/env ] && . ~/.cargo/env
 export PATH="$HOME/.local/share/fnm:$PATH"
 command -v fnm >/dev/null && eval "$(fnm env --use-on-cd --shell bash)"
+
+# ble.sh: attach last, after everything above has run (see the top of this file).
+[[ ! ${BLE_VERSION-} ]] || ble-attach

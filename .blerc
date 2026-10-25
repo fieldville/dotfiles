@@ -1,0 +1,17 @@
+# ble.sh settings (https://github.com/akinomyoga/ble.sh), read when .bashrc sources ble.sh.
+# Linked to ~/.blerc by setup.bash. Everything not mentioned here is a ble.sh default.
+#
+# Inline suggestions (zsh-autosuggestions counterpart) are on by default and come from the
+# history. Default keys, kept as they are because they match the PowerShell profile
+# (PSReadLine ForwardChar / ForwardWord) and zsh:
+#   C-f / right / end   insert the whole suggestion (cursor at end of line)
+#   M-f / C-right       insert the next word only
+#   S-RET               insert the whole suggestion from anywhere
+#   C-RET               insert it and run the line
+# .inputrc is read by ble.sh too, so C-p / C-n / up / down stay history-search-backward /
+# -forward and M-k / M-j stay menu-complete, as in plain readline.
+
+# Share history between sessions the ble.sh way. .bashrc skips its
+# `history -a; history -c; history -r` PROMPT_COMMAND hack when ble.sh is loaded: with
+# ble.sh that hack makes it reload the whole history file at every prompt.
+bleopt history_share=1

@@ -10,6 +10,24 @@ $ ./setup.bash
 `setup.bash` asks per file whether to link it into `~` (`y` / `n` / `a` = all / `q` = quit).
 Use `./setup.bash -y` to link everything without asking.
 
+bash: ble.sh
+------------
+
+`.bashrc` loads [ble.sh](https://github.com/akinomyoga/ble.sh) (Bash Line Editor) when it
+is installed, which gives bash the zsh-autosuggestions-style inline suggestions from
+history, syntax highlighting and menu completion; `.blerc` in this repo holds its settings.
+It is not packaged by apt or Homebrew, so install it from source (no root needed):
+
+```
+$ git clone --recursive --depth 1 https://github.com/akinomyoga/ble.sh.git /tmp/ble.sh
+$ make -C /tmp/ble.sh install PREFIX=~/.local      # -> ~/.local/share/blesh/ble.sh
+```
+
+Accepting a suggestion: `Ctrl+F` / `Right` / `End` take all of it (cursor at end of line),
+`Alt+F` the next word, `Shift+Enter` all of it from anywhere. fzf's `Ctrl+R` / `Ctrl+T` /
+`Alt+C` are loaded through ble.sh's own fzf integration, and `.inputrc` is still honoured.
+Without ble.sh everything falls back to plain readline + `fzf --bash`.
+
 zsh:
 ----
 
