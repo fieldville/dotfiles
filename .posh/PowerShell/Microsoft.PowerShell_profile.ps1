@@ -48,6 +48,13 @@ if ((Get-Command fzf -ErrorAction SilentlyContinue) -and (Get-Module -ListAvaila
   Write-Warning "fzf or PSFzf not found; Ctrl+r/Ctrl+t keep PSReadLine's defaults."
 }
 
+# fzf helper functions (fkill, fbr, fco, fshow, gadd, fstash, fda, ...) and the FZF_*
+# defaults: counterpart of `source ~/.falias` in .bashrc/.zshrc, see falias.ps1.
+# Needs fd / rg (bat optional) for the defaults; winget.ps1 installs them.
+if (Get-Command fzf -ErrorAction SilentlyContinue) {
+  . (Join-Path $PSScriptRoot 'falias.ps1')
+}
+
 #Import-Module DockerCompletion
 #Import-Module posh-docker
 Import-Module posh-git   # kept for git tab completion; the prompt itself is Starship
@@ -69,15 +76,57 @@ function view { nvim -R @args }
 function vimdiff { nvim -d @args }
 
 if (Test-Path alias:rm) { del alias:rm -Force }
-if (Test-Path alias:ls) { del alias:ls -Force }
 
-function l { dir $args }
-function ll { ls -ltrh $args }
-function la { ls -ltrha $args }
+# ls / l / ll / la: `ls` stays the built-in alias for Get-ChildItem. l/ll/la mirror .alias
+# (l='ls', ll='ls -ltrh', la='ll -A') in Get-ChildItem terms: `-ltr` = sort by mtime, newest last;
+# `-A` = -Force (hidden/system files; PowerShell never lists . and ..). Set-Alias cannot
+# carry arguments, so these have to be functions.
+# `-h` has no Get-ChildItem equivalent, so ll/la render their own table with a Size column
+# (4.0K, 12K, 1.5M ... like GNU ls) when they are the last command in the pipeline. When
+# something is piped after them (`ll | Where-Object ...`) they emit plain FileSystemInfo
+# objects instead, so filtering/sorting keeps working. Note `$x = ll` captures the table.
+function ConvertTo-HumanSize ([long]$Bytes) {
+  if ($Bytes -lt 1024) { return "$Bytes" }
+  $v = [double]$Bytes; $i = -1
+  foreach ($u in 'K', 'M', 'G', 'T', 'P') { $v /= 1024; $i++; if ($v -lt 1024) { break } }
+  $fmt = if ($v -lt 10) { '{0:0.0}{1}' } else { '{0:0}{1}' }
+  [string]::Format([cultureinfo]::InvariantCulture, $fmt, $v, ('K', 'M', 'G', 'T', 'P')[$i])
+}
+
+# Name colouring as the default Get-ChildItem view does it ($PSStyle.FileInfo, pwsh 7.2+);
+# Windows PowerShell 5.1 has no $PSStyle and gets plain names.
+function Format-LsName ($Item) {
+  if (-not $PSStyle) { return $Item.Name }
+  $fi = $PSStyle.FileInfo
+  $color =
+    if ($Item.PSIsContainer) { $fi.Directory }
+    elseif ($Item.Attributes -band [IO.FileAttributes]::ReparsePoint) { $fi.SymbolicLink }
+    elseif ($fi.Extension.ContainsKey($Item.Extension)) { $fi.Extension[$Item.Extension] }
+    elseif (($env:PATHEXT -split ';') -contains $Item.Extension) { $fi.Executable }
+    else { '' }
+  if ($color) { "$color$($Item.Name)$($PSStyle.Reset)" } else { $Item.Name }
+}
+
+$LsLongColumns = @(
+  'Mode', 'LastWriteTime',
+  @{ Label = 'Size'; Align = 'Right'; Expression = { if ($_.PSIsContainer) { '' } else { ConvertTo-HumanSize $_.Length } } },
+  @{ Label = 'Name'; Expression = { Format-LsName $_ } }
+)
+
+function l { Get-ChildItem @args }
+function ll {
+  $items = Get-ChildItem @args | Sort-Object LastWriteTime
+  if ($MyInvocation.PipelineLength -eq $MyInvocation.PipelinePosition) { $items | Format-Table $LsLongColumns } else { $items }
+}
+function la {
+  $items = Get-ChildItem -Force @args | Sort-Object LastWriteTime
+  if ($MyInvocation.PipelineLength -eq $MyInvocation.PipelinePosition) { $items | Format-Table $LsLongColumns } else { $items }
+}
 
 function which ($command) {
   Get-command -Name $command -ShowCommandInfo | Format-List -Property Definition
 }
+# Unix find via busybox (frippery.busybox-w32 in Wingetfile); fd is the usual day-to-day tool.
 function find { busybox find $args }
 
 # ---------------------------------------------------------------------------

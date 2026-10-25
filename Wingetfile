@@ -49,6 +49,8 @@ winget "direnv.direnv", cmd: "direnv"
 winget "JernejSimoncic.Wget", cmd: "wget"
 # Maintained ctags implementation
 winget "UniversalCtags.Ctags", cmd: "ctags"
+# Unix tools in one binary; the PowerShell profile's `find` function runs `busybox find`
+winget "frippery.busybox-w32", cmd: "busybox"
 
 ## Editors
 # Ambitious Vim-fork focused on extensibility and agility
