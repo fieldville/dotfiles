@@ -48,6 +48,7 @@ export PATH=~/.local/bin:$PATH
 
 [ -f ~/.bash_aliases ] && . ~/.bash_aliases
 [ -f ~/.alias ] && . ~/.alias
+[ -f ~/.galias ] && . ~/.galias
 [ -f ~/.alias.private ] && . ~/.alias.private
 # fzf: Ctrl+r history, Ctrl+t files, Alt+c dirs, `**<Tab>` completion. Under ble.sh the
 # `bind` calls that `fzf --bash` emits must not be used; its fzf integration modules load

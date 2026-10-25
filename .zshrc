@@ -1,6 +1,6 @@
 # zsh interactive shell: plain zsh + Starship (no oh-my-zsh / zplug).
 # Kept in step with .bashrc so bash and zsh behave the same; the alias files
-# (.alias, .falias, .kalias, .dalias) are in this repo too.
+# (.alias, .galias, .falias, .kalias, .dalias) are in this repo too.
 
 # Directory this file really lives in (follows the ~/.zshrc symlink), so repo-local
 # files like .posh/starship.toml are found wherever the repo is cloned.
@@ -51,6 +51,7 @@ export PATH=/sbin:/usr/sbin:$PATH
 export PATH=~/.local/bin:$PATH
 
 [ -f ~/.alias ] && . ~/.alias
+[ -f ~/.galias ] && . ~/.galias
 [ -f ~/.alias.private ] && . ~/.alias.private
 command -v fzf >/dev/null 2>&1 && eval "$(fzf --zsh)"
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh --cmd j)"
