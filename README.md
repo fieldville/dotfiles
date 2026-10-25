@@ -10,6 +10,31 @@ $ ./setup.bash
 `setup.bash` asks per file whether to link it into `~` (`y` / `n` / `a` = all / `q` = quit).
 Use `./setup.bash -y` to link everything without asking.
 
+VS Code:
+--------
+
+`vscode/` holds the user-level `settings.json` and `keybindings.json` (and `snippets/` if you
+add one). `setup.bash` / `setup.ps1` symlink each of them into VS Code's user settings
+directory, so `git pull` alone updates the running editor (VS Code watches those files; no
+restart needed) and changes made from the Settings UI land in this repo as a diff to commit.
+Extensions are the `vscode "..."` lines in `Brewfile`, installed by `brew bundle` / `winget.ps1`.
+
+| OS                        | linked into                                              |
+|---------------------------|----------------------------------------------------------|
+| macOS                     | `~/Library/Application Support/Code/User`                |
+| Linux                     | `~/.config/Code/User`                                    |
+| Windows                   | `%APPDATA%\Code\User`                                    |
+| Windows, portable (scoop) | `<install>\data\user-data\User` (detected via `code` on PATH) |
+
+WSL is skipped: VS Code there is the Windows one and reads the Windows-side settings.
+On Windows, file symlinks need Developer Mode (Settings > System > For developers) or an
+elevated shell; otherwise `setup.ps1` copies the two files and warns, and re-running it
+with either in place replaces the copies with links (`snippets/` is a junction and needs
+neither). OS-specific keys (`*.windows`, `*.osx`, `*.linux`) are ignored on other OSes, so
+one shared `settings.json` is enough; machine-specific values such as a proxy belong in
+`HTTP_PROXY` rather than in the file. The folder is deliberately not named `.vscode`, which
+VS Code would treat as workspace settings when this repo is opened as a folder.
+
 bash: ble.sh
 ------------
 

@@ -18,9 +18,13 @@
     //"terminal.integrated.shell.windows": "C:\\Users\\user_name\\AppData\\Local\\Microsoft\\WindowsApps\\ubuntu.exe",
     //"git.path": "C:\\wslgit.exe",
 
-    // explorer
+    // explorer / workbench
     "explorer.confirmDelete": false,
     "window.zoomLevel": -1,
+    "workbench.startupEditor": "none",
+    "security.allowedUNCHosts": [
+        "wsl.localhost",
+    ],
 
 
     "editor.minimap.showSlider": "always",
@@ -43,6 +47,33 @@
     "terminal.integrated.windowsEnableConpty": true,
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.allowChords": false, // Ctrl+K有効
+    // terminal profiles: *.windows / *.linux keys only apply on that OS, so they can live here
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell",
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe",
+            ],
+            "args": [],
+            "icon": "terminal-cmd",
+        },
+        "Git Bash": {
+            "source": "Git Bash",
+        },
+        // default WSL distro (no -d), so the same file works on machines with different distros
+        "Ubuntu (WSL)": {
+            "path": "C:\\Windows\\System32\\wsl.exe",
+        },
+    },
+    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "terminal.integrated.automationProfile.linux": {
+        "path": "C:\\Windows\\System32\\wsl.exe",
+        "color": "terminal.ansiCyan",
+    },
     //terminalでも使用可能になるaction
     /*
     "terminal.integrated.commandsToSkipShell": [
@@ -158,7 +189,7 @@
     "vim.sneak": true,
 
     // glassit
-    "glassit.alpha": 245,
+    "glassit.alpha": 220,
     "workbench.colorTheme": "One Monokai",
     "diffEditor.renderSideBySide": true,
 
