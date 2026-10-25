@@ -210,6 +210,14 @@ function which ($command) {
   Get-command -Name $command -ShowCommandInfo | Format-List -Property Definition
 }
 
+# fa: list the functions and aliases whose name or definition matches a regex, the
+# counterpart of `alias | grep ...` in bash (`fa kube`, `fa 'docker compose'`, `fa` for all).
+# Covers everything in the session, so posh-git / PSFzf exports show up too.
+function fa ($Pattern = '.') {
+  Get-ChildItem function:, alias: | Where-Object { $_.Name -match $Pattern -or $_.Definition -match $Pattern } |
+    Sort-Object Name | Format-Table Name, Definition -AutoSize
+}
+
 # Git aliases (g, gst, gco, gl, gp, gg, ...): counterpart of `source ~/.galias` in
 # .bashrc, see galias.ps1.
 . (Join-Path $PSScriptRoot 'galias.ps1')
