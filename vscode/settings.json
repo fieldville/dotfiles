@@ -48,6 +48,8 @@
     "terminal.integrated.windowsEnableConpty": true,
     "terminal.integrated.copyOnSelection": true,
     "terminal.integrated.allowChords": false, // Ctrl+K有効
+    // byobu/tmux の上段ステータス行が sticky scroll のオーバーレイに隠れるので無効化
+    "terminal.integrated.stickyScroll.enabled": false,
     // terminal profiles: *.windows / *.linux keys only apply on that OS, so they can live here
     "terminal.integrated.profiles.windows": {
         "PowerShell": {
