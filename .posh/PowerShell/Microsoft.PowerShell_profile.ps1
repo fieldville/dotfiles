@@ -218,11 +218,9 @@ function egrep { egrep --color=auto $args }
 function fgrep { fgrep --color=auto $args }
 function grep { grep --color --exclude-dir='{.git,.svn}' --exclude=\*.html\* $args }
 
-# docker: the everyday subset of .dalias (dco, dps, ds, da).
-function dco { docker compose @args }
-function dps { docker container ls @args }
-function ds { docker images; docker ps -a }
-function da { docker ps -a }
+# Docker aliases (d, dco, dps, dex, dcu, dcl, ...): counterpart of `source ~/.dalias` in
+# .bashrc, see dalias.ps1.
+. (Join-Path $PSScriptRoot 'dalias.ps1')
 
 # zoxide as `j` / `ji` (interactive via fzf): PowerShell counterpart of
 # `eval "$(zoxide init bash --cmd j)"` in .bashrc. Install: `winget install ajeetdsouza.zoxide`.
