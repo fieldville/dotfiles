@@ -231,6 +231,13 @@ if (Get-Command grep.exe -ErrorAction Ignore) {
 # .bashrc, see dalias.ps1.
 . (Join-Path $PSScriptRoot 'dalias.ps1')
 
+# kubectl aliases (k, kg, kgpo, kd, klo, kex, ksys..., ...): counterpart of `source ~/.kalias`
+# in .bashrc, see kalias.ps1 (generated from .kalias). 790 functions, so only loaded when
+# kubectl is on PATH.
+if (Get-Command kubectl -ErrorAction Ignore) {
+  . (Join-Path $PSScriptRoot 'kalias.ps1')
+}
+
 # zoxide as `j` / `ji` (interactive via fzf): PowerShell counterpart of
 # `eval "$(zoxide init bash --cmd j)"` in .bashrc. Install: `winget install ajeetdsouza.zoxide`.
 # Kept at the end of the profile: on Windows PowerShell 5.1 zoxide hooks the prompt

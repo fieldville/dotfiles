@@ -77,8 +77,10 @@ The profile mirrors `.alias` (`l`/`ll`/`la`, `vi`/`view`/`vimdiff` on nvim) and 
 `gst`, `gco`, `gl`, `gp`, `gg`, ...), and `.posh/PowerShell/falias.ps1`, the port of the
 fzf helpers in `.falias` (`fco`, `fkill`, `fshow`, `gadd`, `fstash`, `fda`, ...), the latter
 only when fzf is on PATH, and `.posh/PowerShell/dalias.ps1`, the port of the docker aliases
-in `.dalias` (`d`, `dco`, `dps`, `dex`, `dcu`, `dcl`, ...). One alias file per tool, so a
-change to the git aliases shows up as a diff of `.galias` / `galias.ps1` alone.
+in `.dalias` (`d`, `dco`, `dps`, `dex`, `dcu`, `dcl`, ...), and `.posh/PowerShell/kalias.ps1`,
+generated from the kubectl aliases in `.kalias` (`k`, `kg`, `kgpo`, `kd`, `klo`, ...) and
+loaded only when kubectl is on PATH. One alias file per tool, so a change to the git
+aliases shows up as a diff of `.galias` / `galias.ps1` alone.
 
 tig: the profile points `$TIGRC_USER` at `.tigrc` in this repo (a value already set
 wins), so no symlink is needed on Windows. There is no winget package, but Git for
