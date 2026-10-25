@@ -102,6 +102,27 @@ if (Test-Path alias:rm) { Remove-Item alias:rm -Force }
 function rm { busybox rm @args }
 function find { busybox find @args }
 
+# cd -: back to the previous directory, as in bash. pwsh 6.2+ has this built in
+# (Set-Location keeps a location history, `cd -` goes back and `cd +` forward), Windows
+# PowerShell 5.1 does not, so it gets a wrapper that remembers one previous directory in
+# $OLDPWD and toggles like bash. Plain `cd` goes to $HOME (bash/pwsh behaviour; the 5.1
+# alias would stay put). Same alias-before-function rule as rm above.
+if ($PSVersionTable.PSVersion -lt [version]'6.2') {
+  if (Test-Path alias:cd) { Remove-Item alias:cd -Force }
+  function cd ([string]$Path) {
+    $prev = $PWD.Path
+    if ($Path -eq '-') {
+      if (-not $global:OLDPWD) { Write-Error 'OLDPWD not set'; return }
+      Set-Location -LiteralPath $global:OLDPWD -ErrorAction Stop
+    } elseif ($Path) {
+      Set-Location $Path -ErrorAction Stop
+    } else {
+      Set-Location $HOME -ErrorAction Stop
+    }
+    $global:OLDPWD = $prev
+  }
+}
+
 # ls / l / ll / la: `ls` stays the built-in alias for Get-ChildItem. l/ll/la mirror .alias
 # (l='ls', ll='ls -ltrh', la='ll -A') in Get-ChildItem terms: `-ltr` = sort by mtime, newest last;
 # `-A` = -Force (hidden/system files; PowerShell never lists . and ..). Set-Alias cannot
