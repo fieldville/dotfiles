@@ -41,7 +41,7 @@ Set-PSReadLineKeyHandler -Chord 'Ctrl+x,Ctrl+e' -Function ViEditVisually
 # NOTE: Windows PowerShell 5.1 and pwsh use separate module dirs
 # (Documents\WindowsPowerShell\Modules vs Documents\PowerShell\Modules), so run
 # Install-Module from BOTH shells, otherwise one of them hits the warning below.
-if ((Get-Command fzf -ErrorAction SilentlyContinue) -and (Get-Module -ListAvailable PSFzf)) {
+if ((Get-Command fzf -ErrorAction Ignore) -and (Get-Module -ListAvailable PSFzf)) {
   Import-Module PSFzf
   Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
 } else {
@@ -51,7 +51,7 @@ if ((Get-Command fzf -ErrorAction SilentlyContinue) -and (Get-Module -ListAvaila
 # fzf helper functions (fkill, fbr, fco, fshow, gadd, fstash, fda, ...) and the FZF_*
 # defaults: counterpart of `source ~/.falias` in .bashrc/.zshrc, see falias.ps1.
 # Needs fd / rg (bat optional) for the defaults; winget.ps1 installs them.
-if (Get-Command fzf -ErrorAction SilentlyContinue) {
+if (Get-Command fzf -ErrorAction Ignore) {
   . (Join-Path $PSScriptRoot 'falias.ps1')
 }
 
@@ -63,7 +63,7 @@ Import-Module posh-git   # kept for git tab completion; the prompt itself is Sta
 # (Windows) / `brew install starship` (macOS, see Brewfile). Config lives in this repo
 # so `git pull` picks up prompt changes too.
 $env:STARSHIP_CONFIG = Join-Path (Split-Path $PSScriptRoot -Parent) 'starship.toml'
-if (Get-Command starship -ErrorAction SilentlyContinue) {
+if (Get-Command starship -ErrorAction Ignore) {
   Invoke-Expression (&starship init powershell)
 } else {
   Write-Warning "starship not found; prompt not customised. Install with: winget install Starship.Starship"
@@ -269,7 +269,7 @@ function tig {
     & $exe @args
   } finally {
     $env:PATH = $oldPath
-    if ($null -eq $oldRc) { Remove-Item Env:TIGRC_USER -ErrorAction SilentlyContinue } else { $env:TIGRC_USER = $oldRc }
+    if ($null -eq $oldRc) { Remove-Item Env:TIGRC_USER -ErrorAction Ignore } else { $env:TIGRC_USER = $oldRc }
   }
 }
 
@@ -290,7 +290,7 @@ function da { docker ps -a }
 # .bashrc in this repo. Install: `winget install ajeetdsouza.zoxide` (see Wingetfile).
 # Kept at the end of the profile: on Windows PowerShell 5.1 zoxide hooks the prompt
 # function, so it has to run after Starship has defined it. Replaces ZLocation (`z`).
-if (Get-Command zoxide -ErrorAction SilentlyContinue) {
+if (Get-Command zoxide -ErrorAction Ignore) {
   Invoke-Expression (& { (zoxide init powershell --cmd j | Out-String) })
 }
 

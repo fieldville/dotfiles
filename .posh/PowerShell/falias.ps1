@@ -19,14 +19,14 @@
 # with Invoke-Expression (so plain native commands work) and FZF_CTRL_T_OPTS is appended
 # to FZF_DEFAULT_OPTS for the Ctrl+t picker. Each is set only when its tool is installed,
 # so a fresh machine falls back to fzf's / PSFzf's built-in defaults.
-if (Get-Command fd -ErrorAction SilentlyContinue) {
+if (Get-Command fd -ErrorAction Ignore) {
   $env:FZF_DEFAULT_COMMAND = 'fd -H -E .git/ -L'
   $env:FZF_ALT_C_COMMAND   = 'fd -H -E .git/ -L -t d'
 }
-if (Get-Command rg -ErrorAction SilentlyContinue) {
+if (Get-Command rg -ErrorAction Ignore) {
   $env:FZF_CTRL_T_COMMAND = 'rg --files --hidden --follow --glob "!.git/*"'
 }
-if (Get-Command bat -ErrorAction SilentlyContinue) {
+if (Get-Command bat -ErrorAction Ignore) {
   $env:FZF_CTRL_T_OPTS = '--preview "bat --color=always --style=header,grid --line-range :100 {}"'
 }
 
