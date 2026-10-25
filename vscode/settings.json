@@ -30,6 +30,7 @@
     "editor.minimap.showSlider": "always",
     "editor.minimap.renderCharacters": false,
     // editor その他
+    "editor.fontSize": 16,
     "editor.renderLineHighlight": "all",    // カーソル行を強調する
     "editor.cursorBlinking": "phase",       // カーソルを点滅させる
     "editor.cursorStyle": "block",
