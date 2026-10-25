@@ -23,6 +23,25 @@ Set-PSReadlineOption -EditMode Emacs
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key 'Ctrl+p' -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key 'Ctrl+n' -Function HistorySearchForward
+
+# Inline prediction from history: the PSReadLine counterpart of zsh-autosuggestions. The
+# suggestion is shown dimmed after the cursor; Ctrl+f / RightArrow (ForwardChar) take it
+# whole when the cursor is at the end of the line, Alt+f (ForwardWord) takes just the next
+# word, like zsh's forward-char / forward-word. pwsh (PSReadLine 2.2+) has this on by
+# default, Windows PowerShell 5.1 (PSReadLine 2.1.0 on Windows 11) ships it off, so set it
+# explicitly for both. PSReadLine refuses (throws) when the console has no VT support or
+# output is redirected (`powershell -Command ...` from a script), so check that first.
+$psrl = (Get-Module PSReadLine).Version
+if ($psrl -lt [version]'2.1') {
+  Write-Warning "PSReadLine $psrl has no inline prediction; run: Install-Module PSReadLine -Scope CurrentUser -Force"
+} elseif ($Host.UI.SupportsVirtualTerminal -and -not [Console]::IsOutputRedirected) {
+  # Plugin predictors need PowerShell 7.2+ (not just PSReadLine 2.2+); 5.1 gets history only.
+  $src = if ($PSVersionTable.PSVersion -ge [version]'7.2') { 'HistoryAndPlugin' } else { 'History' }
+  Set-PSReadLineOption -PredictionSource $src
+  if ($psrl -ge [version]'2.2') { Set-PSReadLineOption -PredictionViewStyle InlineView }   # 2.1.0 is inline-only
+  Set-PSReadLineKeyHandler -Chord 'Ctrl+f', 'RightArrow' -Function ForwardChar
+  Set-PSReadLineKeyHandler -Chord 'Alt+f' -Function ForwardWord
+}
 #Set-PSReadlineKeyHandler -Key 'Ctrl+r' -Function ReverseSearchHistory
 #Set-PSReadlineKeyHandler -Key 'Ctrl+s' -Function ForwardSearchHistory
 #Set-PSReadlineKeyHandler -Key 'Ctrl+k' -Function KillLine
