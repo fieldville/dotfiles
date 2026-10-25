@@ -1,3 +1,4 @@
+# Proxy template for machines behind a corporate proxy: fill in and uncomment as needed.
 # $user = "username"
 # $password = "***********"
 # $proxyhost = "proxy.co.jp:3128"
@@ -17,9 +18,10 @@
 # # choco config set proxyUser $user
 # # choco config set proxyPassword $password
 
+# Line editing: Emacs keys like bash/readline (.inputrc). Ctrl+p / Ctrl+n search history by
+# the typed prefix, Tab cycles through a completion menu.
 Import-Module PSReadline
 Set-PSReadlineOption -EditMode Emacs
-#Set-PSReadlineOption -EditMode vi
 Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
 Set-PSReadlineKeyHandler -Key 'Ctrl+p' -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key 'Ctrl+n' -Function HistorySearchForward
@@ -42,10 +44,6 @@ if ($psrl -lt [version]'2.1') {
   Set-PSReadLineKeyHandler -Chord 'Ctrl+f', 'RightArrow' -Function ForwardChar
   Set-PSReadLineKeyHandler -Chord 'Alt+f' -Function ForwardWord
 }
-#Set-PSReadlineKeyHandler -Key 'Ctrl+r' -Function ReverseSearchHistory
-#Set-PSReadlineKeyHandler -Key 'Ctrl+s' -Function ForwardSearchHistory
-#Set-PSReadlineKeyHandler -Key 'Ctrl+k' -Function KillLine
-#Set-PSReadlineKeyHandler -Key 'Ctrl+u' -Function BackwardKillLine
 
 # Ctrl+x, Ctrl+e: edit the current command line in $env:EDITOR (like bash's edit-and-execute-command).
 # Useful for pasting / editing multi-line scriptlets; the buffer is replaced on save & quit.
@@ -54,47 +52,85 @@ if ($psrl -lt [version]'2.1') {
 if (-not $env:EDITOR) { $env:EDITOR = 'nvim' }
 Set-PSReadLineKeyHandler -Chord 'Ctrl+x,Ctrl+e' -Function ViEditVisually
 
-# fzf via PSFzf: Ctrl+r = fuzzy history search (replaces ReverseSearchHistory),
+# fzf via PSFzf (PowerShell counterpart of `eval "$(fzf --bash)"` in .bashrc):
+# Ctrl+r = fuzzy history search (replaces ReverseSearchHistory),
 # Ctrl+t = fuzzy file-path picker (replaces Emacs SwapCharacters).
 # Install: `winget install junegunn.fzf` and `Install-Module PSFzf -Scope CurrentUser`.
 # NOTE: Windows PowerShell 5.1 and pwsh use separate module dirs
 # (Documents\WindowsPowerShell\Modules vs Documents\PowerShell\Modules), so run
-# Install-Module from BOTH shells, otherwise one of them hits the warning below.
+# Install-Module from BOTH shells. Skipped silently when either piece is missing,
+# so a fresh machine still starts cleanly with PSReadLine's default bindings.
 if ((Get-Command fzf -ErrorAction Ignore) -and (Get-Module -ListAvailable PSFzf)) {
   Import-Module PSFzf
   Set-PsFzfOption -PSReadlineChordProvider 'Ctrl+t' -PSReadlineChordReverseHistory 'Ctrl+r'
-} else {
-  Write-Warning "fzf or PSFzf not found; Ctrl+r/Ctrl+t keep PSReadLine's defaults."
 }
 
 # fzf helper functions (fkill, fbr, fco, fshow, gadd, fstash, fda, ...) and the FZF_*
-# defaults: counterpart of `source ~/.falias` in .bashrc/.zshrc, see falias.ps1.
-# Needs fd / rg (bat optional) for the defaults; winget.ps1 installs them.
+# defaults: counterpart of `source ~/.falias` in .bashrc, see falias.ps1.
+# Needs fd / rg (bat optional) for the defaults.
 if (Get-Command fzf -ErrorAction Ignore) {
   . (Join-Path $PSScriptRoot 'falias.ps1')
 }
 
-#Import-Module DockerCompletion
-#Import-Module posh-docker
-Import-Module posh-git   # kept for git tab completion; the prompt itself is Starship
-
-# Prompt: Starship (https://starship.rs). Install: `winget install Starship.Starship`
-# (Windows) / `brew install starship` (macOS, see Brewfile). Config lives in this repo
-# so `git pull` picks up prompt changes too.
-$env:STARSHIP_CONFIG = Join-Path (Split-Path $PSScriptRoot -Parent) 'starship.toml'
-if (Get-Command starship -ErrorAction Ignore) {
-  Invoke-Expression (&starship init powershell)
-} else {
-  Write-Warning "starship not found; prompt not customised. Install with: winget install Starship.Starship"
+# posh-git: git tab completion only, the prompt itself is Starship (below, so it wins).
+# Optional: `Install-Module posh-git -Scope CurrentUser`, skipped silently when missing.
+if (Get-Module -ListAvailable posh-git) {
+  Import-Module posh-git
 }
 
-# editor: mirrors `alias vi=nvim` / `view='nvim -R'` / `vimdiff='nvim -d'` in .alias (bash/zsh).
+# Starship prompt (https://starship.rs). Install: `winget install Starship.Starship`. The
+# default preset uses Nerd Font glyphs, so also install one and select it in the terminal,
+# e.g. `winget install DEVCOM.JetBrainsMonoNerdFont`.
+# Config: .posh/starship.toml in this repo (shared with .bashrc), pointed to via
+# $env:STARSHIP_CONFIG so no symlink into $env:USERPROFILE\.config is needed; a value already
+# set elsewhere wins. Skipped silently when starship is missing, so a fresh machine still
+# starts cleanly with the default prompt.
+if (Get-Command starship -ErrorAction Ignore) {
+  if (-not $env:STARSHIP_CONFIG) {
+    $env:STARSHIP_CONFIG = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\starship.toml'))
+  }
+  Invoke-Expression (&starship init powershell)
+}
+
+# tig config: .tigrc in this repo (vim-like g/G to first/last line, custom binds).
+# tig reads $TIGRC_USER instead of ~/.tigrc, so no symlink is needed; forward slashes keep
+# the MSYS2 build shipped with Git for Windows happy. A value already set elsewhere wins.
+if (-not $env:TIGRC_USER) {
+  $env:TIGRC_USER = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\..\.tigrc')) -replace '\\', '/'
+}
+
+# tig binary: there is no winget/scoop package, but Git for Windows ships tig.exe (MSYS2 build)
+# in <git root>\usr\bin, which is deliberately NOT on PATH (it also holds find/sort/...).
+# Locate it through `git --exec-path` (<root>\{mingw64,ucrt64}\libexec\git-core) so this works
+# for both the scoop and the winget (C:\Program Files\Git) installs, and expose usr\bin only
+# for the duration of the tig process so the `!sh -c ...` binds in .tigrc work.
+# A tig already on PATH (e.g. a hand-installed one) wins, nothing is shadowed then.
+if (-not (Get-Command tig -CommandType Application -ErrorAction Ignore)) {
+  function tig {
+    $execPath = git --exec-path 2>$null
+    if (-not $execPath) { Write-Error "tig: git not found"; return }
+    $gitRoot = Split-Path (Split-Path (Split-Path $execPath -Parent) -Parent) -Parent
+    $usrBin  = Join-Path $gitRoot 'usr\bin'
+    $exe     = Join-Path $usrBin 'tig.exe'
+    if (-not (Test-Path $exe)) { Write-Error "tig: not found at $exe (is Git for Windows installed?)"; return }
+
+    $oldPath = $env:PATH
+    try {
+      $env:PATH = "$usrBin;$env:PATH"
+      & $exe @args
+    } finally {
+      $env:PATH = $oldPath
+    }
+  }
+}
+
+# editor: mirrors `alias vi=nvim` / `view='nvim -R'` / `vimdiff='nvim -d'` in .alias.
 # Set-Alias cannot carry arguments, so `view` and `vimdiff` are functions.
 Set-Alias vi nvim
 function view { nvim -R @args }
 function vimdiff { nvim -d @args }
 
-# rm / find: Unix semantics via busybox (frippery.busybox-w32 in Wingetfile), so `rm -rf x`
+# rm / find: Unix semantics via busybox (`winget install frippery.busybox-w32`), so `rm -rf x`
 # and `find . -name '*.log'` work as in bash. PowerShell resolves aliases before functions,
 # so the built-in rm alias (Remove-Item) has to go first or the function never runs.
 # fd is the usual day-to-day tool; `find` is for muscle memory and copy-pasted one-liners.
@@ -169,66 +205,29 @@ function la {
   if ($MyInvocation.PipelineLength -eq $MyInvocation.PipelinePosition) { $items | Format-Table $LsLongColumns } else { $items }
 }
 
+# which: show where a command resolves to (alias, function, cmdlet or executable path).
 function which ($command) {
   Get-command -Name $command -ShowCommandInfo | Format-List -Property Definition
 }
 
 # Git aliases (g, gst, gco, gl, gp, gg, ...): counterpart of `source ~/.galias` in
-# .bashrc/.zshrc, see galias.ps1.
+# .bashrc, see galias.ps1.
 . (Join-Path $PSScriptRoot 'galias.ps1')
-
-# ---------------------------------------------------------------------------
-# tig: there is no winget/scoop package, but Git for Windows ships tig.exe (MSYS2 build)
-# in <git root>\usr\bin, which is deliberately NOT on PATH (it also holds find/sort/...).
-# Locate it through `git --exec-path` (<root>\{mingw64,ucrt64}\libexec\git-core) so this
-# works for both the scoop and the winget (C:\Program Files\Git) installs, and expose
-# usr\bin only for the duration of the tig process so `!sh -c ...` binds in .tigrc work.
-# Config: .tigrc in this repo (two levels up from here); tig reads $TIGRC_USER instead
-# of ~/.tigrc, so no symlink (admin-only on Windows) is needed. Forward slashes keep the
-# MSYS2 build happy. A value already set elsewhere wins.
-# ---------------------------------------------------------------------------
-function tig {
-  $execPath = git --exec-path 2>$null
-  if (-not $execPath) { Write-Error "tig: git not found"; return }
-  $gitRoot = Split-Path (Split-Path (Split-Path $execPath -Parent) -Parent) -Parent
-  $usrBin  = Join-Path $gitRoot 'usr\bin'
-  $exe     = Join-Path $usrBin 'tig.exe'
-  if (-not (Test-Path $exe)) { Write-Error "tig: not found at $exe (is Git for Windows installed?)"; return }
-
-  $oldPath = $env:PATH
-  $oldRc   = $env:TIGRC_USER
-  try {
-    $env:PATH = "$usrBin;$env:PATH"
-    if (-not $env:TIGRC_USER) {
-      $rc = @("$HOME\.tigrc", (Join-Path (Split-Path (Split-Path $PSScriptRoot -Parent) -Parent) '.tigrc')) | Where-Object { Test-Path $_ } | Select-Object -First 1
-      if ($rc) { $env:TIGRC_USER = $rc -replace '\\', '/' }
-    }
-    & $exe @args
-  } finally {
-    $env:PATH = $oldPath
-    if ($null -eq $oldRc) { Remove-Item Env:TIGRC_USER -ErrorAction Ignore } else { $env:TIGRC_USER = $oldRc }
-  }
-}
 
 function egrep { egrep --color=auto $args }
 function fgrep { fgrep --color=auto $args }
 function grep { grep --color --exclude-dir='{.git,.svn}' --exclude=\*.html\* $args }
 
-# for docker
-function dco { docker-compose $args }
-function dps { docker ps $args }
+# docker: the everyday subset of .dalias (dco, dps, ds, da).
+function dco { docker compose @args }
+function dps { docker container ls @args }
 function ds { docker images; docker ps -a }
 function da { docker ps -a }
 
-#Set-Alias docker 'C:\Program Files\Docker\Docker\Resources\bin\docker.exe'
-#Set-Alias kubectl 'C:\Program Files\Docker\Docker\Resources\bin\kubectl.exe'
-
-# zoxide as `j` / `ji` (interactive via fzf), same as `zoxide init bash --cmd j` in
-# .bashrc in this repo. Install: `winget install ajeetdsouza.zoxide` (see Wingetfile).
+# zoxide as `j` / `ji` (interactive via fzf): PowerShell counterpart of
+# `eval "$(zoxide init bash --cmd j)"` in .bashrc. Install: `winget install ajeetdsouza.zoxide`.
 # Kept at the end of the profile: on Windows PowerShell 5.1 zoxide hooks the prompt
-# function, so it has to run after Starship has defined it. Replaces ZLocation (`z`).
+# function, so it has to run after Starship has defined it. Skipped silently when missing.
 if (Get-Command zoxide -ErrorAction Ignore) {
   Invoke-Expression (& { (zoxide init powershell --cmd j | Out-String) })
 }
-
-#Set-Location C:\

@@ -79,7 +79,7 @@ fzf helpers in `.falias` (`fco`, `fkill`, `fshow`, `gadd`, `fstash`, `fda`, ...)
 only when fzf is on PATH. One alias file per tool, so a change to the git aliases shows
 up as a diff of `.galias` / `galias.ps1` alone.
 
-tig: there is no winget package, but Git for Windows bundles `tig.exe` in `usr\bin`
-(not on PATH). The profile defines a `tig` function that runs it and points
-`$TIGRC_USER` at `~\.tigrc` or `.tigrc` in this repo (whichever exists), so no symlink
-is needed on Windows.
+tig: the profile points `$TIGRC_USER` at `.tigrc` in this repo (a value already set
+wins), so no symlink is needed on Windows. There is no winget package, but Git for
+Windows bundles `tig.exe` in `usr\bin` (not on PATH); when no `tig` is on PATH the
+profile defines a `tig` function that runs that copy.
