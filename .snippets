@@ -49,7 +49,7 @@ git log --since="1 month ago" --until="0 month ago" --reverse --pretty=oneline -
 tig --all --since=$(date -v-1m "+%Y-%m-01") --until=$(date "+%Y-%m-01") --reverse --author="$(git config user.name)"
 
 # git rebase
-git branch | peco | cut -b 3- | while read line; do echo -e "\e[0;31m--- $line ---\e[0m"; git rebase origin/master $line; done
+git branch | fzf -m | cut -b 3- | while read line; do echo -e "\e[0;31m--- $line ---\e[0m"; git rebase origin/master $line; done
 
 # recess
 recess --noOverqualifying false --strictPropertyOrder true --noIDs true --noUnderscores true global.less | lv

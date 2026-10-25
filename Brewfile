@@ -387,8 +387,6 @@ brew "pandoc"
 brew "pangomm"
 # C++ interface to Pango
 brew "pangomm@2.46"
-# Simplistic interactive filtering tool
-brew "peco"
 # Highly capable, feature-rich programming language
 brew "perl"
 # Execute binaries from Python packages in isolated environments
