@@ -188,8 +188,6 @@
     // enable the sneak plugin for vim.
     "vim.sneak": true,
 
-    // glassit (無効化済み: 拡張機能は削除。再び使うなら alpha を下げる)
-    "glassit.alpha": 255,
     "workbench.colorTheme": "One Monokai",
     "diffEditor.renderSideBySide": true,
 
