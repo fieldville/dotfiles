@@ -20,7 +20,7 @@
 
     // explorer / workbench
     "explorer.confirmDelete": false,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "workbench.startupEditor": "none",
     "security.allowedUNCHosts": [
         "wsl.localhost",
