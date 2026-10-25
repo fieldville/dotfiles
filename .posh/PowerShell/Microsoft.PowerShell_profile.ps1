@@ -62,7 +62,11 @@ if (Get-Command starship -ErrorAction SilentlyContinue) {
   Write-Warning "starship not found; prompt not customised. Install with: winget install Starship.Starship"
 }
 
-Set-Alias vi vim
+# editor: mirrors `alias vi=nvim` / `view='nvim -R'` / `vimdiff='nvim -d'` in .alias (bash/zsh).
+# Set-Alias cannot carry arguments, so `view` and `vimdiff` are functions.
+Set-Alias vi nvim
+function view { nvim -R @args }
+function vimdiff { nvim -d @args }
 
 if (Test-Path alias:rm) { del alias:rm -Force }
 if (Test-Path alias:ls) { del alias:ls -Force }
