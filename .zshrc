@@ -27,14 +27,59 @@ zstyle ':completion:*:manuals' separate-sections true
 # "bindkey -e" is explicit because zsh would otherwise pick the vi keymap whenever
 # EDITOR/VISUAL=nvim is inherited from the environment (e.g. inside byobu).
 bindkey -e
-autoload -U history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
+# Walk the history lines that start with what has been typed, newest first, and
+# leave the cursor at the end of the line (bash's history-search-backward).
+# zsh's own history-beginning-search-backward(-end) did this before, but it does
+# not reliably stop at the oldest match: when the history file has been read in
+# again (fc -R, or share_history re-reading it) the in-memory history can hold the
+# same line twice and the walk then starts over from the newest match, and
+# zsh-autosuggestions' asynchronous suggestion overwrites $LASTWIDGET, which that
+# widget needs to remember the prefix. This widget keeps its own state and shows
+# each matching line once, so it stops at the oldest match; Ctrl-n retraces the
+# lines shown and then returns to the line that was being typed.
+zmodload zsh/parameter
+typeset -ga _hps_nums _hps_path
+typeset -gA _hps_shown
+_history_prefix_search() {
+  emulate -L zsh
+  local n found=
+  # A new search starts whenever the line changed since the previous call;
+  # until then the prefix typed at the start of the search is kept.
+  if [[ $BUFFER != $_hps_buffer || $HISTNO != $_hps_histno ]]; then
+    _hps_prefix=$LBUFFER
+    _hps_start=$HISTNO
+    _hps_path=()        # history numbers shown so far, newest first
+    _hps_shown=()       # their texts, so a duplicated entry is skipped
+    _hps_nums=( ${(On)${(k)history[(R)${(b)_hps_prefix}*]}} )  # all matches, newest first
+  fi
+  if [[ $WIDGET = *-backward ]]; then
+    for n in $_hps_nums; do
+      (( n < HISTNO )) || continue
+      [[ -n $_hps_shown[$history[$n]] || $history[$n] == $BUFFER ]] && continue
+      found=$n; break
+    done
+    [[ -n $found ]] && { _hps_path+=($found); _hps_shown[$history[$found]]=1 }
+  else
+    n=${_hps_path[(i)$HISTNO]}
+    if (( n > $#_hps_path )); then :     # not on a line shown by this search: nothing newer
+    elif (( n > 1 )); then found=$_hps_path[n-1]
+    else found=$_hps_start               # past the newest match: the line being typed
+    fi
+  fi
+  if [[ -n $found ]]; then
+    HISTNO=$found
+    CURSOR=$#BUFFER
+  fi
+  _hps_buffer=$BUFFER _hps_histno=$HISTNO
+  [[ -n $found ]]
+}
+zle -N history-prefix-search-backward _history_prefix_search
+zle -N history-prefix-search-forward _history_prefix_search
 for k in "^P" "^[p" "^[[A" "^[OA"; do
-  bindkey "$k" history-beginning-search-backward-end
+  bindkey "$k" history-prefix-search-backward
 done
 for k in "^N" "^[n" "^[[B" "^[OB"; do
-  bindkey "$k" history-beginning-search-forward-end
+  bindkey "$k" history-prefix-search-forward
 done
 # Alt-k / Alt-j cycle completions forward / backward (menu-complete in .inputrc)
 bindkey "^[k" menu-complete
