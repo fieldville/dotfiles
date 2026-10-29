@@ -224,13 +224,21 @@ function fa ($Pattern = '.') {
 
 # grep / egrep / fgrep: colour, skip binaries and VCS dirs, as `alias grep=...` in .alias.
 # Inside a function named grep a bare `grep` resolves to the function itself (functions shadow
-# executables) and recurses until the call depth overflows, so call `grep.exe` explicitly: with
-# the extension PowerShell looks the application up instead. No brace expansion here, so each
-# --exclude-dir is spelled out. Only defined when a grep.exe is on PATH (Git for Windows keeps
-# its copy in usr\bin, off PATH; busybox grep has neither --color nor --exclude-dir).
+# executables) and recurses until the call depth overflows, so the function calls the resolved
+# GNU grep by full path. No brace expansion here, so each --exclude-dir is spelled out.
+# A grep.exe on PATH is not necessarily GNU: scoop's busybox installs a grep.exe shim that runs
+# `busybox grep`, which has neither --color nor --exclude-dir. So every candidate (PATH entries,
+# then scoop's own GNU grep) is probed with --version and only a GNU one is used; without one the
+# functions are not defined and plain `grep` stays whatever the PATH gives.
 # egrep / fgrep go through `grep -E` / `grep -F`, as GNU grep 3.8+ deprecates the wrappers.
-if (Get-Command grep.exe -ErrorAction Ignore) {
-  function grep { grep.exe -I --color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=HTML --exclude='*.pyc*' @args }
+$gnuGrep = @(
+  @(Get-Command grep.exe -All -ErrorAction Ignore | ForEach-Object { $_.Source })
+  (Join-Path $HOME 'scoop\apps\grep\current\grep.exe')
+) | Where-Object { $_ -and (Test-Path $_) } |
+  Where-Object { "$(& $_ --version 2>&1)" -match 'GNU grep' } |
+  Select-Object -First 1
+if ($gnuGrep) {
+  function grep { & $gnuGrep -I --color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=HTML --exclude='*.pyc*' @args }
   function egrep { grep -E @args }
   function fgrep { grep -F @args }
 }
