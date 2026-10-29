@@ -231,6 +231,8 @@ function fa ($Pattern = '.') {
 # then scoop's own GNU grep) is probed with --version and only a GNU one is used; without one the
 # functions are not defined and plain `grep` stays whatever the PATH gives.
 # egrep / fgrep go through `grep -E` / `grep -F`, as GNU grep 3.8+ deprecates the wrappers.
+# A function does not hand its pipeline input on to the commands it calls, so `ls | grep x` would
+# leave grep reading the console (a hang): every call is fed explicitly with `$input |`.
 $gnuGrep = @(
   @(Get-Command grep.exe -All -ErrorAction Ignore | ForEach-Object { $_.Source })
   (Join-Path $HOME 'scoop\apps\grep\current\grep.exe')
@@ -238,9 +240,9 @@ $gnuGrep = @(
   Where-Object { "$(& $_ --version 2>&1)" -match 'GNU grep' } |
   Select-Object -First 1
 if ($gnuGrep) {
-  function grep { & $gnuGrep -I --color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=HTML --exclude='*.pyc*' @args }
-  function egrep { grep -E @args }
-  function fgrep { grep -F @args }
+  function grep { $input | & $gnuGrep -I --color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=HTML --exclude='*.pyc*' @args }
+  function egrep { $input | grep -E @args }
+  function fgrep { $input | grep -F @args }
 }
 
 # Docker aliases (d, dco, dps, dex, dcu, dcl, ...): counterpart of `source ~/.dalias` in
