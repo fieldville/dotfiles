@@ -228,8 +228,9 @@ function fa ($Pattern = '.') {
 # GNU grep by full path. No brace expansion here, so each --exclude-dir is spelled out.
 # A grep.exe on PATH is not necessarily GNU: scoop's busybox installs a grep.exe shim that runs
 # `busybox grep`, which has neither --color nor --exclude-dir. So every candidate (PATH entries,
-# then scoop's own GNU grep) is probed with --version and only a GNU one is used; without one the
-# functions are not defined and plain `grep` stays whatever the PATH gives.
+# then scoop's own GNU grep) is probed with --version and only a GNU one is used; without one,
+# `busybox grep` is the fallback (plain: no -I / --color / --exclude-dir), and without busybox
+# either the functions are not defined.
 # egrep / fgrep go through `grep -E` / `grep -F`, as GNU grep 3.8+ deprecates the wrappers.
 # A function does not hand its pipeline input on to the commands it calls, so `ls | grep x` would
 # leave grep reading the console (a hang): every call is fed explicitly with `$input |`.
@@ -241,6 +242,10 @@ $gnuGrep = @(
   Select-Object -First 1
 if ($gnuGrep) {
   function grep { $input | & $gnuGrep -I --color=auto --exclude-dir=.git --exclude-dir=.svn --exclude-dir=HTML --exclude='*.pyc*' @args }
+} elseif (Get-Command busybox -ErrorAction Ignore) {
+  function grep { $input | busybox grep @args }
+}
+if (Test-Path function:grep) {
   function egrep { $input | grep -E @args }
   function fgrep { $input | grep -F @args }
 }
