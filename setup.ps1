@@ -37,8 +37,9 @@ if ((Test-Path $PROFILE) -and (Select-String -Path $PROFILE -SimpleMatch $line -
 # Windows PowerShell 5.1 ships PSReadLine 2.0.0, which would otherwise pass as "installed".
 $modules = Get-Content (Join-Path $PSScriptRoot "Wingetfile") | ForEach-Object {
   if ($_ -match "^psmodule\s+`"([^`"]+)`"(.*)") {
+    $name = $Matches[1]
     $min = if ($Matches[2] -match "min:\s*`"([^`"]+)`"") { $Matches[1] } else { '0.0' }
-    @{ Name = $Matches[1]; Min = $min }
+    @{ Name = $name; Min = $min }
   }
 }
 $missing = @($modules | Where-Object {
