@@ -13,15 +13,16 @@ $ErrorActionPreference = "Continue"
 $root = $PSScriptRoot
 Push-Location $root   # code.cmd refuses to start from a UNC cwd (e.g. when launched from WSL)
 
-# Lines look like:  kind "name"   optionally followed by   , cmd: "exe"   and/or   , override: "args"
+# Lines look like:  kind "name"   optionally followed by   , cmd: "exe"   and/or   , override: "args"   and/or   , min: "x.y"
 function Read-Entries([string]$file, [string]$kind) {
   Get-Content (Join-Path $root $file) | ForEach-Object {
     if ($_ -match "^$kind\s+`"([^`"]+)`"(.*)") {
-      $entry = [pscustomobject]@{ Name = $Matches[1]; Cmd = $null; Override = $null }
+      $entry = [pscustomobject]@{ Name = $Matches[1]; Cmd = $null; Override = $null; Min = '0.0' }
       foreach ($opt in [regex]::Matches($Matches[2], "(\w+):\s*`"([^`"]+)`"")) {
         switch ($opt.Groups[1].Value) {
           'cmd'      { $entry.Cmd      = $opt.Groups[2].Value }
           'override' { $entry.Override = $opt.Groups[2].Value }
+          'min'      { $entry.Min      = $opt.Groups[2].Value }
         }
       }
       $entry
@@ -67,17 +68,20 @@ foreach ($p in $missing) {
 # Installed into the user module dir of the shell running this script. Windows PowerShell 5.1
 # cannot see pwsh's dir (pwsh can see 5.1's), so run from Windows PowerShell to cover both,
 # or run setup.ps1 in each shell. setup.ps1 reads the same entries.
-$modules = Read-Entries "Wingetfile" "psmodule" | ForEach-Object Name
-$missingModules = $modules | Where-Object { -not (Get-Module -ListAvailable -Name $_) }
+$modules = @(Read-Entries "Wingetfile" "psmodule")
+$missingModules = @($modules | Where-Object {
+  $min = [version]$_.Min
+  -not (Get-Module -ListAvailable -Name $_.Name | Where-Object { $_.Version -ge $min })
+})
 "psmodule: $($modules.Count) listed, $($missingModules.Count) to install"
 if ($missingModules -and $PSVersionTable.PSVersion.Major -lt 6) {
   # 5.1 defaults to TLS 1.0/1.1, which the PowerShell Gallery no longer accepts.
   [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 }
 foreach ($m in $missingModules) {
-  if ($DryRun) { "  would install $m"; continue }
-  "  installing $m"
-  Install-Module -Name $m -Scope CurrentUser -Force
+  if ($DryRun) { "  would install $($m.Name)"; continue }
+  "  installing $($m.Name)"
+  Install-Module -Name $m.Name -MinimumVersion $m.Min -Scope CurrentUser -Force
 }
 
 # ---- VS Code extensions ----------------------------------------------------

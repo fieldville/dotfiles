@@ -7,7 +7,8 @@
 # package's own installer in place of the arguments from the winget manifest (used to pick
 # Visual Studio workloads; the string must then also request a quiet install itself).
 # `psmodule "Name"` entries are PowerShell Gallery modules (Install-Module), see the section at
-# the end; winget.ps1 and setup.ps1 both read them.
+# the end; winget.ps1 and setup.ps1 both read them. An optional `min: "x.y"` is the minimum
+# version: a module below it is treated as missing and gets updated.
 
 ## Shell / terminal
 # Windows Terminal
@@ -110,3 +111,6 @@ winget "TheDocumentFoundation.LibreOffice"
 psmodule "PSFzf"
 # git tab completion (the prompt itself is Starship)
 psmodule "posh-git"
+# Windows PowerShell 5.1 ships PSReadLine 2.0.0, which counts as "installed", but the profile's
+# inline history prediction needs 2.1+, hence the minimum version (pwsh already has a newer one)
+psmodule "PSReadLine", min: "2.1"

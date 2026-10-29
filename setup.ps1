@@ -33,21 +33,29 @@ if ((Test-Path $PROFILE) -and (Select-String -Path $PROFILE -SimpleMatch $line -
 }
 
 # ---- PowerShell modules (same list as winget.ps1) --------------------------
+# psmodule "Name"[, min: "x.y"]. A module below its minimum version counts as missing:
+# Windows PowerShell 5.1 ships PSReadLine 2.0.0, which would otherwise pass as "installed".
 $modules = Get-Content (Join-Path $PSScriptRoot "Wingetfile") | ForEach-Object {
-  if ($_ -match "^psmodule\s+`"([^`"]+)`"") { $Matches[1] }
+  if ($_ -match "^psmodule\s+`"([^`"]+)`"(.*)") {
+    $min = if ($Matches[2] -match "min:\s*`"([^`"]+)`"") { $Matches[1] } else { '0.0' }
+    @{ Name = $Matches[1]; Min = $min }
+  }
 }
-$missing = $modules | Where-Object { -not (Get-Module -ListAvailable -Name $_) }
+$missing = @($modules | Where-Object {
+  $min = [version]$_.Min
+  -not (Get-Module -ListAvailable -Name $_.Name | Where-Object { $_.Version -ge $min })
+})
 if ($missing -and $PSVersionTable.PSVersion.Major -lt 6) {
   # 5.1 defaults to TLS 1.0/1.1, which the PowerShell Gallery no longer accepts.
   [Net.ServicePointManager]::SecurityProtocol = [Net.ServicePointManager]::SecurityProtocol -bor [Net.SecurityProtocolType]::Tls12
 }
 foreach ($m in $modules) {
   if ($m -in $missing) {
-    "Installing $m ..."
-    Install-Module -Name $m -Scope CurrentUser -Force
-    "Installed $m"
+    "Installing $($m.Name) ..."
+    Install-Module -Name $m.Name -MinimumVersion $m.Min -Scope CurrentUser -Force
+    "Installed $($m.Name)"
   } else {
-    "Already installed: $m"
+    "Already installed: $($m.Name)"
   }
 }
 
