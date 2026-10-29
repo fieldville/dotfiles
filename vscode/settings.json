@@ -198,4 +198,5 @@
     //"python.pythonPath": "C:\\Apps\\w2w\\python.bat",
     "files.autoSave": "afterDelay",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "editor.unicodeHighlight.nonBasicASCII": false,
 }
