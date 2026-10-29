@@ -254,6 +254,33 @@ if (Get-Command zoxide -ErrorAction Ignore) {
   Invoke-Expression (& { (zoxide init powershell --cmd j | Out-String) })
 }
 
+# Visual Studio developer shell (devenv, msbuild, cl, nmake, ... on PATH): `vsdev`.
+# The install path differs per machine (Community / Professional / Enterprise, version
+# 2022 / 18 / ...), so it is looked up with vswhere (shipped with the VS installer, at a
+# fixed path) and the newest install wins; falls back to globbing Program Files when vswhere
+# is missing. Not run at startup (it costs 1-2 s), call it when needed. -Arch picks the
+# target (amd64 default, x86, arm64); the current directory is kept (-SkipAutomaticLocation).
+# Named Initialize-* because Enter-VsDevShell is the cmdlet Launch-VsDevShell.ps1 itself uses.
+function Initialize-VsDevShell {
+  [CmdletBinding()]
+  param([ValidateSet('amd64', 'x86', 'arm64')][string]$Arch = 'amd64')
+
+  $vswhere = Join-Path ${env:ProgramFiles(x86)} 'Microsoft Visual Studio\Installer\vswhere.exe'
+  $vsPath = if (Test-Path $vswhere) {
+    & $vswhere -latest -products * -property installationPath | Select-Object -First 1
+  }
+  if (-not $vsPath) {
+    $vsPath = Get-ChildItem "$env:ProgramFiles\Microsoft Visual Studio\*\*" -Directory -ErrorAction Ignore |
+      Where-Object { Test-Path (Join-Path $_.FullName 'Common7\Tools\Launch-VsDevShell.ps1') } |
+      Sort-Object FullName -Descending | Select-Object -First 1 -ExpandProperty FullName
+  }
+  $script = if ($vsPath) { Join-Path $vsPath 'Common7\Tools\Launch-VsDevShell.ps1' }
+  if (-not $script -or -not (Test-Path $script)) { Write-Error 'Visual Studio with a developer shell was not found'; return }
+
+  & $script -Arch $Arch -HostArch $Arch -SkipAutomaticLocation
+}
+Set-Alias vsdev Initialize-VsDevShell
+
 # Report the current directory to the terminal (OSC 7) on every prompt. tmux/byobu keeps it
 # in #{pane_path}, which .byobu/.tmux.conf uses to open a new window as powershell.exe in the
 # same directory (WSL cannot see the cwd of a Windows process). Drive and UNC paths (e.g.
