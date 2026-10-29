@@ -281,6 +281,14 @@ function Initialize-VsDevShell {
 }
 Set-Alias vsdev Initialize-VsDevShell
 
+# Machine-local overrides: counterpart of `[ -f ~/.alias.private ] && . ~/.alias.private` in
+# .bashrc. Put per-machine aliases / functions / env vars (proxy, work-only tools, ...) in
+# ~\.alias.private.ps1, outside this repo; dot-sourced last so it can override anything above.
+# Skipped silently when the file does not exist. Kept just before the OSC 7 prompt wrapper
+# below so a prompt defined here is wrapped too.
+$aliasPrivate = Join-Path $HOME '.alias.private.ps1'
+if (Test-Path $aliasPrivate) { . $aliasPrivate }
+
 # Report the current directory to the terminal (OSC 7) on every prompt. tmux/byobu keeps it
 # in #{pane_path}, which .byobu/.tmux.conf uses to open a new window as powershell.exe in the
 # same directory (WSL cannot see the cwd of a Windows process). Drive and UNC paths (e.g.
