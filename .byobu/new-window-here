@@ -1,8 +1,13 @@
 #!/bin/bash
-# Open a new tmux window running powershell.exe in the directory PowerShell reported via OSC 7.
-# Usage: new-window-here '#{pane_path}'   (called from .byobu/.tmux.conf)
+# Open a new tmux window (or split pane) running powershell.exe in the directory PowerShell
+# reported via OSC 7.
+# Usage: new-window-here '#{pane_path}' [tmux command and flags]   (called from .byobu/.tmux.conf)
+#   new-window-here '#{pane_path}'                  -> new-window -n powershell
+#   new-window-here '#{pane_path}' split-window -h  -> split-window -h
 # $1 is "file://localhost/C%3A/Program%20Files" (see the prompt hook in the PowerShell profile).
 path=${1#*localhost/}
+shift
+(($#)) || set -- new-window -n powershell
 path=$(printf '%b' "${path//%/\\x}")     # percent-decode: C:/Program Files
 path=${path//\'/\'\'}                    # for a PowerShell single-quoted string
-exec tmux new-window -n powershell powershell.exe -NoLogo -NoExit -Command "Set-Location -LiteralPath '$path'"
+exec tmux "$@" powershell.exe -NoLogo -NoExit -Command "Set-Location -LiteralPath '$path'"
