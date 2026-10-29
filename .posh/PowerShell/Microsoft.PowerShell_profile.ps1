@@ -256,13 +256,14 @@ if (Get-Command zoxide -ErrorAction Ignore) {
 
 # Report the current directory to the terminal (OSC 7) on every prompt. tmux/byobu keeps it
 # in #{pane_path}, which .byobu/.tmux.conf uses to open a new window as powershell.exe in the
-# same directory (WSL cannot see the cwd of a Windows process). Drive paths only, percent-
-# encoded per segment. Last in the profile so it wraps whatever prompt Starship / zoxide set.
+# same directory (WSL cannot see the cwd of a Windows process). Drive and UNC paths (e.g.
+# \\wsl.localhost\...), percent-encoded per segment. Last in the profile so it wraps
+# whatever prompt Starship / zoxide set.
 if ($Host.UI.SupportsVirtualTerminal -and -not [Console]::IsOutputRedirected) {
   $global:__PromptBeforeOsc7 = $function:prompt
   function global:prompt {
     $p = $executionContext.SessionState.Path.CurrentLocation.ProviderPath
-    if ($p -match '^[A-Za-z]:') {
+    if ($p -match '^([A-Za-z]:|\\\\)') {
       $enc = ($p -replace '\\', '/' -split '/' | ForEach-Object { [uri]::EscapeDataString($_) -replace "'", '%27' }) -join '/'
       [Console]::Write("$([char]27)]7;file://localhost/$enc$([char]27)\")
     }

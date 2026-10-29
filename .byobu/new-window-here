@@ -8,6 +8,7 @@
 path=${1#*localhost/}
 shift
 (($#)) || set -- new-window -n powershell
-path=$(printf '%b' "${path//%/\\x}")     # percent-decode: C:/Program Files
+path=$(printf '%b' "${path//%/\\x}")     # percent-decode: C:/Program Files, //wsl.localhost/...
+path=${path//\//\\}                     # C:\Program Files, \\wsl.localhost\...
 path=${path//\'/\'\'}                    # for a PowerShell single-quoted string
 exec tmux "$@" powershell.exe -NoLogo -NoExit -Command "Set-Location -LiteralPath '$path'"
