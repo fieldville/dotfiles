@@ -1,0 +1,8 @@
+#!/bin/bash
+# Open a new tmux window running powershell.exe in the directory PowerShell reported via OSC 7.
+# Usage: new-window-here '#{pane_path}'   (called from .byobu/.tmux.conf)
+# $1 is "file://localhost/C%3A/Program%20Files" (see the prompt hook in the PowerShell profile).
+path=${1#*localhost/}
+path=$(printf '%b' "${path//%/\\x}")     # percent-decode: C:/Program Files
+path=${path//\'/\'\'}                    # for a PowerShell single-quoted string
+exec tmux new-window -n powershell powershell.exe -NoLogo -NoExit -Command "Set-Location -LiteralPath '$path'"
