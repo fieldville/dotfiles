@@ -19,10 +19,13 @@
 # # choco config set proxyPassword $password
 
 # Line editing: Emacs keys like bash/readline (.inputrc). Ctrl+p / Ctrl+n search history by
-# the typed prefix, Tab cycles through a completion menu.
+# the typed prefix. Tab completes the common prefix and lists candidates in columns on a
+# second press (bash's `complete`); Shift+Tab opens the cycling menu (menu-complete).
 Import-Module PSReadline
 Set-PSReadlineOption -EditMode Emacs
-Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+Set-PSReadlineOption -CompletionQueryItems 100   # ask "Display all N possibilities?" like bash's completion-query-items
+Set-PSReadlineKeyHandler -Key Tab -Function Complete
+Set-PSReadlineKeyHandler -Key 'Shift+Tab' -Function MenuComplete
 Set-PSReadlineKeyHandler -Key 'Ctrl+p' -Function HistorySearchBackward
 Set-PSReadlineKeyHandler -Key 'Ctrl+n' -Function HistorySearchForward
 
