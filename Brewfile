@@ -419,8 +419,6 @@ brew "ranger"
 brew "ruby-build"
 # Ruby version manager
 brew "rbenv"
-# Reattach process (e.g., tmux) to background
-brew "reattach-to-user-namespace"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
 # Readline wrapper: adds readline support to tools that lack it
