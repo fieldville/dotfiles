@@ -142,6 +142,21 @@ if (Test-Path alias:rm) { Remove-Item alias:rm -Force }
 function rm { busybox rm @args }
 function find { busybox find @args }
 
+# sed / awk: the busybox ones as well (neither ships with Windows, and the GNU builds in Git for
+# Windows' usr\bin are off PATH on purpose), so `sed -i 's/a/b/' file`, `... | sed -n '1,5p'`
+# and `... | awk '{print $2}'` work as in bash. busybox sed covers the GNU extensions used day
+# to day (-i[SFX], -E/-r, -n, -e, -z); busybox awk is POSIX awk plus -v / -F / -f. Note that in
+# PowerShell a double-quoted '{print $2}' would interpolate $2, so keep awk programs in single
+# quotes. As with grep, a function does not hand its pipeline input on to the commands it calls,
+# so the input is fed explicitly with `$input |`. A sed.exe / awk.exe already on PATH wins
+# (nothing shadowed).
+if (-not (Get-Command sed -CommandType Application -ErrorAction Ignore)) {
+  function sed { $input | busybox sed @args }
+}
+if (-not (Get-Command awk -CommandType Application -ErrorAction Ignore)) {
+  function awk { $input | busybox awk @args }
+}
+
 # cd -: back to the previous directory, as in bash. pwsh 6.2+ has this built in
 # (Set-Location keeps a location history, `cd -` goes back and `cd +` forward), Windows
 # PowerShell 5.1 does not, so it gets a wrapper that remembers one previous directory in
