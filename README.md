@@ -73,6 +73,10 @@ $ chsh -s "$(command -v zsh)"
 byobu / tmux start `$SHELL` (see `.byobu/shell-expand.tmux` and `.tmux.conf.osx`),
 so new windows open zsh once `chsh` has run and you have logged in again.
 
+`setup.bash` also offers to set the macOS key repeat (`KeyRepeat` 1.3 / `InitialKeyRepeat`
+25, faster than the System Settings slider allows); holding h/j/k/l in a terminal is slow
+with the OS defaults. Log out and in for it to apply, and leave the slider alone afterwards.
+
 Windows (PowerShell):
 ---------------------
 

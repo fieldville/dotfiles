@@ -90,3 +90,31 @@ if dir=$(vscode_user_dir); then
 else
   echo "vscode: skipped (WSL or unknown OS; on Windows run setup.ps1)"
 fi
+
+# ---- macOS: key repeat. Holding h/j/k/l (or an arrow) repeats at KeyRepeat * 15 ms after
+# InitialKeyRepeat * 15 ms; the OS defaults (6 / 68) make cursor movement in a terminal feel
+# slow. KeyRepeat 1.3 is below what the System Settings slider allows (2), so set it here; do
+# not touch the slider afterwards or it snaps back. Takes effect after logging out and in.
+mac_key_repeat() {
+  local want_rate=1.3 want_delay=25 rate delay
+  rate=$(defaults read -g KeyRepeat 2>/dev/null); delay=$(defaults read -g InitialKeyRepeat 2>/dev/null)
+  if [[ $rate == "$want_rate" && $delay == "$want_delay" ]]; then
+    echo "  already set (KeyRepeat $rate, InitialKeyRepeat $delay)"; return
+  fi
+  defaults write -g KeyRepeat -float "$want_rate" &&
+  defaults write -g InitialKeyRepeat -int "$want_delay" &&
+  echo "  set KeyRepeat ${rate:-unset} -> $want_rate, InitialKeyRepeat ${delay:-unset} -> $want_delay (log out to apply)"
+}
+
+if [[ $(uname -s) == Darwin ]]; then
+  if (( yes_all )); then
+    mac_key_repeat
+  else
+    read -rp "macOS key repeat (KeyRepeat 1.3 / InitialKeyRepeat 25)  set? (y/N) " -n 1
+    echo
+    case $REPLY in
+      [Yy]) mac_key_repeat ;;
+      *)    echo "  skipped key repeat" ;;
+    esac
+  fi
+fi
