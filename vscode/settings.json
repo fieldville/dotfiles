@@ -174,23 +174,6 @@
     // これを適用するとおそらくバグの影響で最大幅が10%程度狭まってしまう模様
     //"terminal.integrated.rendererType": "dom",
 
-    // vscode vimの設定
-    "vim.useCtrlKeys": true,
-    // systemのclipboardを使用します
-    //"vim.useSystemClipboard": true,
-    // hlsearchは必要だと思う
-    "vim.hlsearch": true,
-    // 検索をするときに見やすいモッサりすることなければこのまま
-    "vim.easymotion": true,
-    // wordを* or + で検索するでしょ?
-    "vim.visualstar": true,
-    // ignore case in search patterns.
-    "vim.ignorecase": true,
-    // show where a / search matches as you type it.
-    "vim.incsearch": true,
-    // enable the sneak plugin for vim.
-    "vim.sneak": true,
-
     "workbench.colorTheme": "One Monokai",
     "diffEditor.renderSideBySide": true,
 
@@ -199,4 +182,15 @@
     "files.autoSave": "afterDelay",
     "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
     "editor.unicodeHighlight.nonBasicASCII": false,
+    "claudeCode.hideOnboarding": true,
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    // vscode-neovim: Neovim (LazyVim, ~/.config/nvim) の挙動に合わせる。
+    // キーマップは nvim 側の lua/plugins/vscode.lua と keybindings.json にある
+    "editor.autoClosingBrackets": "never",  // mini.pairs を切っているのと同じ (カッコを自動で閉じない)
+    "editor.autoClosingQuotes": "never",    // 同上 (クォート)
+    "editor.cursorSurroundingLines": 4,     // LazyVim の scrolloff=4
+    "claudeCode.preferredLocation": "panel",
+    "editor.accessibilitySupport": "off",
 }

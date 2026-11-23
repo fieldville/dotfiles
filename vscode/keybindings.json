@@ -23,4 +23,19 @@
     //{ "key": "ctrl+e", "command": "-workbench.action.quickOpen", "when": "terminalFocus" },
     { "key": "ctrl+e", "command": "-workbench.action.quickOpen" },
     { "key": "ctrl+shift+m", "command": "workbench.action.toggleMaximizedPanel" },
+    // vscode-neovim: LazyVim のキーのうち Neovim 側では割り当てられないもの
+    // (挿入モードは VSCode が入力を処理する / alt, ctrl+s は Neovim に渡らない / エディタ外は Neovim の管轄外)。
+    // ノーマルモードの <leader> 系は nvim 側の lua/plugins/vscode.lua にある
+    { "key": "ctrl+s", "command": "workbench.action.files.save", "when": "editorTextFocus && neovim.init" },
+    // 行の移動 (LazyVim の <A-j> / <A-k>)。挿入モード以外は Neovim に渡して LazyVim のマッピングを使う
+    { "key": "alt+j", "command": "vscode-neovim.send", "args": "<A-j>", "when": "editorTextFocus && neovim.init && neovim.mode != insert" },
+    { "key": "alt+k", "command": "vscode-neovim.send", "args": "<A-k>", "when": "editorTextFocus && neovim.init && neovim.mode != insert" },
+    { "key": "alt+j", "command": "editor.action.moveLinesDownAction", "when": "editorTextFocus && neovim.init && neovim.mode == insert" },
+    { "key": "alt+k", "command": "editor.action.moveLinesUpAction", "when": "editorTextFocus && neovim.init && neovim.mode == insert" },
+    // 補完候補の確定 / 閉じる (blink.cmp の <C-y> / <C-e>。<C-n> / <C-p> は vscode-neovim が割り当て済み)
+    { "key": "ctrl+y", "command": "acceptSelectedSuggestion", "when": "suggestWidgetVisible && textInputFocus" },
+    { "key": "ctrl+e", "command": "hideSuggestWidget", "when": "suggestWidgetVisible && textInputFocus" },
+    // エクスプローラー (neo-tree の代わり): q で閉じる、ctrl+l でエディタに戻る (j/k/h/l/a/d/r などは vscode-neovim が割り当て済み)
+    { "key": "q", "command": "workbench.action.toggleSidebarVisibility", "when": "filesExplorerFocus && !inputFocus" },
+    { "key": "ctrl+l", "command": "workbench.action.navigateRight", "when": "sideBarFocus && !inputFocus" },
 ]
