@@ -20,6 +20,7 @@
 
     // explorer / workbench
     "explorer.confirmDelete": false,
+    "explorer.autoReveal": true,  // 開いたファイルをツリーで選択する (エクスプローラーが見えているときだけ追従。隠れているときは cmd+k e)
     "window.zoomLevel": 1,
     "workbench.startupEditor": "none",
     "security.allowedUNCHosts": [

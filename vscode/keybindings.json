@@ -38,4 +38,7 @@
     // エクスプローラー (neo-tree の代わり): q で閉じる、ctrl+l でエディタに戻る (j/k/h/l/a/d/r などは vscode-neovim が割り当て済み)
     { "key": "q", "command": "workbench.action.toggleSidebarVisibility", "when": "filesExplorerFocus && !inputFocus" },
     { "key": "ctrl+l", "command": "workbench.action.navigateRight", "when": "sideBarFocus && !inputFocus" },
+    // 開いているファイルをエクスプローラーで表示する (サイドバーが別のビューでもエクスプローラーに切り替える)。
+    // 既定の cmd+k e (開いているエディターにフォーカス) は <leader>be にあるので上書きする
+    { "key": "cmd+k e", "command": "workbench.files.action.showActiveFileInExplorer" },
 ]
