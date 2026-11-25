@@ -1,0 +1,24 @@
+# XcodeGen spec: `xcodegen generate` (or ./build.bash) turns this into HelloApple.xcodeproj,
+# which is git-ignored. One multiplatform SwiftUI target for macOS, iOS and iPadOS.
+name: HelloApple
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "17.0"      # also the iPadOS minimum
+    macOS: "14.0"
+targets:
+  HelloApple:
+    type: application
+    supportedDestinations: [iOS, macOS]
+    sources: [Sources]
+    scheme: {}
+    settings:
+      base:
+        SWIFT_VERSION: "6.0"
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: 1
+        GENERATE_INFOPLIST_FILE: YES
+        TARGETED_DEVICE_FAMILY: "1,2"          # 1 = iPhone, 2 = iPad
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
+        "CODE_SIGN_IDENTITY[sdk=macosx*]": "-"  # sign to run locally, no team needed
